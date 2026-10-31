@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 UNPUBLISHED = {".venv", ".git", ".pytest_cache", ".ruff_cache", "__pycache__"}
@@ -93,3 +94,15 @@ def test_notice_names_the_project() -> None:
 def test_marketplace_lists_the_plugin_at_the_root() -> None:
     marketplace = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text())
     assert [(plugin["name"], plugin["source"]) for plugin in marketplace["plugins"]] == [("preview", "./")]
+
+
+def workflow_paths(name: str) -> dict[str, Any]:
+    return yaml.safe_load((ROOT / ".github" / "workflows" / name).read_text())[True]["push"]
+
+
+def test_docs_workflow_covers_exactly_what_ci_ignores() -> None:
+    assert workflow_paths("docs.yaml")["paths"] == workflow_paths("ci.yaml")["paths-ignore"]
+
+
+def test_skill_files_always_run_the_whole_suite() -> None:
+    assert not [path for path in workflow_paths("ci.yaml")["paths-ignore"] if path.startswith(("skills", "examples"))]

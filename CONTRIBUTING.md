@@ -24,6 +24,10 @@ Reasons behind the choices and the backlog are in Russian: [docs/decisions.md](d
 Every push to `master` and every pull request runs CI: `lint` runs ruff, basedpyright and `uv lock --check`;
 `test` runs the whole suite on Python 3.12, 3.13 and 3.14, including the rebuild of the showcase.
 
+A change to the project's own documents only (`README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, `SECURITY.md`,
+`LICENSE`, `NOTICE`, `docs/`) runs the `Docs` workflow instead: the tests that check them, without a browser.
+Files under `skills/` always run everything, because capture tests execute the examples in the references.
+
 ## Showcase
 
 ```sh

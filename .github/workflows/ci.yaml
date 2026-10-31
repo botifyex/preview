@@ -4,7 +4,13 @@ on:
   push:
     branches: [master]
     paths-ignore: &ignored
+      - CHANGELOG.md
+      - CONTRIBUTING.md
       - LICENSE
+      - NOTICE
+      - README.md
+      - SECURITY.md
+      - docs/**
   pull_request:
     paths-ignore: *ignored
 

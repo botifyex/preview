@@ -35,7 +35,7 @@ ignore = ["S603", "S607", "PLR0913", "PLR0917"]
 "skills/preview/scripts/capture/scheme/scripts.py" = ["E501"]
 
 [tool.basedpyright]
-include = ["skills/preview/scripts", "tests"]
+include = ["skills/preview/scripts", "tests", "examples/showcase/build.py"]
 extraPaths = ["skills/preview/scripts", "tests", "tests/capture"]
 pythonVersion = "3.12"
 typeCheckingMode = "recommended"

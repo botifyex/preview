@@ -47,11 +47,11 @@ uv run examples/showcase/build.py
 
 ### Colour, themes and numbers
 
-Marks are blue across this whole example because the spec sets `color`: the app's own accent is close to the default crimson.
+Marks use the default crimson `#E6004C` unless `color` says otherwise; the same field also works for a whole spec.
 
 <table>
 <tr>
-<td width="33%"><img src="examples/showcase/figures/17-colour-levels.png" width="280" alt="<code>color</code> on the figure (green) and one mark (amber); <code>removed</code> keeps its red"><br><sub><code>color</code> on the figure (green) and one mark (amber); <code>removed</code> keeps its red</sub></td>
+<td width="33%"><img src="examples/showcase/figures/17-colour-levels.png" width="280" alt="<code>color</code> on the figure (indigo) and one mark (amber); <code>removed</code> keeps its red"><br><sub><code>color</code> on the figure (indigo) and one mark (amber); <code>removed</code> keeps its red</sub></td>
 <td width="33%"><img src="examples/showcase/figures/18-dark-theme.png" width="280" alt="<code>theme: dark</code>"><br><sub><code>theme: dark</code></sub></td>
 <td width="33%"><img src="examples/showcase/figures/16-number-placements.png" width="280" alt="Every number <code>placement</code>: a deliberate gallery of 10 marks"><br><sub>Every number <code>placement</code>: a deliberate gallery of 10 marks</sub></td>
 </tr>
@@ -89,19 +89,19 @@ Marks are blue across this whole example because the spec sets `color`: the app'
 
 One image from several captures.
 
-<img src="examples/showcase/figures/26-scheme-checkout-path.png" width="760" alt="<code>row</code> with <code>steps_numbers</code>, <code>links: sequence</code> and <code>continuous: true</code>: the cart carries over from step to step">
+<img src="examples/showcase/figures/26-scheme-checkout-path.png" width="800" alt="<code>row</code> with <code>steps_numbers</code>, <code>links: sequence</code> and <code>continuous: true</code>: the cart carries over from step to step">
 
 <code>row</code> with <code>steps_numbers</code>, <code>links: sequence</code> and <code>continuous: true</code>: the cart carries over from step to step
 
-<img src="examples/showcase/figures/28-scheme-screen-map.png" width="760" alt="<code>grid</code> with <code>columns</code>, <code>panel_width</code> and a dark <code>background</code>; links with <code>from_mark</code>, <code>text</code> and a dashed style">
+<img src="examples/showcase/figures/28-scheme-screen-map.png" width="800" alt="<code>grid</code> with <code>columns</code>, <code>panel_width</code> and a dark <code>background</code>; links with <code>from_mark</code>, <code>text</code> and a dashed style">
 
 <code>grid</code> with <code>columns</code>, <code>panel_width</code> and a dark <code>background</code>; links with <code>from_mark</code>, <code>text</code> and a dashed style
 
-<img src="examples/showcase/figures/27-scheme-invoice-parts.png" width="760" alt="<code>column</code> of two <code>crop</code>s with different <code>crop_padding</code>, each with a <code>title</code>">
+<img src="examples/showcase/figures/27-scheme-invoice-parts.png" width="688" alt="<code>column</code> of two <code>crop</code>s with different <code>crop_padding</code>, each with a <code>title</code>">
 
 <code>column</code> of two <code>crop</code>s with different <code>crop_padding</code>, each with a <code>title</code>
 
-<img src="examples/showcase/figures/29-scheme-hide-overlay.png" width="760" alt="<code>hide</code>: the developer strip shown, then listed in <code>hide</code>">
+<img src="examples/showcase/figures/29-scheme-hide-overlay.png" width="800" alt="<code>hide</code>: the developer strip shown, then listed in <code>hide</code>">
 
 <code>hide</code>: the developer strip shown, then listed in <code>hide</code>
 

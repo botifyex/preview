@@ -2,7 +2,6 @@
   "environment": "local",
   "base_url": "http://127.0.0.1:8000",
   "locale": "en-US",
-  "color": "#1D4ED8",
   "hide": [
     ".dev-overlay:not(.pinned)"
   ],
@@ -205,10 +204,17 @@
             "name": "Status"
           },
           "offset": {
-            "x": 342,
+            "x": 346,
             "width": 74
           },
           "text": "Apply was here"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "group",
+            "name": "Status"
+          }
         }
       ]
     },
@@ -307,65 +313,89 @@
     },
     {
       "slug": "connector-none",
-      "url": "/invoice.html?id=INV-1042",
       "viewport": {
-        "width": 1024,
+        "width": 760,
         "height": 640
       },
-      "full_page": false,
-      "annotations": [
+      "panels": [
         {
-          "kind": "connector",
-          "anchor": {
-            "selector": "#bill-to strong"
+          "url": "/invoice.html?id=INV-1042",
+          "full_page": true,
+          "crop": {
+            "selector": "#parties"
           },
-          "from": {
-            "selector": "#bill-from strong"
-          },
-          "heads": "none"
+          "crop_padding": 8,
+          "annotations": [
+            {
+              "kind": "connector",
+              "anchor": {
+                "selector": "#bill-to strong"
+              },
+              "from": {
+                "selector": "#bill-from strong"
+              },
+              "heads": "none"
+            }
+          ]
         }
       ]
     },
     {
       "slug": "connector-end",
-      "url": "/index.html",
       "viewport": {
-        "width": 1024,
+        "width": 760,
         "height": 640
       },
-      "full_page": false,
-      "annotations": [
+      "panels": [
         {
-          "kind": "connector",
-          "anchor": {
-            "selector": "#next-up h2"
+          "url": "/invoice.html?id=INV-1042",
+          "full_page": true,
+          "crop": {
+            "selector": "section:has(> #timeline)"
           },
-          "from": {
-            "selector": ".tiles .tile:nth-child(3)"
-          },
-          "heads": "end"
+          "crop_padding": 8,
+          "annotations": [
+            {
+              "kind": "connector",
+              "anchor": {
+                "selector": "#late-fee"
+              },
+              "from": {
+                "selector": "#timeline li:nth-child(3)"
+              },
+              "heads": "end"
+            }
+          ]
         }
       ]
     },
     {
       "slug": "connector-both",
-      "url": "/settings.html",
       "viewport": {
-        "width": 1024,
+        "width": 760,
         "height": 640
       },
-      "full_page": false,
-      "annotations": [
+      "panels": [
         {
-          "kind": "connector",
-          "anchor": {
-            "text": "Invoice overdue"
+          "url": "/settings.html",
+          "full_page": true,
+          "crop": {
+            "selector": ".split.even"
           },
-          "from": {
-            "role": "textbox",
-            "name": "Work email"
-          },
-          "heads": "both"
+          "crop_padding": 8,
+          "annotations": [
+            {
+              "kind": "connector",
+              "anchor": {
+                "text": "Invoice overdue"
+              },
+              "from": {
+                "role": "textbox",
+                "name": "Work email"
+              },
+              "heads": "both"
+            }
+          ]
         }
       ]
     },
@@ -468,7 +498,7 @@
         "height": 640
       },
       "full_page": false,
-      "color": "#047857",
+      "color": "#4338CA",
       "annotations": [
         {
           "kind": "box",
@@ -492,7 +522,7 @@
             "name": "Status"
           },
           "offset": {
-            "x": 342,
+            "x": 346,
             "width": 74
           },
           "number": 2,
@@ -705,7 +735,7 @@
         {
           "action": "hover",
           "target": {
-            "text": "^INV-1042$",
+            "text": "^INV-10\\d+$",
             "match": "regex"
           }
         }
@@ -723,10 +753,10 @@
     {
       "slug": "scheme-checkout-path",
       "viewport": {
-        "width": 900,
-        "height": 620
+        "width": 380,
+        "height": 440
       },
-      "panel_width": 560,
+      "gap": 56,
       "steps_numbers": true,
       "links": "sequence",
       "continuous": true,
@@ -836,12 +866,12 @@
     {
       "slug": "scheme-screen-map",
       "viewport": {
-        "width": 1024,
-        "height": 640
+        "width": 480,
+        "height": 340
       },
       "layout": "grid",
       "columns": 2,
-      "panel_width": 460,
+      "panel_width": 480,
       "background": "#101828",
       "panels": [
         {
@@ -892,17 +922,16 @@
           "from": "invoice",
           "to": "settings",
           "style": "dashed",
-          "text": "Change who is notified"
+          "text": "Optional"
         }
       ]
     },
     {
       "slug": "scheme-hide-overlay",
       "viewport": {
-        "width": 1024,
-        "height": 640
+        "width": 480,
+        "height": 360
       },
-      "panel_width": 560,
       "layout": "row",
       "panels": [
         {
@@ -914,6 +943,10 @@
               "anchor": {
                 "text": "dev build",
                 "match": "substring"
+              },
+              "offset": {
+                "x": 60,
+                "y": -80
               },
               "text": "Dev overlay"
             }

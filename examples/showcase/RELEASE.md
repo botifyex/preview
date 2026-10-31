@@ -17,7 +17,7 @@
 **6.** A two or three word label above the status filters
 
 ![Figure 7: a dashed red place](figures/07-mark-removed.png)
-**7.** A dashed red place where the Apply button used to be
+**7.** A dashed red place where the Apply button used to be, in its own red beside a solid frame in the default colour
 
 ![Figure 8: a sentence beside the password field](figures/08-mark-callout.png)
 **8.** A sentence on the picture, on a chosen side and at a chosen width, on the signed-out page
@@ -38,7 +38,7 @@
 **13.** A plain line between two things that belong together: who bills and who pays
 
 ![Figure 14: a line with one head](figures/14-connector-end.png)
-**14.** A line with a head at one end: late payments lead to the reminders in Next up
+**14.** A line with a head at one end: a passed due date leads to the late fee
 
 ![Figure 15: a line with two heads](figures/15-connector-both.png)
 **15.** A line with heads at both ends: the work email and the alerts sent to it
@@ -46,8 +46,8 @@
 ![Figure 16: ten tiles with numbers in ten places](figures/16-number-placements.png)
 **16.** A deliberate gallery of ten marks, to compare every place a number can sit in one view: 1 corner, 2 top left, 3 top right, 4 bottom left, 5 bottom right, 6 inside, 7 left, 8 right, 9 above, 10 below
 
-![Figure 17: marks in green, amber and red](figures/17-colour-levels.png)
-**17.** Three colours: green set for the whole picture, amber on one mark, and the removal keeping its own red
+![Figure 17: marks in indigo, amber and red](figures/17-colour-levels.png)
+**17.** Three colours: indigo set for the whole picture, amber on one mark, and the removal keeping its own red; the same field also sets a colour for a whole report
 
 ![Figure 18: the dashboard in dark colours](figures/18-dark-theme.png)
 **18.** The dashboard in dark colours, with the frame still clear
@@ -114,7 +114,7 @@ Mossbill is a made-up billing app, and everything in these pictures is sample da
 - Each row of the list gives the number, customer, dates, amount and status of one invoice ([figure 11](figures/11-mark-highlight.png)).
 - The dashboard chart shows six months of revenue ([figure 12](figures/12-mark-spotlight.png)).
 - Each invoice names who bills and who pays ([figure 13](figures/13-connector-none.png)).
-- Late payments are followed by reminders listed in Next up ([figure 14](figures/14-connector-end.png)).
+- The late fee applies once the due date has passed ([figure 14](figures/14-connector-end.png)).
 - Overdue alerts go to your work email ([figure 15](figures/15-connector-both.png)).
 - Monthly statements sit together on one page; this picture is a deliberate exception to one idea per image, there only to compare where numbers can sit ([figure 16](figures/16-number-placements.png)).
 - Marks can carry different colours, and a removal stays red ([figure 17](figures/17-colour-levels.png)).

@@ -22,6 +22,7 @@ README = (ROOT / "README.md").read_text()
 REPORT = (SHOWCASE / "RELEASE.md").read_text()
 BUILD_TIMEOUT = 300
 GALLERY = "number-placements"
+SCHEME_WIDTH = 680
 EXTERNAL_ADDRESS = re.compile(r"https?://")
 README_IMAGE = re.compile(r'<img src="([^"]+)"|!\[[^\]]*\]\(([^)]+)\)')
 
@@ -197,17 +198,37 @@ def test_scheme_link_carries_text() -> None:
     )
 
 
-def test_color_is_set_at_every_level() -> None:
-    assert "color" in SPEC
+def marks_of(entry: dict[str, Any]) -> list[dict[str, Any]]:
+    return entry.get("marks", []) + [mark for panel in entry.get("panels", []) for mark in panel["marks"]]
+
+
+def colors_of(slug: str) -> dict[str, str]:
+    entry = next(entry for entry in MANIFEST["figures"] if entry["slug"] == slug)
+    return {mark["kind"]: mark["color"] for mark in marks_of(entry)}
+
+
+def test_default_color_is_shown_in_most_figures() -> None:
+    marked = [entry for entry in MANIFEST["figures"] if marks_of(entry)]
+    default = [entry for entry in marked if all(m["color"] == CONSTANTS.DEFAULT_COLOR for m in marks_of(entry))]
+    assert "color" not in SPEC
+    assert len(default) > len(marked) * 3 / 4
+
+
+def test_color_is_set_on_a_figure_and_an_annotation() -> None:
     assert any("color" in figure for figure in SPEC["figures"])
     assert any("color" in mark for mark in annotations(SPEC))
 
 
 def test_removed_is_drawn_in_its_own_red_under_a_figure_color() -> None:
-    entries = [entry for entry in MANIFEST["figures"] if entry["slug"] == "colour-levels"]
-    colors = {mark["kind"]: mark["color"] for mark in entries[0]["marks"]}
+    colors = colors_of("colour-levels")
     assert colors["removed"] == CONSTANTS.KIND_COLORS["removed"]
     assert colors["box"] != colors["removed"]
+
+
+def test_removed_is_shown_beside_the_default_color() -> None:
+    colors = colors_of("mark-removed")
+    assert colors["box"] == CONSTANTS.DEFAULT_COLOR
+    assert colors["removed"] == CONSTANTS.KIND_COLORS["removed"]
 
 
 def test_hide_is_listed() -> None:
@@ -257,6 +278,13 @@ def test_readme_shows_layout(layout: str) -> None:
 @pytest.mark.parametrize("name", sorted(png_names()))
 def test_figure_is_used(name: str) -> None:
     assert name in README or f"figures/{name}" in REPORT
+
+
+@pytest.mark.parametrize("figure", schemes(), ids=lambda figure: figure["slug"])
+def test_readme_shows_schemes_large(figure: dict[str, Any]) -> None:
+    if len(figure["panels"]) > 1:
+        widths = re.findall(rf'{files_of(figure["slug"])[0]}" width="(\d+)"', README)
+        assert [int(width) for width in widths if int(width) >= SCHEME_WIDTH]
 
 
 def test_readme_states_how_to_rebuild() -> None:

@@ -21,7 +21,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": "Start here",
           "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
@@ -69,7 +69,7 @@
       "marks": [
         {
           "kind": "arrow",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": "Alerts",
           "anchor_description": "{\"name\": \"Notifications\", \"role\": \"button\"}",
@@ -122,7 +122,7 @@
       "marks": [
         {
           "kind": "arrow",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": "Keep a copy",
           "anchor_description": "{\"name\": \"Download PDF\", \"role\": \"button\"}",
@@ -175,7 +175,7 @@
       "marks": [
         {
           "kind": "arrow",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1045'] .chip\"}",
@@ -228,7 +228,7 @@
       "marks": [
         {
           "kind": "badge",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"text\": \"Work email\"}",
@@ -256,7 +256,7 @@
         },
         {
           "kind": "badge",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 2,
           "text": null,
           "anchor_description": "{\"text\": \"Invoice overdue\"}",
@@ -284,7 +284,7 @@
         },
         {
           "kind": "badge",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 3,
           "text": null,
           "anchor_description": "{\"name\": \"Save changes\", \"role\": \"button\"}",
@@ -332,7 +332,7 @@
       "marks": [
         {
           "kind": "label",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": "One click filters",
           "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
@@ -389,13 +389,38 @@
           },
           "badge": null,
           "rectangle": {
-            "x": 896,
+            "x": 900,
             "y": 152.75,
             "width": 82,
             "height": 37.0
           },
           "corner": {
-            "x": 896,
+            "x": 900,
+            "y": 152.75
+          },
+          "bottom": 189.75
+        },
+        {
+          "kind": "box",
+          "color": "#E6004C",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
+          "element": {
+            "x": 558,
+            "y": 156.75,
+            "width": 331.5625,
+            "height": 29
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 554,
+            "y": 152.75,
+            "width": 339.5625,
+            "height": 37.0
+          },
+          "corner": {
+            "x": 554,
             "y": 152.75
           },
           "bottom": 189.75
@@ -422,7 +447,7 @@
       "marks": [
         {
           "kind": "callout",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": "Any password works: this demo has made-up data and no real accounts.",
           "anchor_description": "{\"name\": \"Password\", \"role\": \"textbox\"}",
@@ -493,7 +518,7 @@
       "marks": [
         {
           "kind": "ellipse",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .chip\"}",
@@ -545,7 +570,7 @@
       "marks": [
         {
           "kind": "underline",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": null,
           "anchor_description": "{\"selector\": \"#late-fee\"}",
@@ -598,7 +623,7 @@
       "marks": [
         {
           "kind": "highlight",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": null,
           "anchor_description": "{\"match\": \"substring\", \"name\": \"INV-1042\", \"role\": \"row\"}",
@@ -644,7 +669,7 @@
       "marks": [
         {
           "kind": "spotlight",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"selector\": \"#revenue-chart\"}",
@@ -682,180 +707,213 @@
       "number": 13,
       "file": "figures/13-connector-none.png",
       "slug": "connector-none",
-      "role": "current",
-      "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+      "role": "scheme",
+      "layout": "row",
+      "continuous": false,
       "viewport": {
-        "width": 1024,
-        "height": 640,
+        "width": 552,
+        "height": 195,
         "scale": 1
       },
-      "theme": "light",
-      "page": {
-        "width": 1024,
-        "height": 880
-      },
-      "marks": [
+      "panels": [
         {
-          "kind": "connector",
-          "color": "#1D4ED8",
-          "number": null,
-          "text": null,
-          "anchor_description": "{\"selector\": \"#bill-to strong\"}",
-          "element": {
-            "x": 646,
-            "y": 219,
-            "width": 138.328125,
-            "height": 17
-          },
-          "badge": null,
+          "id": 1,
+          "title": null,
+          "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
           "rectangle": {
-            "x": 642,
-            "y": 215,
-            "width": 146.328125,
-            "height": 25
+            "x": 24.0,
+            "y": 24,
+            "width": 504.0,
+            "height": 147.0
           },
-          "corner": {
-            "x": 524.15234375,
-            "y": 227.5
-          },
-          "bottom": 227.5,
-          "source": {
-            "x": 263,
-            "y": 219,
-            "width": 140.28125,
-            "height": 17
-          },
-          "heads": "none",
-          "start": {
-            "x": 407.28125,
-            "y": 227.5
-          },
-          "end": {
-            "x": 642.0,
-            "y": 227.5
-          }
+          "scale": 1.0,
+          "marks": [
+            {
+              "kind": "connector",
+              "color": "#E6004C",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"selector\": \"#bill-to strong\"}",
+              "element": {
+                "x": 302.0,
+                "y": 80.5,
+                "width": 138.328125,
+                "height": 17.0
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 298.0,
+                "y": 76.5,
+                "width": 146.328125,
+                "height": 25.0
+              },
+              "corner": {
+                "x": 246.15234375,
+                "y": 89.0
+              },
+              "bottom": 89.0,
+              "source": {
+                "x": 51.0,
+                "y": 80.5,
+                "width": 140.28125,
+                "height": 17.0
+              },
+              "heads": "none",
+              "start": {
+                "x": 195.28125,
+                "y": 89.0
+              },
+              "end": {
+                "x": 298.0,
+                "y": 89.0
+              }
+            }
+          ]
         }
       ],
+      "links": [],
       "warnings": []
     },
     {
       "number": 14,
       "file": "figures/14-connector-end.png",
       "slug": "connector-end",
-      "role": "current",
-      "url": "http://127.0.0.1:8000/index.html",
+      "role": "scheme",
+      "layout": "row",
+      "continuous": false,
       "viewport": {
-        "width": 1024,
-        "height": 640,
+        "width": 552,
+        "height": 219,
         "scale": 1
       },
-      "theme": "light",
-      "page": {
-        "width": 1024,
-        "height": 808
-      },
-      "marks": [
+      "panels": [
         {
-          "kind": "connector",
-          "color": "#1D4ED8",
-          "number": null,
-          "text": null,
-          "anchor_description": "{\"selector\": \"#next-up h2\"}",
-          "element": {
-            "x": 769,
-            "y": 293.5,
-            "width": 208,
-            "height": 19.5
-          },
-          "badge": null,
+          "id": 1,
+          "title": null,
+          "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
           "rectangle": {
-            "x": 765,
-            "y": 289.5,
-            "width": 216,
-            "height": 27.5
+            "x": 24.0,
+            "y": 24,
+            "width": 504.0,
+            "height": 171.0
           },
-          "corner": {
-            "x": 794.375,
-            "y": 251.0
-          },
-          "bottom": 251.0,
-          "source": {
-            "x": 627,
-            "y": 141,
-            "width": 177.5,
-            "height": 115.5
-          },
-          "heads": "end",
-          "start": {
-            "x": 808.5,
-            "y": 260.38672496025436
-          },
-          "end": {
-            "x": 852.3092105263158,
-            "y": 289.5
-          }
+          "scale": 1.0,
+          "marks": [
+            {
+              "kind": "connector",
+              "color": "#E6004C",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"selector\": \"#late-fee\"}",
+              "element": {
+                "x": 302.0,
+                "y": 125.5,
+                "width": 46.703125,
+                "height": 17.0
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 298.0,
+                "y": 121.5,
+                "width": 54.703125,
+                "height": 25.0
+              },
+              "corner": {
+                "x": 229.0390625,
+                "y": 146.375
+              },
+              "bottom": 146.375,
+              "source": {
+                "x": 51.0,
+                "y": 147.5,
+                "width": 163.453125,
+                "height": 22.5
+              },
+              "heads": "end",
+              "start": {
+                "x": 218.453125,
+                "y": 147.7351658825438
+              },
+              "end": {
+                "x": 298.0,
+                "y": 137.51434742050617
+              }
+            }
+          ]
         }
       ],
+      "links": [],
       "warnings": []
     },
     {
       "number": 15,
       "file": "figures/15-connector-both.png",
       "slug": "connector-both",
-      "role": "current",
-      "url": "http://127.0.0.1:8000/settings.html",
+      "role": "scheme",
+      "layout": "row",
+      "continuous": false,
       "viewport": {
-        "width": 1024,
-        "height": 640,
+        "width": 552,
+        "height": 360,
         "scale": 1
       },
-      "theme": "light",
-      "page": {
-        "width": 1024,
-        "height": 640
-      },
-      "marks": [
+      "panels": [
         {
-          "kind": "connector",
-          "color": "#1D4ED8",
-          "number": null,
-          "text": null,
-          "anchor_description": "{\"text\": \"Invoice overdue\"}",
-          "element": {
-            "x": 646,
-            "y": 228.5,
-            "width": 126.84375,
-            "height": 21
-          },
-          "badge": null,
+          "id": 1,
+          "title": null,
+          "url": "http://127.0.0.1:8000/settings.html",
           "rectangle": {
-            "x": 642,
-            "y": 224.5,
-            "width": 134.84375,
-            "height": 29.0
+            "x": 24.0,
+            "y": 24,
+            "width": 504.0,
+            "height": 311.5
           },
-          "corner": {
-            "x": 568.9609375,
-            "y": 239.125
-          },
-          "bottom": 239.125,
-          "source": {
-            "x": 263,
-            "y": 219,
-            "width": 331,
-            "height": 40.5
-          },
-          "heads": "both",
-          "start": {
-            "x": 598.0,
-            "y": 239.09915735024194
-          },
-          "end": {
-            "x": 642.0,
-            "y": 239.06000055620447
-          }
+          "scale": 1.0,
+          "marks": [
+            {
+              "kind": "connector",
+              "color": "#E6004C",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"text\": \"Invoice overdue\"}",
+              "element": {
+                "x": 302.0,
+                "y": 119.5,
+                "width": 126.84375,
+                "height": 21.0
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 298.0,
+                "y": 115.5,
+                "width": 134.84375,
+                "height": 29.0
+              },
+              "corner": {
+                "x": 257.9609375,
+                "y": 130.125
+              },
+              "bottom": 130.125,
+              "source": {
+                "x": 51.0,
+                "y": 110.0,
+                "width": 199.0,
+                "height": 40.5
+              },
+              "heads": "both",
+              "start": {
+                "x": 254.0,
+                "y": 130.12960741548528
+              },
+              "end": {
+                "x": 298.0,
+                "y": 130.0784260268993
+              }
+            }
+          ]
         }
       ],
+      "links": [],
       "warnings": []
     },
     {
@@ -877,7 +935,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='January']\"}",
@@ -905,7 +963,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 2,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='February']\"}",
@@ -933,7 +991,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 3,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='March']\"}",
@@ -961,7 +1019,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 4,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='April']\"}",
@@ -989,7 +1047,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 5,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='May']\"}",
@@ -1017,7 +1075,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 6,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='June']\"}",
@@ -1045,7 +1103,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 7,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='July']\"}",
@@ -1073,7 +1131,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 8,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='August']\"}",
@@ -1101,7 +1159,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 9,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='September']\"}",
@@ -1129,7 +1187,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 10,
           "text": null,
           "anchor_description": "{\"selector\": \".statement[data-month='October']\"}",
@@ -1179,7 +1237,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#047857",
+          "color": "#4338CA",
           "number": 1,
           "text": null,
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
@@ -1250,17 +1308,17 @@
             "height": 29
           },
           "badge": {
-            "x": 978,
+            "x": 982,
             "y": 152.75
           },
           "rectangle": {
-            "x": 896,
+            "x": 900,
             "y": 152.75,
             "width": 82,
             "height": 37.0
           },
           "corner": {
-            "x": 896,
+            "x": 900,
             "y": 152.75
           },
           "bottom": 189.75
@@ -1287,7 +1345,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": "Needs attention",
           "anchor_description": "{\"selector\": \".tiles .tile:nth-child(3)\"}",
@@ -1335,7 +1393,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"name\": \"Print list\", \"role\": \"button\"}",
@@ -1363,7 +1421,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 2,
           "text": null,
           "anchor_description": "{\"selector\": \".toolbar\"}",
@@ -1411,7 +1469,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
@@ -1439,7 +1497,7 @@
         },
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 2,
           "text": null,
           "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
@@ -1487,7 +1545,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"match\": \"substring\", \"text\": \"Swipe a row left\"}",
@@ -1535,7 +1593,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"name\": \"Invoices\", \"role\": \"link\"}",
@@ -1583,7 +1641,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"selector\": \"#results\"}",
@@ -1631,7 +1689,7 @@
       "marks": [
         {
           "kind": "label",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": null,
           "text": "Window only",
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
@@ -1676,7 +1734,7 @@
       "marks": [
         {
           "kind": "box",
-          "color": "#1D4ED8",
+          "color": "#E6004C",
           "number": 1,
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .row-buttons\"}",
@@ -1713,8 +1771,8 @@
       "layout": "row",
       "continuous": true,
       "viewport": {
-        "width": 1920,
-        "height": 518,
+        "width": 1348,
+        "height": 572,
         "scale": 1
       },
       "panels": [
@@ -1725,35 +1783,35 @@
           "rectangle": {
             "x": 48.0,
             "y": 84,
-            "width": 560.0,
-            "height": 385.77777777777777
+            "width": 380.0,
+            "height": 440.0
           },
-          "scale": 0.6222222222222222,
+          "scale": 1.0,
           "marks": [
             {
               "kind": "box",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": null,
               "text": null,
               "anchor_description": "{\"name\": \"Cart (1)\", \"role\": \"link\"}",
               "element": {
-                "x": 482.92361111111114,
-                "y": 92.08888888888889,
-                "width": 49.16527777777778,
-                "height": 21.155555555555555
+                "x": 284.984375,
+                "y": 97.0,
+                "width": 79.015625,
+                "height": 34.0
               },
               "badge": null,
               "rectangle": {
-                "x": 480.4347222222222,
-                "y": 89.6,
-                "width": 54.143055555555556,
-                "height": 26.133333333333333
+                "x": 280.984375,
+                "y": 93.0,
+                "width": 87.015625,
+                "height": 42.0
               },
               "corner": {
-                "x": 480.4347222222222,
-                "y": 89.6
+                "x": 280.984375,
+                "y": 93.0
               },
-              "bottom": 115.73333333333333
+              "bottom": 135.0
             }
           ]
         },
@@ -1762,37 +1820,37 @@
           "title": "Check the cart",
           "url": "http://127.0.0.1:8000/cart.html",
           "rectangle": {
-            "x": 680.0,
+            "x": 484.0,
             "y": 84,
-            "width": 560.0,
-            "height": 385.77777777777777
+            "width": 380.0,
+            "height": 440.0
           },
-          "scale": 0.6222222222222222,
+          "scale": 1.0,
           "marks": [
             {
               "kind": "highlight",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": null,
               "text": null,
               "anchor_description": "{\"match\": \"substring\", \"name\": \"Reminder emails\", \"role\": \"row\"}",
               "element": {
-                "x": 843.6444444444444,
-                "y": 180.56111111111113,
-                "width": 299.9111111111111,
-                "height": 25.511111111111113
+                "x": 519.0,
+                "y": 233.1875,
+                "width": 310.0,
+                "height": 41.0
               },
               "badge": null,
               "rectangle": {
-                "x": 841.1555555555556,
-                "y": 178.07222222222222,
-                "width": 304.8888888888889,
-                "height": 30.48888888888889
+                "x": 515.0,
+                "y": 229.1875,
+                "width": 318.0,
+                "height": 49.0
               },
               "corner": {
-                "x": 841.1555555555556,
-                "y": 178.07222222222222
+                "x": 515.0,
+                "y": 229.1875
               },
-              "bottom": 208.56111111111113,
+              "bottom": 278.1875,
               "opacity": 0.25
             }
           ]
@@ -1802,37 +1860,37 @@
           "title": "Place the order",
           "url": "http://127.0.0.1:8000/cart.html",
           "rectangle": {
-            "x": 1312.0,
+            "x": 920.0,
             "y": 84,
-            "width": 560.0,
-            "height": 385.77777777777777
+            "width": 380.0,
+            "height": 440.0
           },
-          "scale": 0.6222222222222222,
+          "scale": 1.0,
           "marks": [
             {
               "kind": "box",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": null,
               "text": null,
               "anchor_description": "{\"selector\": \".confirmation\"}",
               "element": {
-                "x": 1463.8222222222223,
-                "y": 169.98333333333335,
-                "width": 323.55555555555554,
-                "height": 86.4888888888889
+                "x": 936.0,
+                "y": 216.1875,
+                "width": 348.0,
+                "height": 139.0
               },
               "badge": null,
               "rectangle": {
-                "x": 1461.3333333333333,
-                "y": 167.49444444444444,
-                "width": 328.53333333333336,
-                "height": 91.46666666666667
+                "x": 932.0,
+                "y": 212.1875,
+                "width": 356.0,
+                "height": 147.0
               },
               "corner": {
-                "x": 1461.3333333333333,
-                "y": 167.49444444444444
+                "x": 932.0,
+                "y": 212.1875
               },
-              "bottom": 258.9611111111111
+              "bottom": 359.1875
             }
           ]
         }
@@ -1845,21 +1903,21 @@
           "text": null,
           "from_mark": null,
           "tail": {
-            "x": 614.0,
-            "y": 258.8888888888889
+            "x": 434.0,
+            "y": 286.0
           },
           "tip": {
-            "x": 674.0,
-            "y": 258.8888888888889
+            "x": 478.0,
+            "y": 286.0
           },
           "points": [
             {
-              "x": 614.0,
-              "y": 258.8888888888889
+              "x": 434.0,
+              "y": 286.0
             },
             {
-              "x": 674.0,
-              "y": 258.8888888888889
+              "x": 478.0,
+              "y": 286.0
             }
           ],
           "label": null
@@ -1871,21 +1929,21 @@
           "text": null,
           "from_mark": null,
           "tail": {
-            "x": 1246.0,
-            "y": 258.8888888888889
+            "x": 870.0,
+            "y": 286.0
           },
           "tip": {
-            "x": 1306.0,
-            "y": 258.8888888888889
+            "x": 914.0,
+            "y": 286.0
           },
           "points": [
             {
-              "x": 1246.0,
-              "y": 258.8888888888889
+              "x": 870.0,
+              "y": 286.0
             },
             {
-              "x": 1306.0,
-              "y": 258.8888888888889
+              "x": 914.0,
+              "y": 286.0
             }
           ],
           "label": null
@@ -1920,7 +1978,7 @@
           "marks": [
             {
               "kind": "highlight",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": null,
               "text": null,
               "anchor_description": "{\"selector\": \"#total\"}",
@@ -1971,8 +2029,8 @@
       "layout": "grid",
       "continuous": false,
       "viewport": {
-        "width": 1210,
-        "height": 937,
+        "width": 1193,
+        "height": 985,
         "scale": 1
       },
       "panels": [
@@ -1983,38 +2041,38 @@
           "rectangle": {
             "x": 48.0,
             "y": 84.0,
-            "width": 460.0,
-            "height": 287.5
+            "width": 480.0,
+            "height": 340.0
           },
-          "scale": 0.44921875,
+          "scale": 1.0,
           "marks": [
             {
               "kind": "box",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": 1,
               "text": null,
               "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
               "element": {
-                "x": 445.59368896484375,
-                "y": 123.08203125,
-                "width": 49.82818603515625,
-                "height": 15.2734375
+                "x": 401.078125,
+                "y": 165.0,
+                "width": 110.921875,
+                "height": 34.0
               },
               "badge": {
-                "x": 497.21875,
-                "y": 121.28515625
+                "x": 512.0,
+                "y": 161.0
               },
               "rectangle": {
-                "x": 443.79681396484375,
-                "y": 121.28515625,
-                "width": 53.42193603515625,
-                "height": 18.8671875
+                "x": 397.078125,
+                "y": 161.0,
+                "width": 118.921875,
+                "height": 42.0
               },
               "corner": {
-                "x": 443.79681396484375,
-                "y": 121.28515625
+                "x": 397.078125,
+                "y": 161.0
               },
-              "bottom": 140.15234375
+              "bottom": 203.0
             }
           ]
         },
@@ -2023,12 +2081,12 @@
           "title": "Invoices",
           "url": "http://127.0.0.1:8000/invoices.html",
           "rectangle": {
-            "x": 701.220703125,
+            "x": 664.4619140625,
             "y": 84.0,
-            "width": 460.0,
-            "height": 287.5
+            "width": 480.0,
+            "height": 340.0
           },
-          "scale": 0.44921875,
+          "scale": 1.0,
           "marks": []
         },
         {
@@ -2037,11 +2095,11 @@
           "url": "http://127.0.0.1:8000/settings.html",
           "rectangle": {
             "x": 48.0,
-            "y": 600.720703125,
-            "width": 460.0,
-            "height": 287.5
+            "y": 596.4619140625,
+            "width": 480.0,
+            "height": 340.0
           },
-          "scale": 0.44921875,
+          "scale": 1.0,
           "marks": []
         },
         {
@@ -2049,12 +2107,12 @@
           "title": "One invoice",
           "url": "http://127.0.0.1:8000/invoice.html?id=INV-1048",
           "rectangle": {
-            "x": 701.220703125,
-            "y": 600.720703125,
-            "width": 460.0,
-            "height": 287.5
+            "x": 664.4619140625,
+            "y": 596.4619140625,
+            "width": 480.0,
+            "height": 340.0
           },
-          "scale": 0.44921875,
+          "scale": 1.0,
           "marks": []
         }
       ],
@@ -2066,26 +2124,26 @@
           "text": "Go to invoices",
           "from_mark": 1,
           "tail": {
-            "x": 497.21875,
-            "y": 121.28515625
+            "x": 512.0,
+            "y": 161.0
           },
           "tip": {
-            "x": 695.220703125,
-            "y": 121.28515625
+            "x": 658.4619140625,
+            "y": 161.0
           },
           "points": [
             {
-              "x": 497.21875,
-              "y": 121.28515625
+              "x": 512.0,
+              "y": 161.0
             },
             {
-              "x": 695.220703125,
-              "y": 121.28515625
+              "x": 658.4619140625,
+              "y": 161.0
             }
           ],
           "label": {
-            "x": 539.98876953125,
-            "y": 91.28515625,
+            "x": 529.0,
+            "y": 131.0,
             "width": 112.4619140625,
             "height": 24
           }
@@ -2097,26 +2155,26 @@
           "text": "Pick one",
           "from_mark": null,
           "tail": {
-            "x": 931.220703125,
-            "y": 377.5
+            "x": 904.4619140625,
+            "y": 430.0
           },
           "tip": {
-            "x": 931.220703125,
-            "y": 558.720703125
+            "x": 904.4619140625,
+            "y": 554.4619140625
           },
           "points": [
             {
-              "x": 931.220703125,
-              "y": 377.5
+              "x": 904.4619140625,
+              "y": 430.0
             },
             {
-              "x": 931.220703125,
-              "y": 558.720703125
+              "x": 904.4619140625,
+              "y": 554.4619140625
             }
           ],
           "label": {
-            "x": 937.220703125,
-            "y": 456.1103515625,
+            "x": 910.4619140625,
+            "y": 480.23095703125,
             "width": 73.5791015625,
             "height": 24
           }
@@ -2125,30 +2183,30 @@
           "from": "invoice",
           "to": "settings",
           "style": "dashed",
-          "text": "Change who is notified",
+          "text": "Optional",
           "from_mark": null,
           "tail": {
-            "x": 695.220703125,
-            "y": 726.470703125
+            "x": 658.4619140625,
+            "y": 748.4619140625
           },
           "tip": {
-            "x": 514.0,
-            "y": 726.470703125
+            "x": 534.0,
+            "y": 748.4619140625
           },
           "points": [
             {
-              "x": 695.220703125,
-              "y": 726.470703125
+              "x": 658.4619140625,
+              "y": 748.4619140625
             },
             {
-              "x": 514.0,
-              "y": 726.470703125
+              "x": 534.0,
+              "y": 748.4619140625
             }
           ],
           "label": {
-            "x": 520.0,
-            "y": 696.470703125,
-            "width": 169.220703125,
+            "x": 559.8447265625,
+            "y": 718.4619140625,
+            "width": 72.7724609375,
             "height": 24
           }
         }
@@ -2163,8 +2221,8 @@
       "layout": "row",
       "continuous": false,
       "viewport": {
-        "width": 1200,
-        "height": 434,
+        "width": 1040,
+        "height": 444,
         "scale": 1
       },
       "panels": [
@@ -2175,42 +2233,42 @@
           "rectangle": {
             "x": 24.0,
             "y": 60,
-            "width": 560.0,
-            "height": 350.0
+            "width": 480.0,
+            "height": 360.0
           },
-          "scale": 0.546875,
+          "scale": 1.0,
           "marks": [
             {
               "kind": "arrow",
-              "color": "#1D4ED8",
+              "color": "#E6004C",
               "number": null,
               "text": "Dev overlay",
               "anchor_description": "{\"match\": \"substring\", \"text\": \"dev build\"}",
               "element": {
-                "x": 443.58984375,
-                "y": 387.03125,
-                "width": 131.66015625,
-                "height": 14.21875
+                "x": 247.25,
+                "y": 378.0,
+                "width": 240.75,
+                "height": 26.0
               },
               "badge": null,
               "rectangle": {
-                "x": 441.40234375,
-                "y": 384.84375,
-                "width": 136.03515625,
-                "height": 18.59375
+                "x": 243.25,
+                "y": 374.0,
+                "width": 248.75,
+                "height": 34.0
               },
               "corner": {
-                "x": 399.83984375,
-                "y": 354.21875
+                "x": 427.625,
+                "y": 311.0
               },
-              "bottom": 354.21875,
+              "bottom": 311.0,
               "tail": {
-                "x": 399.83984375,
-                "y": 354.21875
+                "x": 427.625,
+                "y": 311.0
               },
               "tip": {
-                "x": 483.90127354452056,
-                "y": 384.84375
+                "x": 380.375,
+                "y": 374.0
               }
             }
           ]
@@ -2220,12 +2278,12 @@
           "title": "Listed in hide",
           "url": "http://127.0.0.1:8000/index.html",
           "rectangle": {
-            "x": 616.0,
+            "x": 536.0,
             "y": 60,
-            "width": 560.0,
-            "height": 350.0
+            "width": 480.0,
+            "height": 360.0
           },
-          "scale": 0.546875,
+          "scale": 1.0,
           "marks": []
         }
       ],

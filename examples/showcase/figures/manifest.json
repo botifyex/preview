@@ -26,23 +26,23 @@
           "text": "Start here",
           "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
           "element": {
-            "x": 885.078125,
+            "x": 883,
             "y": 87,
-            "width": 110.921875,
+            "width": 113,
             "height": 34
           },
           "badge": {
-            "x": 881.078125,
+            "x": 879,
             "y": 83
           },
           "rectangle": {
-            "x": 881.078125,
+            "x": 879,
             "y": 83,
-            "width": 118.921875,
+            "width": 121,
             "height": 42
           },
           "corner": {
-            "x": 881.078125,
+            "x": 879,
             "y": 83
           },
           "bottom": 125
@@ -127,29 +127,29 @@
           "text": "Keep a copy",
           "anchor_description": "{\"name\": \"Download PDF\", \"role\": \"button\"}",
           "element": {
-            "x": 727.1875,
+            "x": 724,
             "y": 116.5,
-            "width": 128.78125,
+            "width": 131,
             "height": 34
           },
           "badge": null,
           "rectangle": {
-            "x": 723.1875,
+            "x": 720,
             "y": 112.5,
-            "width": 136.78125,
+            "width": 139,
             "height": 42.0
           },
           "corner": {
-            "x": 571.578125,
+            "x": 569.5,
             "y": 133.5
           },
           "bottom": 133.5,
           "tail": {
-            "x": 571.578125,
+            "x": 569.5,
             "y": 133.5
           },
           "tip": {
-            "x": 723.1875,
+            "x": 720.0,
             "y": 133.5
           }
         }
@@ -180,30 +180,30 @@
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1045'] .chip\"}",
           "element": {
-            "x": 754.0625,
+            "x": 751.625,
             "y": 270.5,
-            "width": 68.6875,
+            "width": 69,
             "height": 20
           },
           "badge": null,
           "rectangle": {
-            "x": 750.0625,
+            "x": 747.625,
             "y": 266.5,
-            "width": 76.6875,
+            "width": 77.0,
             "height": 28.0
           },
           "corner": {
-            "x": 906.9921875,
+            "x": 907.0,
             "y": 279.75
           },
           "bottom": 279.75,
           "tail": {
-            "x": 906.9921875,
+            "x": 907.0,
             "y": 279.75
           },
           "tip": {
-            "x": 826.75,
-            "y": 280.25749390605444
+            "x": 824.625,
+            "y": 280.2611168562565
           }
         }
       ],
@@ -235,17 +235,17 @@
           "element": {
             "x": 263,
             "y": 193.5,
-            "width": 69.125,
+            "width": 70,
             "height": 19.5
           },
           "badge": {
-            "x": 356.125,
+            "x": 357,
             "y": 203.25
           },
           "rectangle": {
             "x": 259,
             "y": 189.5,
-            "width": 77.125,
+            "width": 78,
             "height": 27.5
           },
           "corner": {
@@ -263,17 +263,17 @@
           "element": {
             "x": 646,
             "y": 228.5,
-            "width": 126.84375,
+            "width": 129,
             "height": 21
           },
           "badge": {
-            "x": 796.84375,
+            "x": 799,
             "y": 239.0
           },
           "rectangle": {
             "x": 642,
             "y": 224.5,
-            "width": 134.84375,
+            "width": 137,
             "height": 29.0
           },
           "corner": {
@@ -289,23 +289,23 @@
           "text": null,
           "anchor_description": "{\"name\": \"Save changes\", \"role\": \"button\"}",
           "element": {
-            "x": 872.609375,
+            "x": 870,
             "y": 87,
-            "width": 123.390625,
+            "width": 126,
             "height": 34
           },
           "badge": {
-            "x": 848.609375,
+            "x": 846,
             "y": 104.0
           },
           "rectangle": {
-            "x": 868.609375,
+            "x": 866,
             "y": 83,
-            "width": 131.390625,
+            "width": 134,
             "height": 42
           },
           "corner": {
-            "x": 868.609375,
+            "x": 866,
             "y": 83
           },
           "bottom": 125
@@ -339,14 +339,14 @@
           "element": {
             "x": 558,
             "y": 156.75,
-            "width": 331.5625,
+            "width": 335,
             "height": 29
           },
           "badge": null,
           "rectangle": {
             "x": 554,
             "y": 152.75,
-            "width": 339.5625,
+            "width": 343,
             "height": 37.0
           },
           "corner": {
@@ -384,7 +384,7 @@
           "element": {
             "x": 558,
             "y": 156.75,
-            "width": 331.5625,
+            "width": 335,
             "height": 29
           },
           "badge": null,
@@ -409,14 +409,14 @@
           "element": {
             "x": 558,
             "y": 156.75,
-            "width": 331.5625,
+            "width": 335,
             "height": 29
           },
           "badge": null,
           "rectangle": {
             "x": 554,
             "y": 152.75,
-            "width": 339.5625,
+            "width": 343,
             "height": 37.0
           },
           "corner": {
@@ -460,15 +460,15 @@
           "badge": null,
           "rectangle": {
             "x": 709,
-            "y": 358.34375,
-            "width": 198,
-            "height": 80
+            "y": 348.34375,
+            "width": 185,
+            "height": 100
           },
           "corner": {
             "x": 709,
-            "y": 358.34375
+            "y": 348.34375
           },
-          "bottom": 438.34375,
+          "bottom": 448.34375,
           "side": "right",
           "start": {
             "x": 709,
@@ -480,19 +480,24 @@
           },
           "lines": [
             {
-              "text": "Any password works: this",
+              "text": "Any password works:",
               "x": 721,
-              "y": 378.34375
+              "y": 368.34375
             },
             {
-              "text": "demo has made-up data",
+              "text": "this demo has made-up",
               "x": 721,
-              "y": 398.34375
+              "y": 388.34375
             },
             {
-              "text": "and no real accounts.",
+              "text": "data and no real",
               "x": 721,
-              "y": 418.34375
+              "y": 408.34375
+            },
+            {
+              "text": "accounts.",
+              "x": 721,
+              "y": 428.34375
             }
           ]
         }
@@ -523,27 +528,27 @@
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .chip\"}",
           "element": {
-            "x": 757,
+            "x": 755.0625,
             "y": 519.5,
-            "width": 68.6875,
+            "width": 69,
             "height": 20
           },
           "badge": null,
           "rectangle": {
-            "x": 753,
+            "x": 751.0625,
             "y": 515.5,
-            "width": 76.6875,
+            "width": 77.0,
             "height": 28.0
           },
           "corner": {
-            "x": 753,
+            "x": 751.0625,
             "y": 515.5
           },
           "bottom": 549.2989898732234,
           "bounds": {
-            "x": 737.1174987177567,
+            "x": 735.1152778486359,
             "y": 509.7010101267767,
-            "width": 108.45250256448662,
+            "width": 108.89444430272829,
             "height": 39.5979797464467
           },
           "top": 509.7010101267767
@@ -575,29 +580,29 @@
           "text": null,
           "anchor_description": "{\"selector\": \"#late-fee\"}",
           "element": {
-            "x": 754.375,
+            "x": 696,
             "y": 756,
-            "width": 46.703125,
+            "width": 45,
             "height": 17
           },
           "badge": null,
           "rectangle": {
-            "x": 750.375,
+            "x": 692,
             "y": 752,
-            "width": 54.703125,
+            "width": 53,
             "height": 25
           },
           "corner": {
-            "x": 750.375,
+            "x": 692,
             "y": 752
           },
           "bottom": 777,
           "start": {
-            "x": 754.375,
+            "x": 696,
             "y": 777
           },
           "end": {
-            "x": 801.078125,
+            "x": 741,
             "y": 777
           }
         }
@@ -737,30 +742,30 @@
               "element": {
                 "x": 302.0,
                 "y": 80.5,
-                "width": 138.328125,
+                "width": 135.0,
                 "height": 17.0
               },
               "badge": null,
               "rectangle": {
                 "x": 298.0,
                 "y": 76.5,
-                "width": 146.328125,
+                "width": 143.0,
                 "height": 25.0
               },
               "corner": {
-                "x": 246.15234375,
+                "x": 244.5,
                 "y": 89.0
               },
               "bottom": 89.0,
               "source": {
                 "x": 51.0,
                 "y": 80.5,
-                "width": 140.28125,
+                "width": 137.0,
                 "height": 17.0
               },
               "heads": "none",
               "start": {
-                "x": 195.28125,
+                "x": 192.0,
                 "y": 89.0
               },
               "end": {
@@ -808,35 +813,35 @@
               "element": {
                 "x": 302.0,
                 "y": 125.5,
-                "width": 46.703125,
+                "width": 45.0,
                 "height": 17.0
               },
               "badge": null,
               "rectangle": {
                 "x": 298.0,
                 "y": 121.5,
-                "width": 54.703125,
+                "width": 53.0,
                 "height": 25.0
               },
               "corner": {
-                "x": 229.0390625,
+                "x": 227.75,
                 "y": 146.375
               },
               "bottom": 146.375,
               "source": {
                 "x": 51.0,
                 "y": 147.5,
-                "width": 163.453125,
+                "width": 160.0,
                 "height": 22.5
               },
               "heads": "end",
               "start": {
-                "x": 218.453125,
-                "y": 147.7351658825438
+                "x": 215.0,
+                "y": 148.00581395348843
               },
               "end": {
                 "x": 298.0,
-                "y": 137.51434742050617
+                "y": 137.3895348837209
               }
             }
           ]
@@ -877,37 +882,37 @@
               "text": null,
               "anchor_description": "{\"text\": \"Invoice overdue\"}",
               "element": {
-                "x": 302.0,
+                "x": 328.0,
                 "y": 119.5,
-                "width": 126.84375,
+                "width": 129.0,
                 "height": 21.0
               },
               "badge": null,
               "rectangle": {
-                "x": 298.0,
+                "x": 324.0,
                 "y": 115.5,
-                "width": 134.84375,
+                "width": 137.0,
                 "height": 29.0
               },
               "corner": {
-                "x": 257.9609375,
+                "x": 278.0,
                 "y": 130.125
               },
               "bottom": 130.125,
               "source": {
                 "x": 51.0,
                 "y": 110.0,
-                "width": 199.0,
+                "width": 225.0,
                 "height": 40.5
               },
               "heads": "both",
               "start": {
-                "x": 254.0,
-                "y": 130.12960741548528
+                "x": 280.0,
+                "y": 130.12281659388645
               },
               "end": {
-                "x": 298.0,
-                "y": 130.0784260268993
+                "x": 324.0,
+                "y": 130.07478165938863
               }
             }
           ]
@@ -1242,23 +1247,23 @@
           "text": null,
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
           "element": {
-            "x": 888.984375,
+            "x": 889,
             "y": 87,
-            "width": 107.015625,
+            "width": 107,
             "height": 34
           },
           "badge": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83
           },
           "rectangle": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83,
-            "width": 115.015625,
+            "width": 115,
             "height": 42
           },
           "corner": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83
           },
           "bottom": 125
@@ -1270,27 +1275,27 @@
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .chip\"}",
           "element": {
-            "x": 757,
+            "x": 755.0625,
             "y": 519.5,
-            "width": 68.6875,
+            "width": 69,
             "height": 20
           },
           "badge": null,
           "rectangle": {
-            "x": 753,
+            "x": 751.0625,
             "y": 515.5,
-            "width": 76.6875,
+            "width": 77.0,
             "height": 28.0
           },
           "corner": {
-            "x": 753,
+            "x": 751.0625,
             "y": 515.5
           },
           "bottom": 549.2989898732234,
           "bounds": {
-            "x": 737.1174987177567,
+            "x": 735.1152778486359,
             "y": 509.7010101267767,
-            "width": 108.45250256448662,
+            "width": 108.89444430272829,
             "height": 39.5979797464467
           },
           "top": 509.7010101267767
@@ -1304,7 +1309,7 @@
           "element": {
             "x": 558,
             "y": 156.75,
-            "width": 331.5625,
+            "width": 335,
             "height": 29
           },
           "badge": {
@@ -1398,23 +1403,23 @@
           "text": null,
           "anchor_description": "{\"name\": \"Print list\", \"role\": \"button\"}",
           "element": {
-            "x": 924.203125,
+            "x": 924,
             "y": 69,
-            "width": 75.796875,
+            "width": 76,
             "height": 33
           },
           "badge": {
-            "x": 920.203125,
+            "x": 920,
             "y": 65
           },
           "rectangle": {
-            "x": 920.203125,
+            "x": 920,
             "y": 65,
-            "width": 83.796875,
+            "width": 84,
             "height": 41
           },
           "corner": {
-            "x": 920.203125,
+            "x": 920,
             "y": 65
           },
           "bottom": 106
@@ -1474,23 +1479,23 @@
           "text": null,
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
           "element": {
-            "x": 888.984375,
+            "x": 889,
             "y": 87,
-            "width": 107.015625,
+            "width": 107,
             "height": 34
           },
           "badge": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83
           },
           "rectangle": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83,
-            "width": 115.015625,
+            "width": 115,
             "height": 42
           },
           "corner": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83
           },
           "bottom": 125
@@ -1504,7 +1509,7 @@
           "element": {
             "x": 558,
             "y": 156.75,
-            "width": 331.5625,
+            "width": 335,
             "height": 29
           },
           "badge": {
@@ -1514,7 +1519,7 @@
           "rectangle": {
             "x": 554,
             "y": 152.75,
-            "width": 339.5625,
+            "width": 343,
             "height": 37.0
           },
           "corner": {
@@ -1648,17 +1653,17 @@
           "element": {
             "x": 244,
             "y": 860.5,
-            "width": 65.046875,
+            "width": 66,
             "height": 19.5
           },
           "badge": {
-            "x": 333.046875,
+            "x": 334,
             "y": 870.25
           },
           "rectangle": {
             "x": 240,
             "y": 856.5,
-            "width": 73.046875,
+            "width": 74,
             "height": 27.5
           },
           "corner": {
@@ -1694,20 +1699,20 @@
           "text": "Window only",
           "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
           "element": {
-            "x": 888.984375,
+            "x": 889,
             "y": 87,
-            "width": 107.015625,
+            "width": 107,
             "height": 34
           },
           "badge": null,
           "rectangle": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83,
-            "width": 115.015625,
+            "width": 115,
             "height": 42
           },
           "corner": {
-            "x": 884.984375,
+            "x": 885,
             "y": 83
           },
           "bottom": 125
@@ -1739,23 +1744,23 @@
           "text": null,
           "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .row-buttons\"}",
           "element": {
-            "x": 844.984375,
+            "x": 845,
             "y": 269.25,
-            "width": 124.015625,
+            "width": 124,
             "height": 22
           },
           "badge": {
-            "x": 840.984375,
+            "x": 841,
             "y": 265.25
           },
           "rectangle": {
-            "x": 840.984375,
+            "x": 841,
             "y": 265.25,
-            "width": 132.015625,
+            "width": 132,
             "height": 30.0
           },
           "corner": {
-            "x": 840.984375,
+            "x": 841,
             "y": 265.25
           },
           "bottom": 295.25
@@ -1795,20 +1800,20 @@
               "text": null,
               "anchor_description": "{\"name\": \"Cart (1)\", \"role\": \"link\"}",
               "element": {
-                "x": 284.984375,
+                "x": 284.0,
                 "y": 97.0,
-                "width": 79.015625,
+                "width": 80.0,
                 "height": 34.0
               },
               "badge": null,
               "rectangle": {
-                "x": 280.984375,
+                "x": 280.0,
                 "y": 93.0,
-                "width": 87.015625,
+                "width": 88.0,
                 "height": 42.0
               },
               "corner": {
-                "x": 280.984375,
+                "x": 280.0,
                 "y": 93.0
               },
               "bottom": 135.0
@@ -2029,8 +2034,8 @@
       "layout": "grid",
       "continuous": false,
       "viewport": {
-        "width": 1193,
-        "height": 985,
+        "width": 1196,
+        "height": 988,
         "scale": 1
       },
       "panels": [
@@ -2040,7 +2045,7 @@
           "url": "http://127.0.0.1:8000/index.html",
           "rectangle": {
             "x": 48.0,
-            "y": 84.0,
+            "y": 84,
             "width": 480.0,
             "height": 340.0
           },
@@ -2053,9 +2058,9 @@
               "text": null,
               "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
               "element": {
-                "x": 401.078125,
+                "x": 399.0,
                 "y": 165.0,
-                "width": 110.921875,
+                "width": 113.0,
                 "height": 34.0
               },
               "badge": {
@@ -2063,13 +2068,13 @@
                 "y": 161.0
               },
               "rectangle": {
-                "x": 397.078125,
+                "x": 395.0,
                 "y": 161.0,
-                "width": 118.921875,
+                "width": 121.0,
                 "height": 42.0
               },
               "corner": {
-                "x": 397.078125,
+                "x": 395.0,
                 "y": 161.0
               },
               "bottom": 203.0
@@ -2081,8 +2086,8 @@
           "title": "Invoices",
           "url": "http://127.0.0.1:8000/invoices.html",
           "rectangle": {
-            "x": 664.4619140625,
-            "y": 84.0,
+            "x": 668.0,
+            "y": 84,
             "width": 480.0,
             "height": 340.0
           },
@@ -2095,7 +2100,7 @@
           "url": "http://127.0.0.1:8000/settings.html",
           "rectangle": {
             "x": 48.0,
-            "y": 596.4619140625,
+            "y": 600.0,
             "width": 480.0,
             "height": 340.0
           },
@@ -2107,8 +2112,8 @@
           "title": "One invoice",
           "url": "http://127.0.0.1:8000/invoice.html?id=INV-1048",
           "rectangle": {
-            "x": 664.4619140625,
-            "y": 596.4619140625,
+            "x": 668.0,
+            "y": 600.0,
             "width": 480.0,
             "height": 340.0
           },
@@ -2128,7 +2133,7 @@
             "y": 161.0
           },
           "tip": {
-            "x": 658.4619140625,
+            "x": 662.0,
             "y": 161.0
           },
           "points": [
@@ -2137,14 +2142,14 @@
               "y": 161.0
             },
             {
-              "x": 658.4619140625,
+              "x": 662.0,
               "y": 161.0
             }
           ],
           "label": {
             "x": 529.0,
             "y": 131.0,
-            "width": 112.4619140625,
+            "width": 116,
             "height": 24
           }
         },
@@ -2155,27 +2160,27 @@
           "text": "Pick one",
           "from_mark": null,
           "tail": {
-            "x": 904.4619140625,
+            "x": 908.0,
             "y": 430.0
           },
           "tip": {
-            "x": 904.4619140625,
-            "y": 554.4619140625
+            "x": 908.0,
+            "y": 558.0
           },
           "points": [
             {
-              "x": 904.4619140625,
+              "x": 908.0,
               "y": 430.0
             },
             {
-              "x": 904.4619140625,
-              "y": 554.4619140625
+              "x": 908.0,
+              "y": 558.0
             }
           ],
           "label": {
-            "x": 910.4619140625,
-            "y": 480.23095703125,
-            "width": 73.5791015625,
+            "x": 914.0,
+            "y": 482.0,
+            "width": 75,
             "height": 24
           }
         },
@@ -2186,27 +2191,27 @@
           "text": "Optional",
           "from_mark": null,
           "tail": {
-            "x": 658.4619140625,
-            "y": 748.4619140625
+            "x": 662.0,
+            "y": 752.0
           },
           "tip": {
             "x": 534.0,
-            "y": 748.4619140625
+            "y": 752.0
           },
           "points": [
             {
-              "x": 658.4619140625,
-              "y": 748.4619140625
+              "x": 662.0,
+              "y": 752.0
             },
             {
               "x": 534.0,
-              "y": 748.4619140625
+              "y": 752.0
             }
           ],
           "label": {
-            "x": 559.8447265625,
-            "y": 718.4619140625,
-            "width": 72.7724609375,
+            "x": 560.5,
+            "y": 722.0,
+            "width": 75,
             "height": 24
           }
         }
@@ -2245,29 +2250,29 @@
               "text": "Dev overlay",
               "anchor_description": "{\"match\": \"substring\", \"text\": \"dev build\"}",
               "element": {
-                "x": 247.25,
+                "x": 301.0,
                 "y": 378.0,
-                "width": 240.75,
+                "width": 187.0,
                 "height": 26.0
               },
               "badge": null,
               "rectangle": {
-                "x": 243.25,
+                "x": 297.0,
                 "y": 374.0,
-                "width": 248.75,
+                "width": 195.0,
                 "height": 34.0
               },
               "corner": {
-                "x": 427.625,
+                "x": 454.5,
                 "y": 311.0
               },
               "bottom": 311.0,
               "tail": {
-                "x": 427.625,
+                "x": 454.5,
                 "y": 311.0
               },
               "tip": {
-                "x": 380.375,
+                "x": 407.25,
                 "y": 374.0
               }
             }

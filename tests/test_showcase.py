@@ -24,6 +24,7 @@ BUILD_TIMEOUT = 300
 GALLERY = "number-placements"
 SCHEME_WIDTH = 680
 EXTERNAL_ADDRESS = re.compile(r"https?://")
+PICTOGRAPH = re.compile(r"[\u2600-\u2bff\U0001f000-\U0001faff]")
 README_IMAGE = re.compile(r'<img src="([^"]+)"|!\[[^\]]*\]\(([^)]+)\)')
 
 
@@ -86,7 +87,8 @@ def files_of(slug: str) -> list[str]:
 
 
 def readme_images() -> list[str]:
-    return [first or second for first, second in README_IMAGE.findall(README)]
+    images = [first or second for first, second in README_IMAGE.findall(README)]
+    return [image for image in images if not EXTERNAL_ADDRESS.match(image)]
 
 
 def shown_in_readme(slug: str) -> bool:
@@ -250,6 +252,16 @@ def test_site_makes_no_external_requests() -> None:
     sources = [path for path in (SHOWCASE / "site").rglob("*") if path.is_file()]
     assert sources
     assert [path.name for path in sources if EXTERNAL_ADDRESS.search(path.read_text())] == []
+
+
+def test_site_text_needs_only_the_committed_font() -> None:
+    sources = [path for path in (SHOWCASE / "site").rglob("*") if path.is_file()]
+    assert [path.name for path in sources if PICTOGRAPH.search(path.read_text())] == []
+
+
+def test_committed_font_keeps_its_license() -> None:
+    assert "SIL Open Font License" in (SHOWCASE / "fonts" / "LICENSE").read_text()
+    assert "examples/showcase/fonts" in (ROOT / "NOTICE").read_text()
 
 
 def test_manifest_lists_every_png_and_back() -> None:

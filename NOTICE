@@ -1,0 +1,9 @@
+preview
+Copyright 2026 botifyex
+
+This product includes software developed at
+https://github.com/botifyex/preview
+
+examples/showcase/fonts holds Liberation Sans 2.1.5, used only to rebuild the
+showcase figures. It is licensed under the SIL Open Font License 1.1; see
+examples/showcase/fonts/LICENSE.

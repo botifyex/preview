@@ -25,6 +25,7 @@ SPEC = SHOWCASE / "spec.json"
 REPORT_NAME = "RELEASE.md"
 LOGIN_VARIABLE = "SHOWCASE_PASSWORD"
 LOCAL_HOST = "127.0.0.1"
+FONTS = SHOWCASE / "fonts" / "fonts.conf"
 
 
 class BuildFailure(Exception):
@@ -76,7 +77,7 @@ def capture(output: Path, scratch: Path) -> None:
     resolved = scratch / "spec.json"
     with serving(SHOWCASE / "site") as base_url:
         write_resolved_spec(resolved, base_url)
-        environment = {**os.environ, LOGIN_VARIABLE: secrets.token_urlsafe(16)}
+        environment = {**os.environ, LOGIN_VARIABLE: secrets.token_urlsafe(16), "FONTCONFIG_FILE": str(FONTS)}
         run_script(
             "run_capture.py",
             str(resolved),

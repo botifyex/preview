@@ -2,6 +2,12 @@
   "name": "preview",
   "version": "0.1.0",
   "description": "Walks a running project and writes a numbered, annotated, plain-language guide to what changed in a release or beta.",
+  "author": {
+    "name": "botifyex"
+  },
+  "homepage": "https://github.com/botifyex/preview",
+  "repository": "https://github.com/botifyex/preview",
+  "license": "Apache-2.0",
   "keywords": [
     "release-notes",
     "screenshots",

@@ -4,7 +4,28 @@ version = "0.1.0"
 description = "Claude Code skill that writes an annotated guide to what changed in a release or beta"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "botifyex" }]
+keywords = ["claude-code", "claude-code-skill", "release-notes", "screenshots", "annotation", "playwright"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Documentation",
+]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/botifyex/preview"
+Repository = "https://github.com/botifyex/preview"
+Issues = "https://github.com/botifyex/preview/issues"
+Changelog = "https://github.com/botifyex/preview/blob/master/CHANGELOG.md"
 
 [dependency-groups]
 dev = [
@@ -43,3 +64,42 @@ reportAny = false
 reportExplicitAny = false
 reportUnusedCallResult = false
 reportImplicitStringConcatenation = false
+
+[tool.bumpversion]
+current_version = "0.1.0"
+commit = true
+tag = true
+tag_name = "v{new_version}"
+message = "chore(release): v{new_version}"
+allow_dirty = false
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = '^version = "{current_version}"'
+replace = 'version = "{new_version}"'
+regex = true
+
+[[tool.bumpversion.files]]
+filename = "uv.lock"
+search = """
+name = "preview"
+version = "{current_version}""""
+replace = """
+name = "preview"
+version = "{new_version}""""
+
+[[tool.bumpversion.files]]
+filename = ".claude-plugin/plugin.json"
+search = '"version": "{current_version}"'
+replace = '"version": "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "## [Unreleased]"
+replace = "## [Unreleased]\n\n## [{new_version}] - {now:%Y-%m-%d}"
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "[Unreleased]: https://github.com/botifyex/preview/compare/v{current_version}...HEAD"
+replace = """[Unreleased]: https://github.com/botifyex/preview/compare/v{new_version}...HEAD
+[{new_version}]: https://github.com/botifyex/preview/compare/v{current_version}...v{new_version}"""

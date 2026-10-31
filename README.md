@@ -1,10 +1,14 @@
 # preview
 
+[![CI](https://github.com/botifyex/preview/actions/workflows/ci.yaml/badge.svg)](https://github.com/botifyex/preview/actions/workflows/ci.yaml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/botifyex/preview/blob/master/LICENSE)
+
 A Claude Code skill that opens a running project, walks its pages and writes a numbered,
 visually annotated, plain-language guide to what changed in a release or beta, for ordinary
 users. The report goes: images, title, main changes referencing the images, everything else.
 
-Status: base version. It has been tested on fixtures, not yet on a real project.
+Status: base version. It has been tested on fixtures and run on one real site
+([examples/todo-ui-refresh](examples/todo-ui-refresh/RELEASE.md)); runs on real projects are still limited.
 
 ## What it looks like
 
@@ -108,7 +112,20 @@ One image from several captures.
 ## Install
 
 Nothing is installed by the repository itself. Needs [uv](https://docs.astral.sh/uv/), git,
-and Chromium for Playwright 1.64.1. Scripts fetch their Python dependencies on first run.
+and Chromium for Playwright 1.64.1. Scripts fetch their Python dependencies on first run. Linux is the only
+tested platform.
+
+From GitHub, as a plugin, called `/preview:preview`:
+
+```bash
+claude plugin marketplace add botifyex/preview
+claude plugin install preview@preview
+```
+
+Or in one step inside Claude Code 2.1.275 or later: `/plugin install preview --marketplace botifyex/preview`.
+These two commands were checked against a local copy of this repository, which they installed and enabled; the
+same commands against GitHub can only be checked once the repository is published, and the one-step form has
+not been run.
 
 From this directory, as a personal skill, called `/preview`:
 
@@ -190,4 +207,10 @@ uv run basedpyright
 Versions and rules live in `pyproject.toml`. It holds tool configuration and pinned development
 dependencies only: nothing is built or installed, and the scripts keep their own PEP 723 headers.
 
-Reasons behind the choices, in Russian: [docs/decisions.md](docs/decisions.md).
+Reasons behind the choices and the backlog are in Russian: [docs/decisions.md](docs/decisions.md),
+[docs/backlog.md](docs/backlog.md).
+
+## License
+
+[Apache-2.0](LICENSE). Changes are listed in [CHANGELOG.md](CHANGELOG.md); see also
+[CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).

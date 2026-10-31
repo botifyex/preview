@@ -23,10 +23,10 @@ function shell(page, content) {
     </aside>
     <div class="workspace">
       <header class="topbar">
-        <button class="button icon menu-button" type="button" aria-label="Menu" id="menu-button">☰</button>
+        <button class="button icon menu-button" type="button" aria-label="Menu" id="menu-button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
         <p class="workspace-name">Fernhill Accounting <span class="muted">(fictional)</span></p>
         <a class="button ghost" id="cart-link" href="cart.html">Cart (${cart().length})</a>
-        <button class="button icon" type="button" aria-label="Notifications">🔔</button>
+        <button class="button icon" type="button" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg></button>
         <span class="avatar" aria-label="Signed in as Demo User">DU</span>
       </header>
       <main class="content">${content}</main>
@@ -233,7 +233,7 @@ function bindCart() {
     document.getElementById("cart-link").textContent = "Cart (0)";
     document.querySelector(".content").innerHTML = `
       <div class="title-row"><h1>Order confirmed</h1></div>
-      <section class="panel confirmation"><p class="check">✓</p>
+      <section class="panel confirmation"><p class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></p>
         <p>Order <strong>MB-2048</strong> is active: ${names}.</p>
         <p class="muted">This demo charges nothing.</p></section>`;
   });

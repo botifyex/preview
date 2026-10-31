@@ -1,0 +1,14 @@
+{
+  "name": "preview",
+  "description": "The preview skill for Claude Code: annotated guides to what changed in a release or beta.",
+  "owner": {
+    "name": "botifyex"
+  },
+  "plugins": [
+    {
+      "name": "preview",
+      "source": "./",
+      "description": "Walks a running project and writes a numbered, annotated, plain-language guide to what changed in a release or beta."
+    }
+  ]
+}

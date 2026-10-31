@@ -16,7 +16,7 @@ from support import run_script
 FIXTURES = Path(__file__).parent.parent / "fixtures"
 
 
-ACCENT = (230, 0, 126)
+ACCENT = (230, 0, 76)
 
 
 REMOVED = (200, 30, 30)

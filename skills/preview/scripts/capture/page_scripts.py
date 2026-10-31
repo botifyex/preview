@@ -47,7 +47,7 @@ SCROLL_TOP_SCRIPT = "() => window.scrollTo({ top: 0, left: 0, behavior: 'instant
 
 DRAW_SCRIPT = """
 ({ marks, page, area, radius }) => {
-  const ACCENT = "#E6007E", REMOVED = "#C81E1E", HALO = "#FFFFFF", INK = "#FFFFFF";
+  const HALO = "#FFFFFF", INK = "#FFFFFF";
   const NAMESPACE = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NAMESPACE, "svg");
   svg.setAttribute("data-preview", "overlay");
@@ -73,13 +73,13 @@ DRAW_SCRIPT = """
     add(name, { ...attributes, fill: "none", stroke: color, "stroke-width": 3, "stroke-linecap": "round", ...(dash ? { "stroke-dasharray": dash } : {}) });
   };
   const frame = (mark, color, dash) => outlined("rect", { x: mark.rectangle.x, y: mark.rectangle.y, width: mark.rectangle.width, height: mark.rectangle.height, rx: 4 }, color, dash);
-  const arrow = (mark) => {
+  const arrow = (mark, color) => {
     const { tail, tip } = mark;
     const angle = Math.atan2(tip.y - tail.y, tip.x - tail.x);
     const wing = (turn) => (tip.x - 14 * Math.cos(angle + turn)) + "," + (tip.y - 14 * Math.sin(angle + turn));
     const points = tip.x + "," + tip.y + " " + wing(0.5) + " " + wing(-0.5);
-    outlined("line", { x1: tail.x, y1: tail.y, x2: tip.x, y2: tip.y }, ACCENT);
-    add("polygon", { points, fill: ACCENT, stroke: HALO, "stroke-width": 2 });
+    outlined("line", { x1: tail.x, y1: tail.y, x2: tip.x, y2: tip.y }, color);
+    add("polygon", { points, fill: color, stroke: HALO, "stroke-width": 2 });
   };
   const badge = (mark, color) => {
     const { x, y } = mark.badge;
@@ -101,10 +101,10 @@ DRAW_SCRIPT = """
     return { x, y, width, height };
   };
   return marks.map((mark) => {
-    const color = mark.kind === "removed" ? REMOVED : ACCENT;
+    const { color } = mark;
     if (mark.kind === "box") frame(mark, color);
     if (mark.kind === "removed") frame(mark, color, "10 7");
-    if (mark.kind === "arrow") arrow(mark);
+    if (mark.kind === "arrow") arrow(mark, color);
     const box = mark.text !== null ? label(mark, color) : null;
     if (mark.number !== null) badge(mark, color);
     return box;

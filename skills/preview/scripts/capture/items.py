@@ -1,6 +1,7 @@
 import re
 from typing import Any
 
+from capture.colors import validate_color
 from capture.constants import (
     ANNOTATION_FIELDS,
     ARROW_PLACEMENTS,
@@ -107,6 +108,7 @@ def validate_annotation(annotation: Any, where: str) -> None:
     demand(not missing, f"{where}: {kind} requires {sorted(missing)}")
     validate_locator(annotation["anchor"], where)
     validate_placement(annotation.get("placement", DEFAULT_PLACEMENT), where)
+    validate_color(annotation, where)
     if kind == "arrow":
         placement = annotation.get("placement", DEFAULT_PLACEMENT)
         demand(placement in ARROW_PLACEMENTS, f"{where}: placement {placement} does not apply to an arrow")

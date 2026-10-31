@@ -50,7 +50,7 @@ uv run "${CLAUDE_SKILL_DIR}/scripts/run_capture.py" <spec.json> --out <dir> [--s
 ```
 
 Top level: `environment` and `base_url` are required, and `production`, `prod` or `live`
-is refused. `locale`, `hide` and `login` are optional. `figures` is required. Relative URLs
+is refused. `locale`, `hide`, `login`, `placement` and `color` are optional. `figures` is required. Relative URLs
 are resolved against `base_url`.
 
 **Hide** lists selectors of things that are not part of the product, such as development
@@ -73,7 +73,7 @@ element, frame, arrow tail and tip, number and label. There, frames, a default a
 `corner` or `top-left` numbers keep to the visible rectangle, so they fit whenever the anchor does;
 an explicit `offset`, `from` or other placement falling outside fails. `has_touch: true` and
 `reduced_motion: true` set those browser features. `login: false` keeps a figure signed out in
-a run that has a `login`; if every figure does so, no login happens. `false` is its only value.
+a run that has a `login`; if every figure does so, no login happens. `false` is its only value. `placement` and `color` set a default for its marks, see Annotations.
 
 ## Locators
 
@@ -133,12 +133,18 @@ draw no rectangle and use the same one. An arrow has no inside or corners of its
 of those on the annotation fails; inherited from the figure or spec, it falls back to the tail.
 Corner placements are moved back onto the page at its edges.
 
+`color` is the colour of a mark as `#RRGGBB`, in either case: frame, arrow, number circle and label
+back. The white halo and white text stay. It can be set on the annotation, the figure or the top
+level of the spec; the nearest wins, and with none it is `#E6004C`. A `removed` mark is `#C81E1E`
+and takes only a `color` written on itself, so a figure or spec colour leaves removals distinguishable.
+An invalid value fails and names its level.
+
 Failures rather than guesses:
 an arrow starting inside its target or outside the page, a `removed` place outside the page,
 a label wider than the page, anchors that keep moving.
 
 A malformed spec fails with `error: ...` before the browser starts: wrong types for any field,
-non-integer `number`, `text` or `name` not a string, numbers beyond 1000000000 or not finite,
+non-integer `number`, `text` or `name` not a string, a `color` other than `#RRGGBB`, numbers beyond 1000000000 or not finite,
 `milliseconds` below 0, `offset.width`, `offset.height` or a viewport size of 0 or less.
 
 ## What happens before drawing
@@ -164,7 +170,8 @@ what its scrolling ancestors leave visible. The overlay is one SVG at document c
 
 `before_url` must point at a running old version. It produces its own numbered figure right
 before the current one: `03-old-sidebar-before.png`, `04-old-sidebar.png`. Sessions are per
-host, so an old version on another address must log in through `before_steps`.
+host, so an old version on another address must log in through `before_steps`. `placement` and
+`color` reach `before_annotations` through the same chain.
 
 ## Manifest
 
@@ -187,6 +194,7 @@ host, so an old version on another address must log in through `before_steps`.
       "marks": [
         {
           "kind": "box",
+          "color": "#E6004C",
           "number": 1,
           "text": "New button",
           "anchor_description": "{\"name\": \"Export\", \"role\": \"button\"}",
@@ -204,13 +212,14 @@ host, so an old version on another address must log in through `before_steps`.
 ```
 
 `role` is `current` or `before`. `element` is the measured box in CSS pixels of the document,
-`rectangle` the drawn one, `badge` the centre of the number, `null` without a number. Arrows add `tail` and `tip`.
+`rectangle` the drawn one, `badge` the centre of the number, `null` without a number, `color` the
+colour drawn, in capitals. Arrows add `tail` and `tip`.
 Multiply by `viewport.scale` for image pixels.
 
 ## Output
 
 `<out>/figures/` holds the PNGs, `manifest.json` and `spec.json`, the spec as given with its
-`placement` fields only where you wrote them, so the
+`placement` and `color` fields only where you wrote them, so the
 run can be repeated with `run_capture.py <out>/figures/spec.json --out <out>`. Repeating covers the
 pictures and not the site: steps that change data may not work twice, so see "Test data" in
 SKILL.md. A run replaces only the figures listed in the existing `manifest.json`, plus that file

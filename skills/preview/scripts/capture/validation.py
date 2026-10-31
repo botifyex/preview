@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from typing import Any, cast
 
+from capture.colors import validate_color
 from capture.constants import DEFAULT_PLACEMENT, FLAG_FIELDS, PRODUCTION_NAMES, SLUG_PATTERN, THEMES
 from capture.fields import demand_object, demand_string, demand_url, is_choice, is_integer, is_positive
 from capture.items import validate_annotations, validate_locator, validate_placement, validate_steps
@@ -23,6 +24,7 @@ def validate_viewport(viewport: Any, where: str) -> None:
 def validate_figure_options(figure: Spec, where: str) -> None:
     demand(is_choice(figure.get("theme", "light"), THEMES), f"{where}: theme must be light or dark")
     validate_placement(figure.get("placement", DEFAULT_PLACEMENT), where)
+    validate_color(figure, where)
     for name in (*FLAG_FIELDS, "full_page"):
         demand(isinstance(figure.get(name, False), bool), f"{where}: {name} must be true or false")
     demand(figure.get("login", False) is False, f"{where}: login may only be false")
@@ -81,6 +83,7 @@ def validate_spec(spec: Any) -> None:
     demand_string(spec, "locale", "spec")
     validate_hide(spec.get("hide", []))
     validate_placement(spec.get("placement", DEFAULT_PLACEMENT), "spec")
+    validate_color(spec, "spec")
     validate_figures(spec.get("figures"))
     if "login" in spec:
         validate_login(spec["login"])

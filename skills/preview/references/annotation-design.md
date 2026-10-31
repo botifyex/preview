@@ -31,8 +31,11 @@ where nothing around them should be covered, and `left`, `right`, `above`, `belo
 
 ## Colours
 
-Magenta for additions and red for removals, both with a white halo, so they stand out on
-light, dark and busy pages. Do not put a mark over the thing it is about: anchor it to the
+Crimson `#E6004C` for additions and red `#C81E1E` for removals, both with a white halo, so they
+stand out on light, dark and busy pages. Change the colour with `color` only when the page itself
+is close to it: set it for a whole figure or spec to stay consistent, and keep it dark enough for
+white text. A removal keeps its red and its dashes unless you set `color` on that mark, so it stays
+distinguishable. Do not put a mark over the thing it is about: anchor it to the
 thing, and the drawing stays outside the box.
 
 ## Removed things

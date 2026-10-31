@@ -4,6 +4,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import Browser, Page
 
 from capture.annotate import annotate, hide_elements
+from capture.colors import resolve_color
 from capture.constants import ARROW_PLACEMENTS, DEFAULT_PLACEMENT, DEFAULT_VIEWPORT, MARK_ADVICE
 from capture.failures import picture_on_failure
 from capture.model import Options, Shot, Spec
@@ -62,9 +63,16 @@ def inherited_placement(annotation: Spec, default: str) -> str:
     return default
 
 
-def with_placements(spec: Spec, shot: Shot) -> list[Spec]:
+def with_inherited(spec: Spec, shot: Shot) -> list[Spec]:
     default = shot.figure.get("placement", spec.get("placement", DEFAULT_PLACEMENT))
-    return [{"placement": inherited_placement(annotation, default), **annotation} for annotation in shot.annotations]
+    return [
+        {
+            "placement": inherited_placement(annotation, default),
+            **annotation,
+            "color": resolve_color(annotation["kind"], annotation, shot.figure, spec),
+        }
+        for annotation in shot.annotations
+    ]
 
 
 def manifest_entry(shot: Shot, number: int, name: str, page: Page, marks: list[Spec], page_size: Spec) -> Spec:
@@ -95,7 +103,7 @@ def capture_shot(
         with picture_on_failure(page, shot.slug, where, options):
             open_url(page, urljoin(spec["base_url"], shot.url), options.timeout)
             run_steps(page, shot.steps, spec["base_url"], where, options.timeout)
-            marks, page_size = annotate(page, with_placements(spec, shot), full_page, hide, where, options.timeout)
+            marks, page_size = annotate(page, with_inherited(spec, shot), full_page, hide, where, options.timeout)
             hide_elements(page, hide)
             name = figure_name(number, shot.slug)
             page.screenshot(

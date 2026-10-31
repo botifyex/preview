@@ -154,6 +154,7 @@ def build_mark(annotation: Spec, box: Box, source: Box | None, page_size: Spec, 
     badge = badge_center(placement, shape, page_size, area, where) if numbered else None
     return {
         "kind": kind,
+        "color": annotation["color"],
         "number": annotation.get("number"),
         "text": annotation.get("text"),
         "anchor_description": describe_locator(annotation["anchor"]),

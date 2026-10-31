@@ -1,20 +1,24 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import pytest
-from conftest import Repository
 from support import run_script
+
+if TYPE_CHECKING:
+    from conftest import Repository
 
 
 def resolved(repository: Repository, *arguments: str) -> dict[str, Any]:
-    process = run_script("resolve_range.py", *arguments, "--repo", str(repository.path))
+    process = run_script("run_resolve_range.py", *arguments, "--repo", str(repository.path))
     assert process.returncode == 0, process.stderr
     return json.loads(process.stdout)
 
 
 def refused(repository: Repository, *arguments: str) -> str:
-    process = run_script("resolve_range.py", *arguments, "--repo", str(repository.path))
+    process = run_script("run_resolve_range.py", *arguments, "--repo", str(repository.path))
     assert process.returncode == 1, process.stdout
     assert "Traceback" not in process.stderr
     return process.stderr
@@ -187,7 +191,7 @@ def test_unknown_reference_is_refused(repository: Repository) -> None:
 
 
 def test_outside_a_repository_is_refused(tmp_path: Path) -> None:
-    process = run_script("resolve_range.py", "release", "--repo", str(tmp_path))
+    process = run_script("run_resolve_range.py", "release", "--repo", str(tmp_path))
     assert process.returncode == 1
     assert "Traceback" not in process.stderr
 

@@ -52,14 +52,14 @@ and a plugin alike. It is not an environment variable in the shell. If you see i
 here (for example this file was read directly), use the directory that holds this `SKILL.md`.
 
 ```bash
-uv run "${CLAUDE_SKILL_DIR}/scripts/resolve_range.py" <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
-uv run "${CLAUDE_SKILL_DIR}/scripts/capture.py" <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
+uv run "${CLAUDE_SKILL_DIR}/scripts/run_resolve_range.py" <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
+uv run "${CLAUDE_SKILL_DIR}/scripts/run_capture.py" <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
 uv run "${CLAUDE_SKILL_DIR}/scripts/check_report.py" <dir>
 ```
 
-- `resolve_range.py` prints JSON with `from`, `to`, `label`, `notes`, `commits`, `files`:
+- `run_resolve_range.py` prints JSON with `from`, `to`, `label`, `notes`, `commits`, `files`:
   [references/range.md](references/range.md).
-- `capture.py` writes `<dir>/figures/NN-slug.png` and `manifest.json`, all or nothing:
+- `run_capture.py` writes `<dir>/figures/NN-slug.png` and `manifest.json`, all or nothing:
   [references/capture-spec.md](references/capture-spec.md).
 - `check_report.py` checks `<dir>/RELEASE.md` against `<dir>/figures/` and prints
   `code: message` per problem: [references/report-template.md](references/report-template.md).
@@ -90,7 +90,7 @@ done. Check `environment` and `base_url` against the hard limits.
 
 ### 2. Resolve the range
 
-Run `resolve_range.py` with the mode and any `--from` and `--to`. Tell the user the
+Run `run_resolve_range.py` with the mode and any `--from` and `--to`. Tell the user the
 `from` and `to` it chose and every entry of `notes`. On an error, pass on the message;
 do not guess a range. If `commits` is empty, say there is nothing to preview and stop.
 
@@ -134,7 +134,7 @@ each user you create for the final report.
 ### 8. Capture
 
 Write the spec into the scratchpad or a temporary directory, never into the project's
-tracked files, and run `capture.py`. A failure means the page differs from your plan:
+tracked files, and run `run_capture.py`. A failure means the page differs from your plan:
 open the picture named in the error and find out why. A selector miss is information, possibly that the
 change is not there. Use `hide` for development overlays and `login: false` for signed-out figures.
 

@@ -35,7 +35,7 @@ ignore = ["S603", "S607", "PLR0913", "PLR0917"]
 
 [tool.basedpyright]
 include = ["skills/preview/scripts", "tests"]
-extraPaths = ["skills/preview/scripts", "tests"]
+extraPaths = ["skills/preview/scripts", "tests", "tests/capture"]
 pythonVersion = "3.12"
 typeCheckingMode = "recommended"
 reportAny = false

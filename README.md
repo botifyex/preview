@@ -54,13 +54,13 @@ creates are listed in its final message; removing them is up to you. Login sessi
 Usable on their own. Each exits 0 on success and 1 with a specific message on stderr.
 
 ```bash
-uv run skills/preview/scripts/resolve_range.py <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
-uv run skills/preview/scripts/capture.py <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
+uv run skills/preview/scripts/run_resolve_range.py <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
+uv run skills/preview/scripts/run_capture.py <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
 uv run skills/preview/scripts/check_report.py <dir>
 ```
 
-- [`resolve_range.py`](skills/preview/references/range.md) prints the range as JSON.
-- [`capture.py`](skills/preview/references/capture-spec.md) walks the pages in a JSON spec
+- [`run_resolve_range.py`](skills/preview/references/range.md) prints the range as JSON.
+- [`run_capture.py`](skills/preview/references/capture-spec.md) walks the pages in a JSON spec
   and draws marks on the real elements. It fails when a locator does not match, rather than
   drawing at a guessed spot.
 - [`check_report.py`](skills/preview/references/report-template.md) checks the report's order,

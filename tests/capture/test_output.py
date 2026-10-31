@@ -1,7 +1,7 @@
 import json
 
 import pytest
-from capture_support import LOGIN, Capture, account_login, box, figure
+from helpers import LOGIN, Capture, account_login, box, figure
 from PIL import Image
 from support import run_script
 
@@ -78,5 +78,5 @@ def test_saved_spec_repeats_the_run(capture: Capture) -> None:
     saved = capture.out / "figures" / "spec.json"
     copy = capture.directory / "again.json"
     copy.write_text(saved.read_text())
-    process = run_script("capture.py", str(copy), "--out", str(capture.directory / "again"))
+    process = run_script("run_capture.py", str(copy), "--out", str(capture.directory / "again"))
     assert process.returncode == 0, process.stderr

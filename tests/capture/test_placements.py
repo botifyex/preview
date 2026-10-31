@@ -2,7 +2,7 @@ import json
 from typing import Any
 
 import pytest
-from capture_support import ACCENT, Capture, box, figure, near
+from helpers import ACCENT, Capture, box, figure, near
 
 
 def test_badge_outside_leaves_the_corner_free(capture: Capture) -> None:

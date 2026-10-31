@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from capture_support import LOGIN, Capture, SessionHandler, account_login, box, figure
+from helpers import LOGIN, Capture, SessionHandler, account_login, box, figure
 from support import run_script
 
 
@@ -149,7 +149,7 @@ def test_default_state_directory_is_outside_the_project(
             }
         )
     )
-    process = run_script("capture.py", str(spec), "--out", str(tmp_path / "out"))
+    process = run_script("run_capture.py", str(spec), "--out", str(tmp_path / "out"))
     assert process.returncode == 0, process.stderr
     assert list((tmp_path / "cache" / "preview" / "state").glob("account-*.json"))
     assert not list(project.iterdir())

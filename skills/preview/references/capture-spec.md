@@ -1,7 +1,7 @@
 # Capture spec
 
 ```bash
-uv run "${CLAUDE_SKILL_DIR}/scripts/capture.py" <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
+uv run "${CLAUDE_SKILL_DIR}/scripts/run_capture.py" <spec.json> --out <dir> [--state-dir <dir>] [--ignore-https-errors] [--fresh-login] [--timeout <ms>]
 ```
 
 | Flag | Default | Meaning |
@@ -204,7 +204,7 @@ Multiply by `viewport.scale` for image pixels.
 
 `<out>/figures/` holds the PNGs, `manifest.json` and `spec.json`, the spec as given with its
 `placement` fields only where you wrote them, so the
-run can be repeated with `capture.py <out>/figures/spec.json --out <out>`. Repeating covers the
+run can be repeated with `run_capture.py <out>/figures/spec.json --out <out>`. Repeating covers the
 pictures and not the site: steps that change data may not work twice, so see "Test data" in
 SKILL.md. A run replaces earlier figures.
 

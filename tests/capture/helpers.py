@@ -13,7 +13,7 @@ from urllib.parse import parse_qs, urlsplit
 from PIL import Image
 from support import run_script
 
-FIXTURES = Path(__file__).parent / "fixtures"
+FIXTURES = Path(__file__).parent.parent / "fixtures"
 
 
 ACCENT = (230, 0, 126)
@@ -107,7 +107,7 @@ class Capture:
         path = self.directory / "spec.json"
         path.write_text(json.dumps({"environment": "test", "base_url": self.site, **spec}))
         return run_script(
-            "capture.py",
+            "run_capture.py",
             str(path),
             "--out",
             str(self.out),

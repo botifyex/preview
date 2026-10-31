@@ -1,7 +1,7 @@
 from typing import Any
 
 import pytest
-from capture_support import Capture, box, figure, near
+from helpers import Capture, box, figure, near
 
 
 def test_waits_for_animation_before_measuring(capture: Capture) -> None:

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from capture_support import SAVE, Capture, box, figure
+from helpers import SAVE, Capture, box, figure
 
 
 @pytest.mark.parametrize(
@@ -61,7 +61,7 @@ def test_invalid_spec_is_refused(capture: Capture, change: dict[str, Any], fragm
 
 
 def test_documented_spec_example_is_valid(capture: Capture) -> None:
-    reference = Path(__file__).parent.parent / "skills/preview/references/capture-spec.md"
+    reference = Path(__file__).parent.parent.parent / "skills/preview/references/capture-spec.md"
     block = re.search(r"## Spec\n\n```json\n(.*?)```", reference.read_text(), re.DOTALL)
     assert block
     example = json.loads(block[1])

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "preview"
 SKILL_TEXT = (SKILL / "SKILL.md").read_text()
 README_TEXT = (ROOT / "README.md").read_text()
-SCRIPTS = ["resolve_range.py", "capture.py", "check_report.py"]
+SCRIPTS = ["run_resolve_range.py", "run_capture.py", "check_report.py"]
 LINE_LIMIT = 200
 DESCRIPTION_LIMIT = 1536
 

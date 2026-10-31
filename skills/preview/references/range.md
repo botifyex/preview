@@ -1,7 +1,7 @@
 # Range rules
 
 ```bash
-uv run "${CLAUDE_SKILL_DIR}/scripts/resolve_range.py" <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
+uv run "${CLAUDE_SKILL_DIR}/scripts/run_resolve_range.py" <release|beta> [--repo <dir>] [--from <ref>] [--to <ref>]
 ```
 
 ## Which tags count

@@ -111,7 +111,7 @@ it: test users are removed on request.
    source when you show it.
 4. Show the user the note and the commands you are about to run. Wait for an answer.
 5. Prove it: start the stack if needed, create a user with a fresh `{unique}`, and log
-   in with `capture.py`, using a spec with the note's `login`, one figure on the first
+   in with `run_capture.py`, using a spec with the note's `login`, one figure on the first
    page after login, and a temporary `--out`. Then open that image with Read and confirm
    it is really the panel.
 6. Only after that real login, save the note. If it fails, fix the draft or report what

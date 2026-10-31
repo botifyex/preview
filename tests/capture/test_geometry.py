@@ -1,4 +1,4 @@
-from capture_support import ACCENT, REMOVED, SAVE, Capture, box, figure, near
+from helpers import ACCENT, REMOVED, SAVE, Capture, box, figure, near
 
 
 def test_box_geometry_matches_element_in_manifest_and_pixels(capture: Capture) -> None:

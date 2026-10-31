@@ -69,7 +69,8 @@ it fails (expired, or signed out by an earlier step), the login runs again.
 **Figure**: `slug` (lowercase words with hyphens) and `url` are required. `viewport` defaults
 to 1280x800 at scale 1. `theme` is `light` or `dark`. `full_page` defaults to true; with
 `false`, everything drawn must lie inside the viewport or the run fails: each anchor and `from`
-element, frame, arrow tail and tip, number and label. There, frames, a default arrow tail, labels and
+element, frame, ellipse, arrow tail and tip, ends of an underline, connector or leader, callout block,
+number and label. There, frames, a default arrow tail, labels and
 `corner` or `top-left` numbers keep to the visible rectangle, so they fit whenever the anchor does;
 an explicit `offset`, `from` or other placement falling outside fails. `has_touch: true` and
 `reduced_motion: true` set those browser features. `login: false` keeps a figure signed out in
@@ -114,8 +115,23 @@ ones outside password fields and in URLs.
 | `badge` | `anchor`, `number` | Numbered circle at the top left corner |
 | `label` | `anchor`, `text` | Text tag above the element, or below when there is no room |
 | `removed` | `anchor`, `offset` | Dashed rectangle in a separate red, at the anchor's box moved by `offset.x`, `offset.y`, sized `offset.width`, `offset.height` or as the anchor |
+| `callout` | `anchor`, `text` | Block of white text on the mark's colour, wrapped to `width`, with a leader line to the anchor's edge. Optional `side`, see below |
+| `ellipse` | `anchor` | Ellipse through the corners of the rectangle 4 px outside the element, so it crosses none of the element; it reaches about 21% of the rectangle's size further on each side |
+| `underline` | `anchor` | Line under the element, 4 px below it and as wide as it |
+| `highlight` | `anchor` | Translucent fill over the rectangle 4 px outside the element, opacity 0.25 and no frame |
+| `spotlight` | `anchor` | Dims everything outside the rectangle 4 px outside the element, opacity 0.6, with a thin white rim. At most one per image; always drawn under the other marks, as `highlight` is. Only its number and label take `color` |
+| `connector` | `anchor`, `from` | Line between the edges of the two elements. Optional `heads`: `none` (default), `end` (at the anchor) or `both` |
 
-`box`, `arrow`, `removed` also accept `number` and `text`.
+`box`, `arrow`, `removed`, `ellipse`, `underline`, `highlight`, `spotlight`, `connector` also accept
+`number` and `text`; `callout` accepts `number`, and its `text` is the block. The opacities are
+fixed. `side`, `width` and `heads` on any other kind fail.
+
+`callout` wraps with text measured by the browser, at spaces, at a line break you write, and inside
+a word longer than the width. `width` is the widest the block may be, from 80, by default 280 or
+what the page leaves. `side` is `left`, `right`, `above` or `below`; without it the first of these,
+in this order, that fits inside the page (the viewport for `full_page: false`). The block keeps
+28 px from the anchor's rectangle, so it never covers its anchor, but it may cover the anchor's
+neighbours: open the image, and set `side` if it does.
 
 `placement` chooses where a mark's number sits. It can be set on the annotation, the figure or
 the top level of the spec; the nearest wins, and with none it is `corner`. An invalid value fails
@@ -123,28 +139,33 @@ and names its level. It has no effect on a mark without a `number`.
 
 | `placement` | Number sits | Applies to |
 | --- | --- | --- |
-| `corner`, `top-left` | On the top left corner; on the tail for an arrow | all |
-| `top-right`, `bottom-left`, `bottom-right` | On that corner | all but arrows |
-| `inside` | Fully inside, at the top left. A shape under 36 px in width or height fails | all but arrows |
-| `left`, `right`, `above`, `below` | Fully outside, 20 px from that side. Off the page fails | all; for an arrow, beside its target |
+| `corner`, `top-left` | On the top left corner; on the tail for an arrow, the middle of the line for a connector | all |
+| `top-right`, `bottom-left`, `bottom-right` | On that corner | all but arrows and connectors |
+| `inside` | Fully inside, at the top left. A shape under 36 px in width or height fails | all but arrows, connectors and callouts |
+| `left`, `right`, `above`, `below` | Fully outside, 20 px from that side. Off the page fails | all; for an arrow or connector, beside its target |
 
-The shape is the drawn rectangle: the element plus 4 px, or the `removed` place. `badge` and `label`
-draw no rectangle and use the same one. An arrow has no inside or corners of its own, so naming one
-of those on the annotation fails; inherited from the figure or spec, it falls back to the tail.
+The shape is the drawn rectangle: the element plus 4 px, the `removed` place, or a callout's block.
+`badge`, `label`, `underline` and `connector` draw no rectangle and use the same one. An `ellipse`
+passes through that rectangle's corners, so a corner number sits on the curve, and an outside number
+keeps 20 px from the curve. An arrow or connector has no inside or corners of its own, and a number
+inside a callout would cover its text, so naming one of those on the annotation fails; inherited from
+the figure or spec, it falls back to the `corner` row. A callout's number over its own anchor fails.
 Corner placements are moved back onto the page at its edges.
 
-`color` is the colour of a mark as `#RRGGBB`, in either case: frame, arrow, number circle and label
-back. The white halo and white text stay. It can be set on the annotation, the figure or the top
+`color` is the colour of a mark as `#RRGGBB`, in either case: frame, arrow, line, fill, number circle,
+label and callout back. The white halo and white text stay. It can be set on the annotation, the figure or the top
 level of the spec; the nearest wins, and with none it is `#E6004C`. A `removed` mark is `#C81E1E`
 and takes only a `color` written on itself, so a figure or spec colour leaves removals distinguishable.
 An invalid value fails and names its level.
 
 Failures rather than guesses:
 an arrow starting inside its target or outside the page, a `removed` place outside the page,
-a label wider than the page, anchors that keep moving.
+a label wider than the page, anchors that keep moving, a callout that fits on no side or not on its
+`side` (naming the anchor), a connector between elements that touch or overlap.
 
 A malformed spec fails with `error: ...` before the browser starts: wrong types for any field,
 non-integer `number`, `text` or `name` not a string, a `color` other than `#RRGGBB`, numbers beyond 1000000000 or not finite,
+an empty callout `text`, a callout `width` under 80, an unknown `side` or `heads`, a second `spotlight` in one image,
 `milliseconds` below 0, `offset.width`, `offset.height` or a viewport size of 0 or less.
 
 ## What happens before drawing
@@ -213,7 +234,11 @@ host, so an old version on another address must log in through `before_steps`. `
 
 `role` is `current` or `before`. `element` is the measured box in CSS pixels of the document,
 `rectangle` the drawn one, `badge` the centre of the number, `null` without a number, `color` the
-colour drawn, in capitals. Arrows add `tail` and `tip`.
+colour drawn, in capitals. Arrows add `tail` and `tip`. Underlines add `start` and `end`. An ellipse
+adds `bounds`, the box of its curve. `highlight` and `spotlight` add `opacity`, and `spotlight` adds
+`veil`, the size of the dimmed area. A connector adds `start` at `from`, `end` at the anchor, `source`
+(the `from` element) and `heads`. A callout's `rectangle` is its block; it adds `side`, the leader's
+`start` and `end`, and `lines` with each line's `text`, `x`, `y`.
 Multiply by `viewport.scale` for image pixels.
 
 ## Output

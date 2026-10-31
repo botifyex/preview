@@ -3,11 +3,20 @@ from dataclasses import asdict
 from playwright.sync_api import Locator, Page
 from playwright.sync_api import TimeoutError as PlaywrightTimeout
 
+from capture.callout import wrap_limit
 from capture.constants import BADGE_RADIUS, IDLE_LIMIT, STABLE_POLL
 from capture.geometry import build_marks, page_area, visible_area
 from capture.locators import single_visible
 from capture.model import Box, CaptureFailure, Spec, demand, describe_locator
-from capture.page_scripts import DRAW_SCRIPT, HIDE_SCRIPT, MEASURE_SCRIPT, PAGE_SCRIPT, SCROLL_TOP_SCRIPT, SETTLE_SCRIPT
+from capture.page_scripts import (
+    DRAW_SCRIPT,
+    HIDE_SCRIPT,
+    MEASURE_SCRIPT,
+    PAGE_SCRIPT,
+    SCROLL_TOP_SCRIPT,
+    SETTLE_SCRIPT,
+    WRAP_SCRIPT,
+)
 from capture.viewport import check_viewport
 
 
@@ -62,6 +71,13 @@ def hide_elements(page: Page, selectors: list[str]) -> None:
         page.locator(selector).evaluate_all(HIDE_SCRIPT)
 
 
+def with_measured_text(page: Page, annotation: Spec, area: Box) -> Spec:
+    if annotation["kind"] != "callout":
+        return annotation
+    limit = wrap_limit(annotation, area)
+    return {**annotation, "measured": page.evaluate(WRAP_SCRIPT, {"text": annotation["text"], "limit": limit})}
+
+
 def annotate(
     page: Page, annotations: list[Spec], full_page: bool, hide: list[str], where: str, timeout: int
 ) -> tuple[list[Spec], Spec]:
@@ -74,7 +90,8 @@ def annotate(
     boxes = stable_boxes(page, pairs, where, timeout)
     page_size = page.evaluate(PAGE_SCRIPT)
     area = page_area(page_size) if full_page else visible_area(page_size)
-    marks = build_marks(annotations, boxes, page_size, area, where)
+    measured = [with_measured_text(page, annotation, area) for annotation in annotations]
+    marks = build_marks(measured, boxes, page_size, area, where)
     arguments = {"marks": marks, "page": page_size, "area": asdict(area), "radius": BADGE_RADIUS}
     labels = page.evaluate(DRAW_SCRIPT, arguments)
     if not full_page:

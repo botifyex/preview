@@ -4,11 +4,15 @@ from typing import Any
 from capture.colors import validate_color
 from capture.constants import (
     ANNOTATION_FIELDS,
-    ARROW_PLACEMENTS,
+    CALLOUT_NARROWEST,
+    CALLOUT_SIDES,
+    CONNECTOR_HEADS,
     DEFAULT_PLACEMENT,
+    KIND_PLACEMENTS,
     LOCATOR_KEYS,
     MATCH_KINDS,
     PLACEMENTS,
+    SINGLE_KIND_FIELDS,
     STEP_FIELDS,
 )
 from capture.fields import (
@@ -100,6 +104,24 @@ def validate_marking(annotation: Spec, where: str) -> None:
         validate_offset(annotation["offset"], where)
 
 
+def validate_kind_placement(kind: str, annotation: Spec, where: str) -> None:
+    placement = annotation.get("placement", DEFAULT_PLACEMENT)
+    article = "an" if kind[0] in "aeiou" else "a"
+    allowed = KIND_PLACEMENTS.get(kind, PLACEMENTS)
+    demand(placement in allowed, f"{where}: placement {placement} does not apply to {article} {kind}")
+
+
+def validate_shape_fields(kind: str, annotation: Spec, where: str) -> None:
+    for field, owner in SINGLE_KIND_FIELDS.items():
+        demand(field not in annotation or kind == owner, f"{where}: {field} applies only to a {owner}")
+    demand(is_choice(annotation.get("side", "left"), CALLOUT_SIDES), f"{where}: side must be one of {CALLOUT_SIDES}")
+    demand(
+        is_choice(annotation.get("heads", "none"), CONNECTOR_HEADS), f"{where}: heads must be one of {CONNECTOR_HEADS}"
+    )
+    width = annotation.get("width", CALLOUT_NARROWEST)
+    demand(is_number(width) and width >= CALLOUT_NARROWEST, f"{where}: width must be a number from {CALLOUT_NARROWEST}")
+
+
 def validate_annotation(annotation: Any, where: str) -> None:
     demand_object(annotation, f"{where}: must be an object")
     kind: Any = annotation.get("kind")
@@ -109,14 +131,18 @@ def validate_annotation(annotation: Any, where: str) -> None:
     validate_locator(annotation["anchor"], where)
     validate_placement(annotation.get("placement", DEFAULT_PLACEMENT), where)
     validate_color(annotation, where)
-    if kind == "arrow":
-        placement = annotation.get("placement", DEFAULT_PLACEMENT)
-        demand(placement in ARROW_PLACEMENTS, f"{where}: placement {placement} does not apply to an arrow")
+    validate_kind_placement(kind, annotation, where)
+    validate_shape_fields(kind, annotation, where)
     if "from" in annotation:
         validate_locator(annotation["from"], where)
     validate_marking(annotation, where)
+    if kind == "callout":
+        demand(annotation["text"].strip(), f"{where}: callout text must not be empty")
 
 
 def validate_annotations(owner: Spec, field: str, where: str, label: str) -> None:
-    for index, annotation in enumerate(demand_list(owner, field, where), 1):
+    annotations = demand_list(owner, field, where)
+    for index, annotation in enumerate(annotations, 1):
         validate_annotation(annotation, f"{label} annotation {index}")
+    spotlights = sum(annotation["kind"] == "spotlight" for annotation in annotations)
+    demand(spotlights <= 1, f"{label}: at most one spotlight per image, found {spotlights}")

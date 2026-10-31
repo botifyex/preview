@@ -33,7 +33,30 @@ STABLE_POLL = 100
 NUMBER_LIMIT = 1_000_000_000
 BACKUP_PREFIX = ".capture-backup-"
 INCOMING_NAME = "incoming"
-FRAMED_KINDS = frozenset({"box", "removed"})
+FRAMED_KINDS = frozenset({"box", "removed", "ellipse", "highlight", "spotlight"})
+LINE_PARTS: dict[str, tuple[tuple[str, str], ...]] = {
+    "arrow": (("arrow tail", "tail"), ("arrow tip", "tip")),
+    "underline": (("underline start", "start"), ("underline end", "end")),
+    "connector": (("connector start", "start"), ("connector end", "end")),
+    "callout": (("leader start", "start"), ("leader end", "end")),
+}
+ELLIPSE_REACH = 2**0.5
+HIGHLIGHT_OPACITY = 0.25
+SPOTLIGHT_OPACITY = 0.6
+CALLOUT_WIDTH = 280
+CALLOUT_NARROWEST = 80
+CALLOUT_GAP = 28
+CALLOUT_PADDING = (12, 10)
+CALLOUT_LINE = 20
+CALLOUT_SIDES = ("left", "right", "above", "below")
+CONNECTOR_MINIMUM = 16
+CONNECTOR_HEADS = ("none", "end", "both")
+SINGLE_KIND_FIELDS = {"side": "callout", "width": "callout", "heads": "connector"}
+KIND_PLACEMENTS = {
+    "arrow": ARROW_PLACEMENTS,
+    "connector": ARROW_PLACEMENTS,
+    "callout": PLACEMENTS - {"inside"},
+}
 STEP_FIELDS: dict[str, frozenset[str]] = {
     "goto": frozenset({"url"}),
     "fill": frozenset({"target"}),
@@ -48,5 +71,11 @@ ANNOTATION_FIELDS: dict[str, frozenset[str]] = {
     "badge": frozenset({"anchor", "number"}),
     "label": frozenset({"anchor", "text"}),
     "removed": frozenset({"anchor", "offset"}),
+    "callout": frozenset({"anchor", "text"}),
+    "ellipse": frozenset({"anchor"}),
+    "underline": frozenset({"anchor"}),
+    "highlight": frozenset({"anchor"}),
+    "spotlight": frozenset({"anchor"}),
+    "connector": frozenset({"anchor", "from"}),
 }
 LOCATOR_KEYS = frozenset({"selector", "role", "text"})

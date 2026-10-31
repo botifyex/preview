@@ -8,8 +8,9 @@ The picture has to work for someone who has never seen a commit.
 - **At most about 5 marks.** More than 5 gives a warning; treat it as a sign to split.
 - **Numbers tie the picture to the text.** A badge `1` on figure 2 is described as such in
   the text. Do not number what the text never mentions. Restart badge numbers in each image.
-- **Say what to look at, then stop.** A box or an arrow, not both on one element.
+- **Say what to look at, then stop.** One mark on one element, not a box and an arrow.
   Add a `label` only when the mark alone is unclear, and keep it to two or three words.
+  A sentence goes in a `callout`, and one is usually enough.
 - **Show the context.** The user must recognise the page. Prefer the normal viewport to a
   tight crop, and a wide viewport to a mobile one unless the change is mobile only.
 - **Reach the state the change is about.** Open the menu, fill the form, show the result.
@@ -28,6 +29,17 @@ where nothing around them should be covered, and `left`, `right`, `above`, `belo
 | Several steps of one flow | `badge` 1, 2, 3 on each element |
 | Something moved | `arrow` with `from` the old neighbour, or two figures |
 | Something gone | `removed`, see below |
+| A reason that needs a sentence and belongs on the picture | `callout`; two words are a `label` |
+| A small compact thing, a word or an icon, among similar ones | `ellipse`; on a long or wide element, `box` |
+| One word or line of text | `underline` |
+| A row or passage whose content is the point | `highlight`, which leaves it readable; `box` if nothing inside matters |
+| One area on a crowded page | `spotlight`, once per image, with at most a number or label besides |
+| Two places that belong together, with no movement | `connector`; `arrow` when one thing points at another |
+
+A second `callout`, or a `spotlight` with other marks around it, usually means two ideas: split the
+image. A callout covers whatever lies on its side, so check that it hides nothing the text relies on,
+and set `side` if it does. The line of a `connector` runs straight across what is between the two
+elements: keep them close, or use numbers.
 
 ## Colours
 

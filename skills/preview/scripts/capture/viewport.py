@@ -1,4 +1,4 @@
-from capture.constants import BADGE_RADIUS, FRAMED_KINDS
+from capture.constants import BADGE_RADIUS, FRAMED_KINDS, LINE_PARTS
 from capture.model import Box, Spec, demand, describe_locator
 
 
@@ -13,9 +13,10 @@ def badge_box(center: Spec) -> Box:
 def drawn_parts(mark: Spec, label: Spec | None) -> list[tuple[str, Box]]:
     parts: list[tuple[str, Box]] = []
     if mark["kind"] in FRAMED_KINDS:
-        parts.append(("frame", Box(**mark["rectangle"])))
-    if mark["kind"] == "arrow":
-        parts += [("arrow tail", point_box(mark["tail"])), ("arrow tip", point_box(mark["tip"]))]
+        parts.append(("frame", Box(**mark.get("bounds", mark["rectangle"]))))
+    if mark["kind"] == "callout":
+        parts.append(("callout block", Box(**mark["rectangle"])))
+    parts += [(name, point_box(mark[field])) for name, field in LINE_PARTS.get(mark["kind"], ())]
     if mark["badge"] is not None:
         parts.append(("number", badge_box(mark["badge"])))
     if label is not None:

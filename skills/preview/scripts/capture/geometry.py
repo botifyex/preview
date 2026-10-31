@@ -1,6 +1,7 @@
-import math
+from collections.abc import Callable
 from dataclasses import asdict
 
+from capture.callout import callout_fields, demand_number_clear
 from capture.constants import (
     ARROW_REACH,
     BADGE_INSET,
@@ -8,11 +9,31 @@ from capture.constants import (
     BADGE_REACH,
     BOX_PADDING,
     DEFAULT_PLACEMENT,
-    EDGE_MARGIN,
+    KIND_PLACEMENTS,
     OUTSIDE_PLACEMENTS,
+    PLACEMENTS,
     TAIL_PLACEMENTS,
 )
 from capture.model import Box, Spec, demand, describe_locator
+from capture.shapes import (
+    Placed,
+    clamp_frame,
+    connector_fields,
+    edge_scale,
+    ellipse_fields,
+    highlight_fields,
+    spotlight_fields,
+    underline_fields,
+)
+
+SHAPE_FIELDS: dict[str, Callable[[Placed], Spec]] = {
+    "callout": callout_fields,
+    "connector": connector_fields,
+    "ellipse": ellipse_fields,
+    "highlight": highlight_fields,
+    "spotlight": spotlight_fields,
+    "underline": underline_fields,
+}
 
 
 def page_area(page_size: Spec) -> Box:
@@ -21,14 +42,6 @@ def page_area(page_size: Spec) -> Box:
 
 def visible_area(page_size: Spec) -> Box:
     return Box(page_size["left"], page_size["top"], page_size["viewportWidth"], page_size["viewportHeight"])
-
-
-def clamp_frame(box: Box, area: Box) -> Box:
-    left = max(area.x + EDGE_MARGIN, box.x - BOX_PADDING)
-    top = max(area.y + EDGE_MARGIN, box.y - BOX_PADDING)
-    right = min(area.right - EDGE_MARGIN, box.right + BOX_PADDING)
-    bottom = min(area.bottom - EDGE_MARGIN, box.bottom + BOX_PADDING)
-    return Box(left, top, right - left, bottom - top)
 
 
 def removed_place(box: Box, annotation: Spec) -> Box:
@@ -64,10 +77,7 @@ def arrow_tip(box: Box, tail: tuple[float, float], where: str) -> tuple[float, f
     center_x, center_y = box.center
     delta_x, delta_y = tail[0] - center_x, tail[1] - center_y
     half_width, half_height = box.width / 2 + BOX_PADDING, box.height / 2 + BOX_PADDING
-    scale = min(
-        half_width / abs(delta_x) if delta_x else math.inf,
-        half_height / abs(delta_y) if delta_y else math.inf,
-    )
+    scale = edge_scale(half_width, half_height, delta_x, delta_y)
     demand(scale < 1, f"{where}: arrow starts inside its target")
     return (center_x + delta_x * scale, center_y + delta_y * scale)
 
@@ -95,6 +105,8 @@ def geometry(kind: str, box: Box, source: Box | None, annotation: Spec, page_siz
         result |= {"tail": {"x": tail[0], "y": tail[1]}, "tip": {"x": tip[0], "y": tip[1]}}
         result["corner"] = {"x": tail[0], "y": tail[1]}
         result["bottom"] = tail[1]
+    if kind in SHAPE_FIELDS:
+        result |= SHAPE_FIELDS[kind](Placed(box, source, annotation, page_size, area, where))
     return result
 
 
@@ -137,21 +149,29 @@ def corner_point(placement: str, frame: Box) -> Spec:
 
 def badge_center(placement: str, shape: Spec, page_size: Spec, area: Box, where: str) -> Spec:
     frame = Box(**shape["rectangle"])
+    outer = Box(**shape.get("bounds", shape["rectangle"]))
     if placement in TAIL_PLACEMENTS:
         return clamped_badge(shape["corner"], area)
     if placement in OUTSIDE_PLACEMENTS:
-        return outside_badge(placement, frame, page_size, where)
+        return outside_badge(placement, outer, page_size, where)
     if placement == "inside":
         return inside_badge(frame, where)
     return clamped_badge(corner_point(placement, frame), page_area(page_size))
 
 
+def applicable_placement(annotation: Spec) -> str:
+    placement = annotation.get("placement", DEFAULT_PLACEMENT)
+    return placement if placement in KIND_PLACEMENTS.get(annotation["kind"], PLACEMENTS) else DEFAULT_PLACEMENT
+
+
 def build_mark(annotation: Spec, box: Box, source: Box | None, page_size: Spec, area: Box, where: str) -> Spec:
     kind = annotation["kind"]
     shape = geometry(kind, box, source, annotation, page_size, area, where)
-    placement = annotation.get("placement", DEFAULT_PLACEMENT)
+    placement = applicable_placement(annotation)
     numbered = annotation.get("number") is not None
     badge = badge_center(placement, shape, page_size, area, where) if numbered else None
+    if badge is not None and kind == "callout":
+        demand_number_clear(badge, box, annotation["anchor"], where)
     return {
         "kind": kind,
         "color": annotation["color"],

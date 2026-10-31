@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import pytest
-from support import run_script
+from support import SCRIPTS, run_script
 
 if TYPE_CHECKING:
     from conftest import Repository
@@ -22,6 +25,39 @@ def refused(repository: Repository, *arguments: str) -> str:
     assert process.returncode == 1, process.stdout
     assert "Traceback" not in process.stderr
     return process.stderr
+
+
+def executed(environment: dict[str, str], *arguments: str) -> subprocess.CompletedProcess[bytes]:
+    return subprocess.run(
+        [sys.executable, str(SCRIPTS / "run_resolve_range.py"), *arguments],
+        capture_output=True,
+        env={**os.environ, **environment},
+        timeout=60,
+        check=False,
+    )
+
+
+def decoded(repository: Repository, environment: dict[str, str], *arguments: str) -> dict[str, Any]:
+    process = executed(environment, *arguments, "--repo", str(repository.path))
+    assert process.returncode == 0, process.stderr
+    return json.loads(process.stdout.decode("utf-8"))
+
+
+def message_file(repository: Repository, message: bytes) -> str:
+    path = repository.path.parent / "message"
+    path.write_bytes(message)
+    return str(path)
+
+
+def commit_raw(repository: Repository, message: bytes, name: bytes = b"raw.txt") -> None:
+    (repository.path / os.fsdecode(name)).write_text("raw")
+    repository.git("add", ".")
+    tree = repository.git("write-tree")
+    parent = repository.git("rev-parse", "HEAD")
+    person = "Test <test@example.com> 1700000000 +0000"
+    header = f"tree {tree}\nparent {parent}\nauthor {person}\ncommitter {person}\n\n"
+    created = repository.git("hash-object", "-t", "commit", "-w", message_file(repository, header.encode() + message))
+    repository.git("update-ref", "HEAD", created)
 
 
 def endpoints(report: dict[str, Any]) -> tuple[str, str]:
@@ -231,3 +267,149 @@ def test_from_with_tagged_end_reports_the_tag(repository: Repository) -> None:
     repository.tagged("v1.0.0")
     report = resolved(repository, "release", "--from", start)
     assert endpoints(report) == (start, "v1.0.0")
+
+
+@pytest.mark.parametrize("arguments", [["release"], ["beta"], ["release", "--from", "HEAD"]])
+def test_missing_git_is_a_short_failure(repository: Repository, tmp_path: Path, arguments: list[str]) -> None:
+    repository.tagged("v1.0.0")
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    process = executed({"PATH": str(empty)}, *arguments, "--repo", str(repository.path))
+    assert process.returncode == 1
+    assert process.stdout == b""
+    assert process.stderr.decode().startswith("error: git is not available")
+    assert b"Traceback" not in process.stderr
+
+
+LOCALES = [
+    pytest.param({"LC_ALL": "C.UTF-8"}, id="utf8"),
+    pytest.param({"LC_ALL": "C"}, id="c"),
+    pytest.param({"LC_ALL": "C", "PYTHONUTF8": "0", "PYTHONCOERCECLOCALE": "0"}, id="ascii"),
+]
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_latin1_message_is_replaced_and_the_rest_stays_correct(
+    repository: Repository, environment: dict[str, str]
+) -> None:
+    repository.tagged("v1.0.0")
+    commit_raw(repository, b"caf\xe9 subject\n\nna\xefve body\n")
+    repository.commit("clean after", "clean body")
+    report = decoded(repository, environment, "release")
+    assert endpoints(report) == ("v1.0.0", "HEAD")
+    assert [(commit["subject"], commit["body"]) for commit in report["commits"]] == [
+        ("clean after", "clean body"),
+        ("caf\ufffd subject", "na\ufffdve body"),
+    ]
+    assert {"status": "A", "path": "raw.txt"} in report["files"]
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_non_utf8_file_name_is_replaced_and_the_rest_stays_correct(
+    repository: Repository, environment: dict[str, str]
+) -> None:
+    repository.tagged("v1.0.0")
+    commit_raw(repository, b"raw name\n", b"caf\xe9.txt")
+    repository.commit("after")
+    report = decoded(repository, environment, "release")
+    assert [commit["subject"] for commit in report["commits"]] == ["after", "raw name"]
+    assert report["files"] == [
+        {"status": "A", "path": "caf\ufffd.txt"},
+        {"status": "A", "path": "file2.txt"},
+    ]
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_declared_commit_encoding_is_converted(repository: Repository, environment: dict[str, str]) -> None:
+    repository.tagged("v1.0.0")
+    (repository.path / "declared.txt").write_text("declared")
+    repository.git("add", ".")
+    message = message_file(repository, "caf\u00e9\n".encode("latin-1"))
+    repository.git("-c", "i18n.commitEncoding=latin-1", "commit", "-q", "-F", message)
+    assert decoded(repository, environment, "release")["commits"][0]["subject"] == "caf\u00e9"
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_log_output_encoding_setting_does_not_corrupt_subjects(
+    repository: Repository, environment: dict[str, str]
+) -> None:
+    repository.tagged("v1.0.0")
+    repository.commit("caf\u00e9")
+    repository.git("config", "i18n.logOutputEncoding", "latin-1")
+    assert decoded(repository, environment, "release")["commits"][0]["subject"] == "caf\u00e9"
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_non_utf8_tag_is_ignored_among_real_ones(repository: Repository, environment: dict[str, str]) -> None:
+    repository.tagged("v1.0.0")
+    repository.tag(os.fsdecode(b"caf\xe9"))
+    repository.commit("after")
+    assert endpoints(decoded(repository, environment, "release")) == ("v1.0.0", "HEAD")
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_non_ascii_digits_are_not_a_version(repository: Repository, environment: dict[str, str]) -> None:
+    repository.tagged("v1.0.0")
+    repository.tag("v\u0661.\u0662")
+    repository.commit("after")
+    assert endpoints(decoded(repository, environment, "release")) == ("v1.0.0", "HEAD")
+
+
+@pytest.mark.parametrize("environment", LOCALES)
+def test_non_utf8_reference_leaves_valid_json(repository: Repository, environment: dict[str, str]) -> None:
+    repository.tagged("v1.0.0")
+    name = os.fsdecode(b"caf\xe9")
+    repository.tag(name)
+    commit = repository.git("rev-parse", "HEAD")
+    repository.commit("after")
+    report = decoded(repository, environment, "release", "--from", name)
+    assert report["from"] == "caf?"
+    assert report["from_commit"] == commit
+    assert [entry["subject"] for entry in report["commits"]] == ["after"]
+
+
+def test_branch_named_like_a_version_gets_the_untagged_label(repository: Repository) -> None:
+    repository.tagged("v1.0.0")
+    repository.commit("after")
+    repository.git("branch", "1.2")
+    report = resolved(repository, "release", "--to", "1.2")
+    assert endpoints(report) == ("v1.0.0", "1.2")
+    assert report["label"] == "v1.0.0--1.2"
+
+
+def test_branch_named_like_a_version_with_from_gets_the_untagged_label(repository: Repository) -> None:
+    start = repository.commit("start")
+    repository.commit("after")
+    repository.git("branch", "1.2")
+    assert resolved(repository, "release", "--from", start, "--to", "1.2")["label"] == f"{start}--1.2"
+
+
+@pytest.mark.parametrize("annotated", [False, True], ids=["lightweight", "annotated"])
+def test_real_tag_at_the_end_keeps_its_label(repository: Repository, annotated: bool) -> None:
+    repository.tagged("v1.0.0")
+    repository.commit("after")
+    repository.tag("v1.1.0", annotated=annotated)
+    repository.commit("later")
+    report = resolved(repository, "release", "--to", "v1.1.0")
+    assert endpoints(report) == ("v1.0.0", "v1.1.0")
+    assert report["label"] == "v1.1.0"
+
+
+def test_tag_wins_over_a_branch_of_the_same_name(repository: Repository) -> None:
+    repository.tagged("v1.0.0")
+    repository.commit("branch tip")
+    repository.git("branch", "1.2")
+    repository.commit("tag target")
+    repository.tag("1.2")
+    tagged_commit = repository.git("rev-parse", "refs/tags/1.2")
+    report = resolved(repository, "release", "--to", "1.2")
+    assert report["to_commit"] == tagged_commit
+    assert report["label"] == "1.2"
+    assert report["commits"][0]["subject"] == "tag target"
+
+
+@pytest.mark.parametrize("flag", ["--from", "--to"])
+def test_empty_reference_is_refused_by_its_flag(repository: Repository, flag: str) -> None:
+    repository.tagged("v1.0.0")
+    repository.commit("after")
+    assert f"error: {flag} must not be empty" in refused(repository, "release", flag, "")

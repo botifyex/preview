@@ -53,7 +53,8 @@ stable cases of the table; pass every note on to the user.
 ## Overrides
 
 `--to <ref>` replaces HEAD: the rules above apply as if HEAD were that ref. `--from <ref>`
-skips the search, so it works with no tags at all. Two tags on one commit never produce
+skips the search, so it works with no tags at all. An empty value for either flag is refused.
+Two tags on one commit never produce
 an empty range: the previous version must be a different commit.
 
 ## Output
@@ -74,5 +75,10 @@ an empty range: the previous version must be a different commit.
 
 `to` is the tag when `--from` is used and the end is tagged. `label` is safe as a directory
 name and is the default output directory's last part: the tag when the range ends at a
-version, otherwise `<from>--<to>`. Commits are newest first and merges are included. File
+version tag, otherwise `<from>--<to>`; a branch named `1.2` is not a version tag. When a tag and
+a branch share a name, git and this script use the tag. Commits are newest first and merges are included. File
 status is git's `A`, `M`, `D` or `T`; a rename appears as `D` plus `A`.
+
+Git output is read as UTF-8 whatever the locale. Bytes that are not UTF-8, in a commit message
+or a file name, become `U+FFFD`, and tags with such names are ignored. A `--from` or `--to`
+value that is not UTF-8 appears with `?` in `from`, `to` and `label` keeps only safe characters.

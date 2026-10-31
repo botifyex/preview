@@ -2,6 +2,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 from resolve_range.describe import resolve
 from resolve_range.model import RangeFailure
@@ -16,6 +17,11 @@ def parser() -> argparse.ArgumentParser:
     return result
 
 
+def emit(report: dict[str, Any]) -> None:
+    text = json.dumps(report, indent=2, ensure_ascii=False)
+    sys.stdout.buffer.write(f"{text}\n".encode(errors="replace"))
+
+
 def main() -> int:
     arguments = parser().parse_args()
     try:
@@ -23,5 +29,5 @@ def main() -> int:
     except RangeFailure as failure:
         print(f"error: {failure}", file=sys.stderr)
         return 1
-    print(json.dumps(report, indent=2, ensure_ascii=False))
+    emit(report)
     return 0

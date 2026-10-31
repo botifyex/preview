@@ -16,7 +16,7 @@ VERSION_PATTERN: re.Pattern[str] = re.compile(
     r"v?(?P<major>\d+)\.(?P<minor>\d+)(?:\.(?P<patch>\d+))?"
     r"(?:[-._]?(?P<stage>alpha|beta|rc|a|b|c)(?:[-._]?(?P<number>\d+))?)?"
     r"(?:\+[0-9A-Za-z.-]+)?",
-    re.IGNORECASE,
+    re.IGNORECASE | re.ASCII,
 )
 
 
@@ -36,5 +36,5 @@ def parse_version(tag: str, commit: str) -> Version | None:
 
 def reachable_versions(repository: Path, end: str) -> list[Version]:
     names = git(repository, "tag", "--merged", end).split()
-    parsed = (parse_version(name, commit_of(repository, name)) for name in names)
+    parsed = (parse_version(name, commit_of(repository, name)) for name in names if VERSION_PATTERN.fullmatch(name))
     return sorted((version for version in parsed if version), key=lambda version: version.order)

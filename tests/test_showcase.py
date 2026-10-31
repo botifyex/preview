@@ -299,9 +299,18 @@ def test_readme_shows_schemes_large(figure: dict[str, Any]) -> None:
         assert [int(width) for width in widths if int(width) >= SCHEME_WIDTH]
 
 
-def test_readme_states_how_to_rebuild() -> None:
-    assert "uv run examples/showcase/build.py" in README
+def test_contributing_states_how_to_rebuild() -> None:
+    assert "uv run examples/showcase/build.py" in (ROOT / "CONTRIBUTING.md").read_text()
+
+
+def test_readme_links_the_sample_report() -> None:
     assert "examples/showcase/RELEASE.md" in README
+
+
+def test_readme_opens_with_the_quick_start() -> None:
+    headings = re.findall(r"^## (.+)$", README, re.MULTILINE)
+    assert headings[:2] == ["Quick start", "Examples"]
+    assert "examples/showcase/build.py" not in README
 
 
 def test_report_passes_the_validator() -> None:

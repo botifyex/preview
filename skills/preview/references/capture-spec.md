@@ -173,6 +173,71 @@ before the current one: `03-old-sidebar-before.png`, `04-old-sidebar.png`. Sessi
 host, so an old version on another address must log in through `before_steps`. `placement` and
 `color` reach `before_annotations` through the same chain.
 
+## Schemes
+
+A figure with `panels` in place of `url` combines several captures into one image: a complex page in
+parts, a step-by-step path, links between screens. It yields exactly one numbered `NN-slug.png`, so
+numbering, publishing and the report rules are those of any figure. Panels are captured into a
+private temporary directory and never published alone.
+
+```json
+{
+  "slug": "reach-export",
+  "viewport": { "width": 1024, "height": 640 },
+  "steps_numbers": true,
+  "links": "sequence",
+  "panels": [
+    { "url": "/", "title": "Open Reports", "annotations": [{ "kind": "box", "anchor": { "text": "Reports" }, "number": 1 }] },
+    { "url": "/reports", "title": "Pick a month", "crop": { "selector": ".months" } },
+    { "url": "/reports/march", "title": "Press Export" }
+  ]
+}
+```
+
+| Figure field | Default | Meaning |
+| --- | --- | --- |
+| `panels` | required | Non-empty list. `url`, `before_url`, `before_steps`, `before_annotations`, `steps`, `annotations`, `full_page` on the figure itself are refused |
+| `layout` | `row` | `row`, `column`, or `grid`, which requires `columns`. `columns` without a grid is refused |
+| `panel_width` | 640 | CSS pixels. Scales a panel's picture down, never up |
+| `gap` | 32, or 72 with links | Pixels between panels. By default it also widens to fit the longest link text |
+| `background` | `#F2F4F7` | `#RRGGBB`. Titles turn white on a dark one |
+| `steps_numbers` | false | Number panel titles 1, 2, 3 for a path; a panel without a title still gets its number |
+| `links` | none | A list, see below, or `"sequence"` in a row or column: each panel to the next |
+
+`viewport`, `theme`, `login`, `has_touch`, `reduced_motion`, `placement` and `color` on the figure
+are defaults for its panels. `color` also colours links and step numbers.
+
+**Panel**: `url`, plus `steps`, `annotations`, `viewport`, `theme`, `login`, `has_touch`,
+`reduced_motion`, `placement`, `color` and `full_page` as for a figure, except that `full_page`
+defaults to false. Also `title`, text above the panel (a long title widens the panel's frame),
+`crop`, a locator that keeps only that element plus `crop_padding` (default 16) on each side, and
+`id`, a slug for links, otherwise the panel's 1-based index. A crop that does not fit the picture, or
+marks reaching past the crop, fail: a number on a cropped element's corner needs `crop_padding` of
+about 20. Failures name `figure <slug> panel <n>`, and the page at failure is saved as
+`failures/<slug>-panel-<n>.png`.
+
+**Link**: `{ "from": <panel id>, "to": <panel id>, "text": "...", "from_mark": 2, "style": "dashed" }`.
+`from` and `to` are required; `style` is `solid` (default) or `dashed`. The arrow runs edge to edge
+through the gaps and margins, with up to two bends, and never over a panel, including its title.
+`from_mark` starts it on that numbered mark, in the from panel; the arrow may cross only that panel,
+and a mark without that number fails. These fail rather than draw something false: a link that
+cannot be routed (panels touching on every side), and a `text` that fits nowhere beside its arrow.
+
+Numbers of marks are redrawn at a readable size on top of a scaled panel, at least 10 px in radius.
+Other marks, and the page itself, scale with the panel: with a small `panel_width`, labels get hard to read.
+
+A picture over 8000 px on a side, in image pixels, fails with `error: ...`. More than 6 panels, or
+more than 5 marks in a panel, gives a warning. Wrong types, unknown panels in a link, duplicate `id`s
+and missing marks fail before the browser starts.
+
+The manifest entry has `number`, `file`, `slug`, `role: "scheme"`, `layout`, `viewport` (the size of
+the composite in CSS pixels and its `scale`, the highest of its panels), `warnings`, and:
+
+- `panels`: each with `id`, `title`, `url`, `rectangle` (the picture drawn, in the composite), `scale`
+  and `marks` in composite coordinates;
+- `links`: each with `from`, `to`, `style`, `text`, `from_mark`, `tail`, `tip`, `points` (the whole
+  line) and `label` (the text's rectangle, or `null`).
+
 ## Manifest
 
 `<out>/figures/manifest.json`:
@@ -211,7 +276,7 @@ host, so an old version on another address must log in through `before_steps`. `
 }
 ```
 
-`role` is `current` or `before`. `element` is the measured box in CSS pixels of the document,
+`role` is `current`, `before` or, see Schemes, `scheme`. `element` is the measured box in CSS pixels of the document,
 `rectangle` the drawn one, `badge` the centre of the number, `null` without a number, `color` the
 colour drawn, in capitals. Arrows add `tail` and `tip`.
 Multiply by `viewport.scale` for image pixels.

@@ -3,32 +3,12 @@ from pathlib import Path
 from typing import Any, cast
 
 from capture.colors import validate_color
-from capture.constants import DEFAULT_PLACEMENT, FLAG_FIELDS, PRODUCTION_NAMES, SLUG_PATTERN, THEMES
-from capture.fields import demand_object, demand_string, demand_url, is_choice, is_integer, is_positive
+from capture.constants import DEFAULT_PLACEMENT, PRODUCTION_NAMES
+from capture.fields import demand_object, demand_string, demand_url
+from capture.figure_fields import is_slug, validate_figure_options
 from capture.items import validate_annotations, validate_locator, validate_placement, validate_steps
 from capture.model import CaptureFailure, Spec, demand
-
-
-def is_slug(value: Any) -> bool:
-    return isinstance(value, str) and SLUG_PATTERN.fullmatch(value) is not None
-
-
-def validate_viewport(viewport: Any, where: str) -> None:
-    demand_object(viewport, f"{where}: viewport must be an object")
-    for field in ("width", "height"):
-        value = viewport.get(field, 1)
-        demand(is_integer(value) and is_positive(value), f"{where}: viewport {field} must be a positive integer")
-    demand(is_positive(viewport.get("scale", 1)), f"{where}: viewport scale must be a positive number")
-
-
-def validate_figure_options(figure: Spec, where: str) -> None:
-    demand(is_choice(figure.get("theme", "light"), THEMES), f"{where}: theme must be light or dark")
-    validate_placement(figure.get("placement", DEFAULT_PLACEMENT), where)
-    validate_color(figure, where)
-    for name in (*FLAG_FIELDS, "full_page"):
-        demand(isinstance(figure.get(name, False), bool), f"{where}: {name} must be true or false")
-    demand(figure.get("login", False) is False, f"{where}: login may only be false")
-    validate_viewport(figure.get("viewport", {}), where)
+from capture.scheme.validation import validate_scheme
 
 
 def validate_figure(figure: Any, index: int) -> None:
@@ -36,6 +16,9 @@ def validate_figure(figure: Any, index: int) -> None:
     slug = figure.get("slug", "")
     where = f"figure {index} ({slug})"
     demand(is_slug(slug), f"{where}: slug must be lowercase words joined by hyphens")
+    if "panels" in figure:
+        validate_scheme(figure, where)
+        return
     demand("url" in figure, f"{where}: url is required")
     demand_url(figure, "url", where)
     demand_url(figure, "before_url", where)

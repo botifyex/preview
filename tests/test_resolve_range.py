@@ -1,8 +1,10 @@
 import json
+from pathlib import Path
 from typing import Any
 
 import pytest
-from conftest import Repository, run_script
+from conftest import Repository
+from support import run_script
 
 
 def resolved(repository: Repository, *arguments: str) -> dict[str, Any]:
@@ -26,9 +28,7 @@ def endpoints(report: dict[str, Any]) -> tuple[str, str]:
     ("older", "newer"),
     [("v1.2.0", "v1.10.0"), ("1.2.0", "1.10.0"), ("v1.2", "v1.2.1")],
 )
-def test_release_starts_at_latest_stable_for_both_spellings(
-    repository: Repository, older: str, newer: str
-) -> None:
+def test_release_starts_at_latest_stable_for_both_spellings(repository: Repository, older: str, newer: str) -> None:
     repository.tagged(older, newer)
     repository.commit("after")
     assert endpoints(resolved(repository, "release")) == (newer, "HEAD")
@@ -145,7 +145,9 @@ def test_no_tags_suggest_from(repository: Repository, mode: str) -> None:
 
 @pytest.mark.parametrize("mode", ["release", "beta"])
 def test_only_non_version_tags_suggest_from(repository: Repository, mode: str) -> None:
-    repository.tagged("nightly", "deploy-2026", "release-candidate", "v1", "v1.2.0-foo", "pkg-1.2.0", "1.2.0.dev1", "1.2.0.post1")
+    repository.tagged(
+        "nightly", "deploy-2026", "release-candidate", "v1", "v1.2.0-foo", "pkg-1.2.0", "1.2.0.dev1", "1.2.0.post1"
+    )
     assert "--from" in refused(repository, mode)
 
 
@@ -184,7 +186,7 @@ def test_unknown_reference_is_refused(repository: Repository) -> None:
     assert "nope" in refused(repository, "release", "--from", "nope")
 
 
-def test_outside_a_repository_is_refused(repository: Repository, tmp_path) -> None:
+def test_outside_a_repository_is_refused(tmp_path: Path) -> None:
     process = run_script("resolve_range.py", "release", "--repo", str(tmp_path))
     assert process.returncode == 1
     assert "Traceback" not in process.stderr

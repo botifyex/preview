@@ -69,10 +69,20 @@ uv run skills/preview/scripts/check_report.py <dir>
 ## Tests
 
 ```bash
-uv run --no-project --with pytest --with pytest-xdist --with pillow --with pyyaml pytest tests -n auto
+uv run pytest tests -n auto
 ```
 
 Tests use real temporary git repositories, a local HTTP server, and real Chromium.
 
+## Checks
+
+```bash
+uv run ruff check .
+uv run ruff format --check .
+uv run basedpyright
+```
+
+Versions and rules live in `pyproject.toml`. It holds tool configuration and pinned development
+dependencies only: nothing is built or installed, and the scripts keep their own PEP 723 headers.
 
 Reasons behind the choices, in Russian: [docs/decisions.md](docs/decisions.md).

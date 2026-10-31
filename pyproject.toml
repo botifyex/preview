@@ -1,0 +1,44 @@
+[project]
+name = "preview"
+version = "0.1.0"
+description = "Claude Code skill that writes an annotated guide to what changed in a release or beta"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "basedpyright==1.40.2",
+    "pillow==13.0.0",
+    "playwright==1.64.1",
+    "pytest==9.2.0",
+    "pytest-xdist==3.8.0",
+    "pyyaml==6.0.3",
+    "ruff==0.17.3",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RET", "PTH", "RUF", "PL", "S"]
+ignore = ["S603", "S607", "PLR0913", "PLR0917"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "PLR2004"]
+"skills/preview/scripts/capture/page_scripts.py" = ["E501"]
+
+[tool.basedpyright]
+include = ["skills/preview/scripts", "tests"]
+extraPaths = ["skills/preview/scripts", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "recommended"
+reportAny = false
+reportExplicitAny = false
+reportUnusedCallResult = false
+reportImplicitStringConcatenation = false

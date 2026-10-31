@@ -9,6 +9,7 @@ import sys
 from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path
+from typing import override
 
 
 class Code(StrEnum):
@@ -28,6 +29,7 @@ HEADING = re.compile(r"^(#{1,6})\s+\S")
 IMAGE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)[^)]*\)")
 REFERENCE = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)[^)]*\)")
 FIGURE_NAME = re.compile(r"(\d{2,})-[^/]+\.png")
+SECTION_LEVEL = 2
 
 
 @dataclass(frozen=True)
@@ -35,6 +37,7 @@ class Problem:
     code: Code
     message: str
 
+    @override
     def __str__(self) -> str:
         return f"{self.code}: {self.message}"
 
@@ -70,11 +73,11 @@ def split_sections(lines: list[str]) -> Sections:
     for line in lines:
         match = HEADING.match(line)
         level = len(match[1]) if match else 0
-        if level in (1, 2):
+        if level in (1, SECTION_LEVEL):
             sections.headings.append(level)
         if level == 1 and current is sections.opening:
             current = sections.title
-        elif level == 2 and targets:
+        elif level == SECTION_LEVEL and targets:
             current = targets.pop(0)
         current.append(line)
     return sections

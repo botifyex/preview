@@ -1,9 +1,10 @@
 import re
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
-from conftest import run_script
+from support import run_script
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "preview"
@@ -62,7 +63,7 @@ def test_report_template_passes_the_validator(tmp_path: Path) -> None:
     assert process.returncode == 0, process.stderr
 
 
-def note_sample() -> dict:
+def note_sample() -> dict[str, Any]:
     reference = (SKILL / "references" / "access-note.md").read_text()
     block = re.search(r"```markdown\n---\n(.*?)\n---\n", reference, re.DOTALL)
     assert block
@@ -90,7 +91,9 @@ def test_note_sample_defines_the_request_shape() -> None:
     assert "{password}" in str(request)
 
 
-@pytest.mark.parametrize("path", sorted((SKILL / "references").glob("*.md")) + [SKILL / "SKILL.md"], ids=lambda path: path.name)
+@pytest.mark.parametrize(
+    "path", [*sorted((SKILL / "references").glob("*.md")), SKILL / "SKILL.md"], ids=lambda path: path.name
+)
 def test_samples_avoid_the_refused_test_domain(path: Path) -> None:
     assert "example.test" not in path.read_text()
 

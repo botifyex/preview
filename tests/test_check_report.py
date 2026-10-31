@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from conftest import run_script
+from support import run_script
 
 FIGURE_ONE = "figures/01-export.png"
 FIGURE_TWO = "figures/02-menu.png"
@@ -88,10 +88,14 @@ NOT_EMBEDDED_LINK = GOOD.replace("Small fixes.", "See ([figure 3](figures/03-ext
         pytest.param(NO_OTHER, (FIGURE_ONE,), "section-order", id="no-other-section"),
         pytest.param(GOOD + "\n## Third\n", (FIGURE_ONE, FIGURE_TWO), "section-order", id="third-section"),
         pytest.param(NEVER_REFERENCED, (FIGURE_ONE, FIGURE_TWO), "unreferenced-figure", id="figure-unreferenced"),
-        pytest.param(GOOD, (FIGURE_ONE, FIGURE_TWO, "figures/03-extra.png"), "unreferenced-figure", id="file-not-in-report"),
+        pytest.param(
+            GOOD, (FIGURE_ONE, FIGURE_TWO, "figures/03-extra.png"), "unreferenced-figure", id="file-not-in-report"
+        ),
         pytest.param(GOOD, (FIGURE_ONE,), "missing-file", id="file-missing"),
         pytest.param(GHOST_LINK, (FIGURE_ONE, FIGURE_TWO), "missing-file", id="reference-without-file"),
-        pytest.param(NOT_EMBEDDED_LINK, (FIGURE_ONE, FIGURE_TWO, "figures/03-extra.png"), "missing-file", id="link-not-embedded"),
+        pytest.param(
+            NOT_EMBEDDED_LINK, (FIGURE_ONE, FIGURE_TWO, "figures/03-extra.png"), "missing-file", id="link-not-embedded"
+        ),
         pytest.param(GAP, (FIGURE_ONE, "figures/03-menu.png"), "numbering", id="numbering-gap"),
         pytest.param(REVERSED, (OUT_OF_ORDER_ONE, OUT_OF_ORDER_TWO), "numbering", id="numbering-reversed"),
         pytest.param(BAD_NAME, ("figures/export.png", FIGURE_TWO), "numbering", id="bad-name"),

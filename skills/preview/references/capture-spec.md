@@ -139,7 +139,7 @@ and names its level. It has no effect on a mark without a `number`.
 
 | `placement` | Number sits | Applies to |
 | --- | --- | --- |
-| `corner`, `top-left` | On the top left corner; on the tail for an arrow, the middle of the line for a connector | all |
+| `corner`, `top-left` | On the top left corner; on the tail for an arrow; for a connector on the line, halfway between the two elements' centres | all |
 | `top-right`, `bottom-left`, `bottom-right` | On that corner | all but arrows and connectors |
 | `inside` | Fully inside, at the top left. A shape under 36 px in width or height fails | all but arrows, connectors and callouts |
 | `left`, `right`, `above`, `below` | Fully outside, 20 px from that side. Off the page fails | all; for an arrow or connector, beside its target |
@@ -224,9 +224,10 @@ private temporary directory and never published alone.
 | `background` | `#F2F4F7` | `#RRGGBB`. Titles turn white on a dark one |
 | `steps_numbers` | false | Number panel titles 1, 2, 3 for a path; a panel without a title still gets its number |
 | `links` | none | A list, see below, or `"sequence"` in a row or column: each panel to the next |
+| `continuous` | false | One browser context and page for all panels, in order: see below |
 
 `viewport`, `theme`, `login`, `has_touch`, `reduced_motion`, `placement` and `color` on the figure
-are defaults for its panels. `color` also colours links and step numbers.
+are defaults for its panels, and a panel's `viewport` overrides the figure's field by field. `color` also colours links and step numbers.
 
 **Panel**: `url`, plus `steps`, `annotations`, `viewport`, `theme`, `login`, `has_touch`,
 `reduced_motion`, `placement`, `color` and `full_page` as for a figure, except that `full_page`
@@ -239,11 +240,20 @@ crop; its hole, number and label do. A connector with an element entirely outsid
 fails. A spotlight is limited to one per panel. Failures name `figure <slug> panel <n>`, and the
 page at failure is saved as `failures/<slug>-panel-<n>.png`.
 
+**Each panel starts fresh by default**: its own browser context, with no cookies, storage, clicks or
+page from the panel before. A cart filled in panel 1 is empty in panel 2, and nothing warns about it.
+For a path where one step depends on the last, set `"continuous": true`. All panels then share one
+context and page, in panel order. A panel's `url` is optional, except on the first: given, it
+navigates; absent, the page stays where the last panel left it. Its `steps` run, then it is
+captured. A panel's marks and `hide` are undone before the next panel's steps. `viewport`, `theme`,
+`has_touch`, `reduced_motion` and `login` on a panel are refused, set them on the figure. Login works
+as for a figure.
+
 **Link**: `{ "from": <panel id>, "to": <panel id>, "text": "...", "from_mark": 2, "style": "dashed" }`.
 `from` and `to` are required; `style` is `solid` (default) or `dashed`. The arrow runs edge to edge
 through the gaps and margins, with up to two bends, and never over a panel, including its title.
 `from_mark` starts it on that numbered mark, in the from panel; the arrow may cross only that panel,
-and a mark without that number fails. These fail rather than draw something false: a link that
+and a mark without that number, or a number used twice in that panel, fails. These fail rather than draw something false: a link that
 cannot be routed (panels touching on every side), and a `text` that fits nowhere beside its arrow.
 
 Numbers of marks are redrawn at a readable size on top of a scaled panel, at least 10 px in radius.
@@ -253,10 +263,10 @@ A picture over 8000 px on a side, in image pixels, fails with `error: ...`. More
 more than 5 marks in a panel, gives a warning. Wrong types, unknown panels in a link, duplicate `id`s
 and missing marks fail before the browser starts.
 
-The manifest entry has `number`, `file`, `slug`, `role: "scheme"`, `layout`, `viewport` (the size of
+The manifest entry has `number`, `file`, `slug`, `role: "scheme"`, `layout`, `continuous`, `viewport` (the size of
 the composite in CSS pixels and its `scale`, the highest of its panels), `warnings`, and:
 
-- `panels`: each with `id`, `title`, `url`, `rectangle` (the picture drawn, in the composite), `scale`
+- `panels`: each with `id`, `title`, `url` (where the panel really ended), `rectangle` (the picture drawn, in the composite), `scale`
   and `marks` in composite coordinates: every point, rectangle, `top` and `bottom` is scaled and
   shifted, a spotlight's `veil` is a size and only scaled, and `opacity` and the `text` of `lines` stay;
 - `links`: each with `from`, `to`, `style`, `text`, `from_mark`, `tail`, `tip`, `points` (the whole

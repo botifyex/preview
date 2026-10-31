@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shop fixture</title>
+<style>
+  body { margin: 0; height: 300px; background: #ffffff; }
+  button, a { position: absolute; display: block; }
+  #add { left: 40px; top: 40px; width: 120px; height: 40px; }
+  #added { position: absolute; left: 200px; top: 40px; width: 120px; height: 40px; background: #dddddd; }
+  #go { left: 40px; top: 120px; }
+  #banner { position: absolute; left: 40px; top: 200px; width: 200px; height: 40px; background: #aa00aa; }
+  #check { position: absolute; left: 0; top: 0; width: 80px; height: 30px; }
+</style>
+</head>
+<body>
+<button id="add">Add</button>
+<div id="added"></div>
+<a id="go" href="cart.html">Open cart</a>
+<div id="banner" style="display: flex"><button id="check">Check</button></div>
+<script>
+  const paint = () => { document.getElementById("added").style.background = "#00aa00"; };
+  document.getElementById("add").addEventListener("click", () => {
+    localStorage.setItem("cart", "1");
+    paint();
+  });
+  document.getElementById("check").addEventListener("click", () => {
+    if (getComputedStyle(document.getElementById("banner")).display === "flex") paint();
+  });
+</script>
+</body>
+</html>

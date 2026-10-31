@@ -12,6 +12,29 @@ OVERLAY_BOUNDS_SCRIPT = """
 }
 """
 
+REMEMBER_HIDDEN_SCRIPT = """
+(elements) => {
+  const kept = (window.__previewHidden ??= new Map());
+  elements.filter((element) => !kept.has(element)).forEach((element) => {
+    kept.set(element, [element.style.getPropertyValue("display"), element.style.getPropertyPriority("display")]);
+  });
+}
+"""
+
+RESTORE_HIDDEN_SCRIPT = """
+(elements) => elements.forEach((element) => {
+  const kept = window.__previewHidden ?? new Map();
+  const [value, priority] = kept.get(element) ?? ["", ""];
+  if (value) element.style.setProperty("display", value, priority);
+  else element.style.removeProperty("display");
+  kept.delete(element);
+})
+"""
+
+REMOVE_OVERLAY_SCRIPT = """
+() => document.querySelectorAll('svg[data-preview="overlay"]').forEach((overlay) => overlay.remove())
+"""
+
 TEXT_WIDTH_SCRIPT = """
 (requests) => {
   const context = document.createElement("canvas").getContext("2d");

@@ -77,6 +77,8 @@ def placed_lines(lines: list[str], block: Box) -> list[Spec]:
 
 def callout_fields(placed: Placed) -> Spec:
     measured = placed.annotation["measured"]
+    anchor = describe_locator(placed.annotation["anchor"])
+    demand(measured["lines"] and measured["width"] > 0, f"{placed.where}: callout text draws nothing on {anchor}")
     width = math.ceil(measured["width"]) + 2 * CALLOUT_PADDING[0]
     height = len(measured["lines"]) * CALLOUT_LINE + 2 * CALLOUT_PADDING[1]
     side, block = choose_side(placed, width, height)

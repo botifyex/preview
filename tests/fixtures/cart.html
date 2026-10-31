@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cart fixture</title>
+<style>
+  body { margin: 0; height: 300px; background: #ffffff; }
+  #state { position: absolute; left: 40px; top: 40px; width: 200px; height: 80px; background: #aa0000; }
+</style>
+</head>
+<body>
+<div id="state"></div>
+<script>
+  if (localStorage.getItem("cart")) document.getElementById("state").style.background = "#00aa00";
+</script>
+</body>
+</html>

@@ -6,6 +6,7 @@ from capture.figure_fields import is_slug, validate_figure_options
 from capture.items import validate_annotations, validate_locator, validate_steps
 from capture.model import CaptureFailure, Spec, demand
 from capture.scheme.constants import (
+    CONTEXT_FIELDS,
     FIGURE_ONLY_FIELDS,
     LAYOUTS,
     LINK_STYLES,
@@ -35,9 +36,16 @@ def validate_crop(panel: Spec, where: str) -> None:
         demand(is_size(panel["crop_padding"]), f"{where}: crop_padding must be an integer from 0 to {SIDE_LIMIT}")
 
 
-def validate_panel(panel: Any, where: str) -> None:
+def validate_context_fields(panel: Spec, where: str) -> None:
+    for field in CONTEXT_FIELDS:
+        demand(field not in panel, f"{where}: {field} does not apply with continuous")
+
+
+def validate_panel(panel: Any, where: str, continuous: bool, first: bool) -> None:
     demand_object(panel, f"{where}: must be an object")
-    demand("url" in panel, f"{where}: url is required")
+    demand("url" in panel or (continuous and not first), f"{where}: url is required")
+    if continuous:
+        validate_context_fields(panel, where)
     demand_url(panel, "url", where)
     for field in PANEL_ONLY_FIELDS:
         demand(field not in panel, f"{where}: {field} does not apply to a panel")
@@ -53,9 +61,10 @@ def validate_panel(panel: Any, where: str) -> None:
 def validate_panels(figure: Spec, where: str) -> None:
     panels = demand_list(figure, "panels", where)
     demand(panels, f"{where}: panels must not be empty")
+    continuous = figure.get("continuous", False)
     identities: set[str] = set()
     for index, panel in enumerate(panels, 1):
-        validate_panel(panel, f"{where} panel {index}")
+        validate_panel(panel, f"{where} panel {index}", continuous, index == 1)
         identity = str(panel_identity(panel, index))
         demand(identity not in identities, f"{where}: duplicate panel id {identity}")
         identities.add(identity)
@@ -92,6 +101,7 @@ def validate_mark(link: Spec, source: Spec, where: str) -> None:
     demand(is_integer(number), f"{where}: from_mark must be an integer")
     numbers = [annotation.get("number") for annotation in source.get("annotations", [])]
     demand(number in numbers, f"{where}: panel {link['from']} has no mark {number}")
+    demand(numbers.count(number) == 1, f"{where}: panel {link['from']} has mark {number} twice")
 
 
 def validate_link(link: Any, figure: Spec, where: str) -> None:
@@ -121,6 +131,7 @@ def validate_scheme(figure: Spec, where: str) -> None:
     for field in FIGURE_ONLY_FIELDS:
         demand(field not in figure, f"{where}: {field} does not apply with panels")
     validate_figure_options(figure, where)
+    demand(isinstance(figure.get("continuous", False), bool), f"{where}: continuous must be true or false")
     validate_panels(figure, where)
     validate_arrangement(figure, where)
     validate_links(figure, where)

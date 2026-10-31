@@ -44,7 +44,8 @@ elements: keep them close, or use numbers.
 ## When to use a scheme
 
 One idea per image still applies: a scheme is for one idea that does not fit one screen. Use it for
-a path of up to about 6 steps with `steps_numbers` and `links: "sequence"`, for how two or three
+a path of up to about 6 steps with `steps_numbers`, `links: "sequence"` and `continuous: true`, since panels otherwise
+start in fresh browser contexts and lose what the last step did, for how two or three
 screens lead to each other, or for the parts of a page too long to read whole, with `crop`.
 Unrelated changes stay separate figures, and one change on one page needs no scheme. Keep panels
 readable: a smaller `viewport` beats a smaller `panel_width`. Start an arrow at a mark with

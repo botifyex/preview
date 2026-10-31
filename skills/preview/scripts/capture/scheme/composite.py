@@ -22,6 +22,7 @@ from capture.scheme.constants import (
     STEP_ONLY_WIDTH,
     STEP_WIDTH,
 )
+from capture.scheme.continuous import capture_path
 from capture.scheme.drawing import draw
 from capture.scheme.layout import Sheet, Size, Slot, arranged, column_count, fit_scale, fitted, refuse_oversize
 from capture.scheme.links import Drawn, drawn_links, link_entry, links_of, route_links
@@ -95,6 +96,7 @@ def scheme_entry(
         "slug": figure["slug"],
         "role": "scheme",
         "layout": figure.get("layout", "row"),
+        "continuous": figure.get("continuous", False),
         "viewport": {"width": sheet.size.width, "height": sheet.size.height, "scale": ratio},
         "panels": entries,
         "links": [link_entry(drawn) for drawn in links],
@@ -138,8 +140,12 @@ def capture_scheme(
 ) -> Spec:
     figure = shot.figure
     with tempfile.TemporaryDirectory(dir=options.output, prefix=".capture-panels-") as directory:
-        panels = [
-            capture_panel(browser, spec, figure, index, options, logins, Path(directory))
-            for index in range(1, len(figure["panels"]) + 1)
-        ]
+        panels = (
+            capture_path(browser, spec, shot, options, logins, Path(directory))
+            if figure.get("continuous", False)
+            else [
+                capture_panel(browser, spec, figure, index, options, logins, Path(directory))
+                for index in range(1, len(figure["panels"]) + 1)
+            ]
+        )
         return composed(browser, spec, figure, panels, number, options, staging)

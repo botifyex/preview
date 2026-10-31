@@ -13,7 +13,7 @@ from capture.model import Box, CaptureFailure, Options, Shot, Spec, demand
 from capture.scheme.constants import CROP_PADDING, INHERITED_FIELDS
 from capture.scheme.layout import Size
 from capture.scheme.routing import overlaps
-from capture.scheme.scripts import OVERLAY_BOUNDS_SCRIPT
+from capture.scheme.scripts import OVERLAY_BOUNDS_SCRIPT, REMEMBER_HIDDEN_SCRIPT
 from capture.scheme.validation import panel_identity
 from capture.shots import Logins, context_options, with_inherited
 from capture.steps import open_url, run_steps
@@ -49,13 +49,14 @@ class Captured:
 
 def panel_settings(figure: Spec, panel: Spec) -> Spec:
     inherited = {field: figure[field] for field in INHERITED_FIELDS if field in figure}
-    return {"full_page": False, **inherited, **panel}
+    viewport = {**figure.get("viewport", {}), **panel.get("viewport", {})}
+    return {"full_page": False, **inherited, **panel, "viewport": viewport}
 
 
 def panel_shot(figure: Spec, panel: Spec, index: int) -> Shot:
     name = f"{figure['slug']}-panel-{index}"
     settings = panel_settings(figure, panel)
-    return Shot(name, panel["url"], panel.get("steps", []), panel.get("annotations", []), settings, "panel")
+    return Shot(name, panel.get("url", ""), panel.get("steps", []), panel.get("annotations", []), settings, "panel")
 
 
 def natural_size(path: Path, pixel_ratio: float) -> Size:
@@ -103,13 +104,20 @@ def open_panel(page: Page, url: str, where: str, timeout: int) -> None:
         raise CaptureFailure(f"{where}: {failure}") from failure
 
 
+def remember_hidden(page: Page, selectors: list[str]) -> None:
+    for selector in selectors:
+        page.locator(selector).evaluate_all(REMEMBER_HIDDEN_SCRIPT)
+
+
 def shoot(page: Page, spec: Spec, shot: Shot, crop: Spec | None, path: Path, where: str, options: Options) -> Picture:
     full_page, hide = shot.figure["full_page"], spec.get("hide", [])
-    open_panel(page, urljoin(spec["base_url"], shot.url), where, options.timeout)
+    if "url" in shot.figure:
+        open_panel(page, urljoin(spec["base_url"], shot.url), where, options.timeout)
     run_steps(page, shot.steps, spec["base_url"], where, options.timeout)
     locator = None if crop is None else single_visible(page, crop, f"{where} crop", options.timeout)
     if locator is not None:
         locator.scroll_into_view_if_needed(timeout=options.timeout)
+    remember_hidden(page, hide)
     marks, page_size = annotate(page, with_inherited(spec, shot), full_page, hide, where, options.timeout)
     hide_elements(page, hide)
     element = None if locator is None or crop is None else measure(locator, crop, f"{where} crop")
@@ -128,22 +136,26 @@ def shown_area(page: Page, panel: Spec, picture: Picture, natural: Size, where: 
     return shown
 
 
-def capture_panel(
-    browser: Browser, spec: Spec, figure: Spec, index: int, options: Options, logins: Logins, directory: Path
-) -> Captured:
+def panel_on_page(page: Page, spec: Spec, figure: Spec, index: int, options: Options, directory: Path) -> Captured:
     panel = figure["panels"][index - 1]
     shot = panel_shot(figure, panel, index)
     where = f"figure {figure['slug']} panel {index}"
     pixel_ratio = {**DEFAULT_VIEWPORT, **shot.figure.get("viewport", {})}["scale"]
     path = directory / f"{index}.png"
+    with picture_on_failure(page, shot.slug, where, options):
+        picture = shoot(page, spec, shot, panel.get("crop"), path, where, options)
+        natural = natural_size(path, pixel_ratio)
+        shown = shown_area(page, panel, picture, natural, where)
+        identity = panel_identity(panel, index)
+        return Captured(index, identity, panel.get("title", ""), path, pixel_ratio, natural, shown, picture)
+
+
+def capture_panel(
+    browser: Browser, spec: Spec, figure: Spec, index: int, options: Options, logins: Logins, directory: Path
+) -> Captured:
+    shot = panel_shot(figure, figure["panels"][index - 1], index)
     context = browser.new_context(**context_options(spec, shot.figure, options, logins.state(shot)))
     try:
-        page = context.new_page()
-        with picture_on_failure(page, shot.slug, where, options):
-            picture = shoot(page, spec, shot, panel.get("crop"), path, where, options)
-            natural = natural_size(path, pixel_ratio)
-            shown = shown_area(page, panel, picture, natural, where)
-            identity = panel_identity(panel, index)
-            return Captured(index, identity, panel.get("title", ""), path, pixel_ratio, natural, shown, picture)
+        return panel_on_page(context.new_page(), spec, figure, index, options, directory)
     finally:
         context.close()

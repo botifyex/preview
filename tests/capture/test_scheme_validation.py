@@ -13,6 +13,11 @@ def marked(number: int) -> dict[str, Any]:
     return panel(annotations=[{"kind": "box", "anchor": {"selector": "#card"}, "number": number}])
 
 
+def twice(number: int) -> dict[str, Any]:
+    box = {"kind": "box", "anchor": {"selector": "#card"}, "number": number}
+    return panel(annotations=[box, box])
+
+
 TWO = (panel(), panel())
 CASES: list[tuple[dict[str, Any], str]] = [
     ({"slug": "s", "panels": 3}, "panels must be a list"),
@@ -74,6 +79,7 @@ CASES: list[tuple[dict[str, Any], str]] = [
     (scheme(*TWO, links=[{"from": 1, "to": 2, "from_mark": "1"}]), "link 1: from_mark must be an integer"),
     (scheme(*TWO, links=[{"from": 1, "to": 2, "from_mark": 3}]), "link 1: panel 1 has no mark 3"),
     (scheme(marked(1), panel(), links=[{"from": 1, "to": 2, "from_mark": 2}]), "link 1: panel 1 has no mark 2"),
+    (scheme(twice(1), panel(), links=[{"from": 1, "to": 2, "from_mark": 1}]), "link 1: panel 1 has mark 1 twice"),
 ]
 
 
@@ -89,3 +95,13 @@ def test_refusal_reaches_the_command_line_before_the_browser(capture: Capture) -
     stderr = capture.failure(scheme(panel(), layout="circle"))
     assert stderr.startswith("error: figure 1 (scheme): layout must be row, column or grid")
     assert not capture.out.exists()
+
+
+def test_repeated_numbers_no_link_names_stay_allowed() -> None:
+    linked = [{"from": 2, "to": 1, "from_mark": 1}]
+    spec = {
+        "environment": "test",
+        "base_url": "http://localhost/",
+        "figures": [scheme(twice(1), marked(1), links=linked), scheme(twice(1), slug="other")],
+    }
+    validation.validate_spec(spec)

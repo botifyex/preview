@@ -139,9 +139,45 @@ def test_callout_text_is_not_drawn_twice_as_a_label(capture: Capture) -> None:
 def test_callout_that_fits_nowhere_fails_naming_the_anchor(capture: Capture, side: str | None) -> None:
     annotation = callout("#all", **({"side": side} if side else {}))
     message = capture.failure(figure(annotation, url=FILLED_URL, full_page=False))
-    assert "callout does not fit" in message
-    assert side or "any side" in message
+    assert f"callout does not fit {side or 'any side'} of" in message
     assert '"selector": "#all"' in message
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "\ufeff",
+        "\ufeff\n\ufeff",
+        " \ufeff ",
+        "\u200b",
+        "\u200b\u200c\u200d",
+        "\u2060",
+        "\u200b\ufeff",
+        "\u00ad",
+        "\ufe0f",
+    ],
+    ids=[
+        "bom",
+        "bom lines",
+        "bom spaces",
+        "zero width space",
+        "zero width joiners",
+        "word joiner",
+        "mixed",
+        "soft hyphen",
+        "variation selector",
+    ],
+)
+def test_callout_text_that_measures_to_nothing_fails_naming_the_anchor(capture: Capture, text: str) -> None:
+    message = capture.failure(figure(callout(text=text), url=URL))
+    assert message.startswith("error: ")
+    assert "callout text draws nothing" in message
+    assert '"selector": "#target"' in message
+
+
+def test_visible_text_beside_a_zero_width_character_is_kept(capture: Capture) -> None:
+    mark = single(capture, callout(text="\ufeffShort\u200b"))
+    assert mark["rectangle"]["width"] > 40
 
 
 def test_explicit_side_without_room_fails_rather_than_moving(capture: Capture) -> None:

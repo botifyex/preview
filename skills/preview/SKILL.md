@@ -116,7 +116,8 @@ validator requires at least one figure.
 
 List for the user: figure number, page, state to reach, what is marked. Plan one idea
 per image, following [references/annotation-design.md](references/annotation-design.md). For a path or links
-between screens, one figure can combine panels: "Schemes" in capture-spec.md.
+between screens, one figure can combine panels: "Schemes" in capture-spec.md. Panels start
+fresh; a path whose steps build on each other needs `continuous: true`.
 The plan contains only what the changes support, and nothing is drawn on a guess: every
 mark must land on an element that the run itself finds.
 

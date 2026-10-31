@@ -1,3 +1,5 @@
+from capture.page_scripts import RETREAT_SCRIPT
+
 OVERLAY_BOUNDS_SCRIPT = """
 () => {
   const overlay = document.querySelector('svg[data-preview="overlay"]');
@@ -45,8 +47,12 @@ TEXT_WIDTH_SCRIPT = """
 }
 """
 
-DRAW_SCRIPT = """
+DRAW_SCRIPT = (
+    """
 async ({ size, background, ink, panels, links, badges, headingFont, labelFont, labelPadding }) => {
+"""
+    + RETREAT_SCRIPT
+    + """
   const HALO = "#FFFFFF", BORDER = "#98A2B3", LABEL_INK = "#FFFFFF";
   const NAMESPACE = "http://www.w3.org/2000/svg";
   const add = (parent, name, attributes, text) => {
@@ -89,6 +95,11 @@ async ({ size, background, ink, panels, links, badges, headingFont, labelFont, l
     add(root, "polyline", { points: line, fill: "none", stroke: HALO, "stroke-width": 7, "stroke-opacity": 0.9, "stroke-linecap": "round", "stroke-linejoin": "round" });
     add(root, "polyline", { points: line, fill: "none", stroke: color, "stroke-width": 3, "stroke-linecap": "round", "stroke-linejoin": "round", ...(dash ? { "stroke-dasharray": "10 8" } : {}) });
   };
+  const shortened = (points) => {
+    const [before, tip] = points.slice(-2).map(([x, y]) => ({ x, y }));
+    const end = retreat(before, tip);
+    return [...points.slice(0, -1), [end.x, end.y]];
+  };
   const head = (points, color) => {
     const tip = points[points.length - 1], before = points[points.length - 2];
     const angle = Math.atan2(tip[1] - before[1], tip[0] - before[0]);
@@ -104,9 +115,10 @@ async ({ size, background, ink, panels, links, badges, headingFont, labelFont, l
     add(root, "text", { x, y, fill: LABEL_INK, "font-family": "Arial, sans-serif", "font-size": radius + 1, "font-weight": 700, "text-anchor": "middle", "dominant-baseline": "central" }, String(number));
   };
   await Promise.all(panels.map(panelImage));
-  links.forEach(({ points, color, dashed }) => { stroke(points, color, dashed); head(points, color); });
+  links.forEach(({ points, color, dashed }) => { stroke(shortened(points), color, dashed); head(points, color); });
   links.filter((link) => link.label).forEach((link) => label({ ...link.label, color: link.color }));
   badges.forEach(badge);
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 }
 """
+)

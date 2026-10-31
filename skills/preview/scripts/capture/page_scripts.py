@@ -73,8 +73,19 @@ WRAP_SCRIPT = """
 }
 """
 
-DRAW_SCRIPT = """
+RETREAT_SCRIPT = """
+  const retreat = (from, to) => {
+    const share = Math.min(1, 8 / Math.hypot(to.x - from.x, to.y - from.y));
+    return { x: to.x + (from.x - to.x) * share, y: to.y + (from.y - to.y) * share };
+  };
+"""
+
+DRAW_SCRIPT = (
+    """
 ({ marks, page, area, radius }) => {
+"""
+    + RETREAT_SCRIPT
+    + """
   const HALO = "#FFFFFF", INK = "#FFFFFF";
   const NAMESPACE = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NAMESPACE, "svg");
@@ -109,12 +120,8 @@ DRAW_SCRIPT = """
   };
   const segment = (start, end, color) => outlined("line", { x1: start.x, y1: start.y, x2: end.x, y2: end.y }, color);
   const arrow = (mark, color) => {
-    segment(mark.tail, mark.tip, color);
+    segment(mark.tail, retreat(mark.tail, mark.tip), color);
     head(mark.tail, mark.tip, color);
-  };
-  const retreat = (from, to) => {
-    const share = 8 / Math.hypot(to.x - from.x, to.y - from.y);
-    return { x: to.x + (from.x - to.x) * share, y: to.y + (from.y - to.y) * share };
   };
   const connector = (mark, color) => {
     const { start, end, heads } = mark;
@@ -175,3 +182,4 @@ DRAW_SCRIPT = """
   });
 }
 """
+)

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · Mossbill</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="sign-in">
+<main class="sign-in-card">
+  <p class="brand"><span class="brand-mark">M</span> Mossbill</p>
+  <h1>Sign in</h1>
+  <p class="muted">Billing for small teams. This is a fictional demo with made-up data.</p>
+  <form id="sign-in-form">
+    <label for="email">Email</label>
+    <input id="email" type="email" autocomplete="off">
+    <label for="password">Password</label>
+    <input id="password" type="password" autocomplete="off">
+    <p class="form-error" id="sign-in-error" hidden>Enter your email and password.</p>
+    <button class="button primary wide" type="submit">Sign in</button>
+  </form>
+  <p class="muted small demo-note">No account is needed: any email and password open the demo.</p>
+</main>
+<script>
+document.getElementById("sign-in-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const filled = document.getElementById("email").value && document.getElementById("password").value;
+  document.getElementById("sign-in-error").hidden = Boolean(filled);
+  if (filled) {
+    localStorage.setItem("mossbill.session", document.getElementById("email").value);
+    location.href = "index.html";
+  }
+});
+</script>
+</body>
+</html>

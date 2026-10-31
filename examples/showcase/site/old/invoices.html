@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invoices · Mossbill 2 (previous version)</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <strong>Mossbill 2</strong>
+  <nav aria-label="Main"><a href="invoices.html" class="active">Invoices</a><span>Customers</span><span>Reports</span></nav>
+</header>
+<main>
+  <div class="title-row">
+    <h1>Invoices</h1>
+    <button type="button">Print list</button>
+  </div>
+  <div class="toolbar">
+    <label for="status">Status</label>
+    <select id="status"><option>All</option><option>Paid</option><option>Open</option><option>Overdue</option></select>
+    <button type="button">Apply</button>
+  </div>
+  <table>
+    <thead><tr><th>Number</th><th>Customer</th><th>Issued</th><th>Amount</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>INV-1048</td><td>Harbor Lane Bakery</td><td>Oct 28</td><td>$1,240.00</td><td>Open</td></tr>
+      <tr><td>INV-1047</td><td>Quillon Test Studio</td><td>Oct 26</td><td>$3,860.00</td><td>Paid</td></tr>
+      <tr><td>INV-1046</td><td>Birch &amp; Vale Cycles</td><td>Oct 24</td><td>$615.50</td><td>Open</td></tr>
+      <tr><td>INV-1045</td><td>Sample Roofing Co.</td><td>Sep 30</td><td>$4,120.00</td><td>Overdue</td></tr>
+      <tr><td>INV-1044</td><td>Harbor Lane Bakery</td><td>Sep 28</td><td>$1,240.00</td><td>Paid</td></tr>
+      <tr><td>INV-1043</td><td>Tern Island Ferries</td><td>Sep 22</td><td>$8,795.00</td><td>Paid</td></tr>
+    </tbody>
+  </table>
+</main>
+<script>
+if (!localStorage.getItem("mossbill.session")) location.replace("../login.html");
+</script>
+</body>
+</html>

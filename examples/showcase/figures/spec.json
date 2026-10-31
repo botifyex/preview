@@ -1,0 +1,929 @@
+{
+  "environment": "local",
+  "base_url": "http://127.0.0.1:8000",
+  "locale": "en-US",
+  "color": "#1D4ED8",
+  "hide": [
+    ".dev-overlay:not(.pinned)"
+  ],
+  "login": {
+    "name": "showcase-user",
+    "steps": [
+      {
+        "action": "goto",
+        "url": "/login.html"
+      },
+      {
+        "action": "fill",
+        "target": {
+          "role": "textbox",
+          "name": "Email"
+        },
+        "value": "demo@mossbill.example"
+      },
+      {
+        "action": "fill",
+        "target": {
+          "role": "textbox",
+          "name": "Password"
+        },
+        "value_env": "SHOWCASE_PASSWORD"
+      },
+      {
+        "action": "click",
+        "target": {
+          "role": "button",
+          "name": "Sign in"
+        }
+      }
+    ],
+    "expect": {
+      "role": "heading",
+      "name": "Dashboard"
+    }
+  },
+  "figures": [
+    {
+      "slug": "mark-box",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "link",
+            "name": "New invoice"
+          },
+          "number": 1,
+          "text": "Start here"
+        }
+      ]
+    },
+    {
+      "slug": "mark-arrow-default",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "arrow",
+          "anchor": {
+            "role": "button",
+            "name": "Notifications"
+          },
+          "text": "Alerts"
+        }
+      ]
+    },
+    {
+      "slug": "mark-arrow-offset",
+      "url": "/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "arrow",
+          "anchor": {
+            "role": "button",
+            "name": "Download PDF"
+          },
+          "offset": {
+            "x": -220,
+            "y": 0
+          },
+          "text": "Keep a copy"
+        }
+      ]
+    },
+    {
+      "slug": "mark-arrow-from",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "overdue",
+            "match": "substring"
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "kind": "arrow",
+          "anchor": {
+            "selector": "tr[data-number='INV-1045'] .chip"
+          },
+          "from": {
+            "selector": "tr[data-number='INV-1045'] .row-actions"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mark-badge",
+      "url": "/settings.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "placement": "right",
+      "annotations": [
+        {
+          "kind": "badge",
+          "anchor": {
+            "text": "Work email"
+          },
+          "number": 1
+        },
+        {
+          "kind": "badge",
+          "anchor": {
+            "text": "Invoice overdue"
+          },
+          "number": 2
+        },
+        {
+          "kind": "badge",
+          "anchor": {
+            "role": "button",
+            "name": "Save changes"
+          },
+          "number": 3,
+          "placement": "left"
+        }
+      ]
+    },
+    {
+      "slug": "mark-label",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "label",
+          "anchor": {
+            "role": "group",
+            "name": "Status"
+          },
+          "text": "One click filters"
+        }
+      ]
+    },
+    {
+      "slug": "mark-removed",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "removed",
+          "anchor": {
+            "role": "group",
+            "name": "Status"
+          },
+          "offset": {
+            "x": 342,
+            "width": 74
+          },
+          "text": "Apply was here"
+        }
+      ]
+    },
+    {
+      "slug": "mark-callout",
+      "url": "/login.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "login": false,
+      "annotations": [
+        {
+          "kind": "callout",
+          "anchor": {
+            "role": "textbox",
+            "name": "Password"
+          },
+          "side": "right",
+          "width": 200,
+          "text": "Any password works: this demo has made-up data and no real accounts."
+        }
+      ]
+    },
+    {
+      "slug": "mark-ellipse",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "ellipse",
+          "anchor": {
+            "selector": "tr[data-number='INV-1042'] .chip"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mark-underline",
+      "url": "/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": true,
+      "annotations": [
+        {
+          "kind": "underline",
+          "anchor": {
+            "selector": "#late-fee"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mark-highlight",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "highlight",
+          "anchor": {
+            "role": "row",
+            "name": "INV-1042",
+            "match": "substring"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mark-spotlight",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "spotlight",
+          "anchor": {
+            "selector": "#revenue-chart"
+          },
+          "number": 1
+        }
+      ]
+    },
+    {
+      "slug": "connector-none",
+      "url": "/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "connector",
+          "anchor": {
+            "selector": "#bill-to strong"
+          },
+          "from": {
+            "selector": "#bill-from strong"
+          },
+          "heads": "none"
+        }
+      ]
+    },
+    {
+      "slug": "connector-end",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "connector",
+          "anchor": {
+            "selector": "#next-up h2"
+          },
+          "from": {
+            "selector": ".tiles .tile:nth-child(3)"
+          },
+          "heads": "end"
+        }
+      ]
+    },
+    {
+      "slug": "connector-both",
+      "url": "/settings.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "connector",
+          "anchor": {
+            "text": "Invoice overdue"
+          },
+          "from": {
+            "role": "textbox",
+            "name": "Work email"
+          },
+          "heads": "both"
+        }
+      ]
+    },
+    {
+      "slug": "number-placements",
+      "url": "/reports.html",
+      "viewport": {
+        "width": 1280,
+        "height": 520
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='January']"
+          },
+          "number": 1,
+          "placement": "corner"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='February']"
+          },
+          "number": 2,
+          "placement": "top-left"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='March']"
+          },
+          "number": 3,
+          "placement": "top-right"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='April']"
+          },
+          "number": 4,
+          "placement": "bottom-left"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='May']"
+          },
+          "number": 5,
+          "placement": "bottom-right"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='June']"
+          },
+          "number": 6,
+          "placement": "inside"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='July']"
+          },
+          "number": 7,
+          "placement": "left"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='August']"
+          },
+          "number": 8,
+          "placement": "right"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='September']"
+          },
+          "number": 9,
+          "placement": "above"
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".statement[data-month='October']"
+          },
+          "number": 10,
+          "placement": "below"
+        }
+      ]
+    },
+    {
+      "slug": "colour-levels",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "color": "#047857",
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "button",
+            "name": "Export CSV"
+          },
+          "number": 1
+        },
+        {
+          "kind": "ellipse",
+          "anchor": {
+            "selector": "tr[data-number='INV-1042'] .chip"
+          },
+          "color": "#B45309"
+        },
+        {
+          "kind": "removed",
+          "anchor": {
+            "role": "group",
+            "name": "Status"
+          },
+          "offset": {
+            "x": 342,
+            "width": 74
+          },
+          "number": 2,
+          "placement": "top-right"
+        }
+      ]
+    },
+    {
+      "slug": "dark-theme",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "theme": "dark",
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".tiles .tile:nth-child(3)"
+          },
+          "number": 1,
+          "text": "Needs attention"
+        }
+      ]
+    },
+    {
+      "slug": "before-after",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "before_url": "/old/invoices.html",
+      "before_annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "button",
+            "name": "Print list"
+          },
+          "number": 1
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": ".toolbar"
+          },
+          "number": 2
+        }
+      ],
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "button",
+            "name": "Export CSV"
+          },
+          "number": 1
+        },
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "group",
+            "name": "Status"
+          },
+          "number": 2
+        }
+      ]
+    },
+    {
+      "slug": "mobile-touch",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "scale": 2
+      },
+      "full_page": false,
+      "has_touch": true,
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "text": "Swipe a row left",
+            "match": "substring"
+          },
+          "number": 1,
+          "placement": "below"
+        }
+      ]
+    },
+    {
+      "slug": "mobile-menu",
+      "url": "/index.html",
+      "viewport": {
+        "width": 390,
+        "height": 640,
+        "scale": 2
+      },
+      "full_page": false,
+      "has_touch": true,
+      "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Menu"
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "role": "link",
+            "name": "Invoices"
+          },
+          "number": 1
+        }
+      ]
+    },
+    {
+      "slug": "page-whole",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 420
+      },
+      "full_page": true,
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": "#results"
+          },
+          "number": 1,
+          "placement": "right"
+        }
+      ]
+    },
+    {
+      "slug": "page-window",
+      "url": "/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 420
+      },
+      "full_page": false,
+      "annotations": [
+        {
+          "kind": "label",
+          "anchor": {
+            "role": "button",
+            "name": "Export CSV"
+          },
+          "text": "Window only"
+        }
+      ]
+    },
+    {
+      "slug": "steps-to-hover",
+      "url": "/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "full_page": false,
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/invoices.html"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "role": "searchbox",
+            "name": "Search invoices"
+          },
+          "value": "Fictional"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "searchbox",
+            "name": "Search invoices"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "wait",
+          "target": {
+            "text": "1 invoice"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "^Overdue",
+            "match": "regex"
+          }
+        },
+        {
+          "action": "wait",
+          "milliseconds": 50
+        },
+        {
+          "action": "hover",
+          "target": {
+            "text": "^INV-1042$",
+            "match": "regex"
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "kind": "box",
+          "anchor": {
+            "selector": "tr[data-number='INV-1042'] .row-buttons"
+          },
+          "number": 1
+        }
+      ]
+    },
+    {
+      "slug": "scheme-checkout-path",
+      "viewport": {
+        "width": 900,
+        "height": 620
+      },
+      "panel_width": 560,
+      "steps_numbers": true,
+      "links": "sequence",
+      "continuous": true,
+      "panels": [
+        {
+          "url": "/addons.html",
+          "title": "Add a service",
+          "steps": [
+            {
+              "action": "click",
+              "target": {
+                "role": "button",
+                "name": "Add Reminder emails"
+              }
+            }
+          ],
+          "annotations": [
+            {
+              "kind": "box",
+              "anchor": {
+                "role": "link",
+                "name": "Cart (1)"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Check the cart",
+          "steps": [
+            {
+              "action": "click",
+              "target": {
+                "role": "link",
+                "name": "Cart (1)"
+              }
+            }
+          ],
+          "annotations": [
+            {
+              "kind": "highlight",
+              "anchor": {
+                "role": "row",
+                "name": "Reminder emails",
+                "match": "substring"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Place the order",
+          "steps": [
+            {
+              "action": "click",
+              "target": {
+                "role": "button",
+                "name": "Place order"
+              }
+            }
+          ],
+          "annotations": [
+            {
+              "kind": "box",
+              "anchor": {
+                "selector": ".confirmation"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "scheme-invoice-parts",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "layout": "column",
+      "panels": [
+        {
+          "url": "/invoice.html?id=INV-1042",
+          "title": "What was billed",
+          "full_page": true,
+          "crop": {
+            "selector": "#line-items"
+          },
+          "crop_padding": 24,
+          "annotations": [
+            {
+              "kind": "highlight",
+              "anchor": {
+                "selector": "#total"
+              }
+            }
+          ]
+        },
+        {
+          "url": "/invoice.html?id=INV-1042",
+          "title": "What happened since",
+          "full_page": true,
+          "crop": {
+            "selector": "#timeline"
+          },
+          "crop_padding": 8
+        }
+      ]
+    },
+    {
+      "slug": "scheme-screen-map",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "layout": "grid",
+      "columns": 2,
+      "panel_width": 460,
+      "background": "#101828",
+      "panels": [
+        {
+          "id": "dashboard",
+          "url": "/index.html",
+          "title": "Dashboard",
+          "annotations": [
+            {
+              "kind": "box",
+              "anchor": {
+                "role": "link",
+                "name": "New invoice"
+              },
+              "number": 1,
+              "placement": "top-right"
+            }
+          ]
+        },
+        {
+          "id": "invoices",
+          "url": "/invoices.html",
+          "title": "Invoices"
+        },
+        {
+          "id": "settings",
+          "url": "/settings.html",
+          "title": "Settings"
+        },
+        {
+          "id": "invoice",
+          "url": "/invoice.html?id=INV-1048",
+          "title": "One invoice"
+        }
+      ],
+      "links": [
+        {
+          "from": "dashboard",
+          "to": "invoices",
+          "from_mark": 1,
+          "text": "Go to invoices"
+        },
+        {
+          "from": "invoices",
+          "to": "invoice",
+          "text": "Pick one"
+        },
+        {
+          "from": "invoice",
+          "to": "settings",
+          "style": "dashed",
+          "text": "Change who is notified"
+        }
+      ]
+    },
+    {
+      "slug": "scheme-hide-overlay",
+      "viewport": {
+        "width": 1024,
+        "height": 640
+      },
+      "panel_width": 560,
+      "layout": "row",
+      "panels": [
+        {
+          "url": "/index.html?devtools=pinned",
+          "title": "Not hidden",
+          "annotations": [
+            {
+              "kind": "arrow",
+              "anchor": {
+                "text": "dev build",
+                "match": "substring"
+              },
+              "text": "Dev overlay"
+            }
+          ]
+        },
+        {
+          "url": "/index.html",
+          "title": "Listed in hide"
+        }
+      ]
+    }
+  ]
+}

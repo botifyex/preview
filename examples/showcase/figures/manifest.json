@@ -1,0 +1,2236 @@
+{
+  "environment": "local",
+  "base_url": "http://127.0.0.1:8000",
+  "figures": [
+    {
+      "number": 1,
+      "file": "figures/01-mark-box.png",
+      "slug": "mark-box",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 808
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": "Start here",
+          "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
+          "element": {
+            "x": 885.078125,
+            "y": 87,
+            "width": 110.921875,
+            "height": 34
+          },
+          "badge": {
+            "x": 881.078125,
+            "y": 83
+          },
+          "rectangle": {
+            "x": 881.078125,
+            "y": 83,
+            "width": 118.921875,
+            "height": 42
+          },
+          "corner": {
+            "x": 881.078125,
+            "y": 83
+          },
+          "bottom": 125
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 2,
+      "file": "figures/02-mark-arrow-default.png",
+      "slug": "mark-arrow-default",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 808
+      },
+      "marks": [
+        {
+          "kind": "arrow",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": "Alerts",
+          "anchor_description": "{\"name\": \"Notifications\", \"role\": \"button\"}",
+          "element": {
+            "x": 914,
+            "y": 12,
+            "width": 36,
+            "height": 36
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 910,
+            "y": 8,
+            "width": 44,
+            "height": 44
+          },
+          "corner": {
+            "x": 834.0,
+            "y": 108.0
+          },
+          "bottom": 108.0,
+          "tail": {
+            "x": 834.0,
+            "y": 108.0
+          },
+          "tip": {
+            "x": 910.0,
+            "y": 47.51020408163265
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 3,
+      "file": "figures/03-mark-arrow-offset.png",
+      "slug": "mark-arrow-offset",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 880
+      },
+      "marks": [
+        {
+          "kind": "arrow",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": "Keep a copy",
+          "anchor_description": "{\"name\": \"Download PDF\", \"role\": \"button\"}",
+          "element": {
+            "x": 727.1875,
+            "y": 116.5,
+            "width": 128.78125,
+            "height": 34
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 723.1875,
+            "y": 112.5,
+            "width": 136.78125,
+            "height": 42.0
+          },
+          "corner": {
+            "x": 571.578125,
+            "y": 133.5
+          },
+          "bottom": 133.5,
+          "tail": {
+            "x": 571.578125,
+            "y": 133.5
+          },
+          "tip": {
+            "x": 723.1875,
+            "y": 133.5
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 4,
+      "file": "figures/04-mark-arrow-from.png",
+      "slug": "mark-arrow-from",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "arrow",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"tr[data-number='INV-1045'] .chip\"}",
+          "element": {
+            "x": 754.0625,
+            "y": 270.5,
+            "width": 68.6875,
+            "height": 20
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 750.0625,
+            "y": 266.5,
+            "width": 76.6875,
+            "height": 28.0
+          },
+          "corner": {
+            "x": 906.9921875,
+            "y": 279.75
+          },
+          "bottom": 279.75,
+          "tail": {
+            "x": 906.9921875,
+            "y": 279.75
+          },
+          "tip": {
+            "x": 826.75,
+            "y": 280.25749390605444
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 5,
+      "file": "figures/05-mark-badge.png",
+      "slug": "mark-badge",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/settings.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "badge",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"text\": \"Work email\"}",
+          "element": {
+            "x": 263,
+            "y": 193.5,
+            "width": 69.125,
+            "height": 19.5
+          },
+          "badge": {
+            "x": 356.125,
+            "y": 203.25
+          },
+          "rectangle": {
+            "x": 259,
+            "y": 189.5,
+            "width": 77.125,
+            "height": 27.5
+          },
+          "corner": {
+            "x": 259,
+            "y": 189.5
+          },
+          "bottom": 217.0
+        },
+        {
+          "kind": "badge",
+          "color": "#1D4ED8",
+          "number": 2,
+          "text": null,
+          "anchor_description": "{\"text\": \"Invoice overdue\"}",
+          "element": {
+            "x": 646,
+            "y": 228.5,
+            "width": 126.84375,
+            "height": 21
+          },
+          "badge": {
+            "x": 796.84375,
+            "y": 239.0
+          },
+          "rectangle": {
+            "x": 642,
+            "y": 224.5,
+            "width": 134.84375,
+            "height": 29.0
+          },
+          "corner": {
+            "x": 642,
+            "y": 224.5
+          },
+          "bottom": 253.5
+        },
+        {
+          "kind": "badge",
+          "color": "#1D4ED8",
+          "number": 3,
+          "text": null,
+          "anchor_description": "{\"name\": \"Save changes\", \"role\": \"button\"}",
+          "element": {
+            "x": 872.609375,
+            "y": 87,
+            "width": 123.390625,
+            "height": 34
+          },
+          "badge": {
+            "x": 848.609375,
+            "y": 104.0
+          },
+          "rectangle": {
+            "x": 868.609375,
+            "y": 83,
+            "width": 131.390625,
+            "height": 42
+          },
+          "corner": {
+            "x": 868.609375,
+            "y": 83
+          },
+          "bottom": 125
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 6,
+      "file": "figures/06-mark-label.png",
+      "slug": "mark-label",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "label",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": "One click filters",
+          "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
+          "element": {
+            "x": 558,
+            "y": 156.75,
+            "width": 331.5625,
+            "height": 29
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 554,
+            "y": 152.75,
+            "width": 339.5625,
+            "height": 37.0
+          },
+          "corner": {
+            "x": 554,
+            "y": 152.75
+          },
+          "bottom": 189.75
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 7,
+      "file": "figures/07-mark-removed.png",
+      "slug": "mark-removed",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "removed",
+          "color": "#C81E1E",
+          "number": null,
+          "text": "Apply was here",
+          "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
+          "element": {
+            "x": 558,
+            "y": 156.75,
+            "width": 331.5625,
+            "height": 29
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 896,
+            "y": 152.75,
+            "width": 82,
+            "height": 37.0
+          },
+          "corner": {
+            "x": 896,
+            "y": 152.75
+          },
+          "bottom": 189.75
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 8,
+      "file": "figures/08-mark-callout.png",
+      "slug": "mark-callout",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/login.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "callout",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": "Any password works: this demo has made-up data and no real accounts.",
+          "anchor_description": "{\"name\": \"Password\", \"role\": \"textbox\"}",
+          "element": {
+            "x": 347,
+            "y": 378.09375,
+            "width": 330,
+            "height": 40.5
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 709,
+            "y": 358.34375,
+            "width": 198,
+            "height": 80
+          },
+          "corner": {
+            "x": 709,
+            "y": 358.34375
+          },
+          "bottom": 438.34375,
+          "side": "right",
+          "start": {
+            "x": 709,
+            "y": 398.34375
+          },
+          "end": {
+            "x": 681,
+            "y": 398.34375
+          },
+          "lines": [
+            {
+              "text": "Any password works: this",
+              "x": 721,
+              "y": 378.34375
+            },
+            {
+              "text": "demo has made-up data",
+              "x": 721,
+              "y": 398.34375
+            },
+            {
+              "text": "and no real accounts.",
+              "x": 721,
+              "y": 418.34375
+            }
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 9,
+      "file": "figures/09-mark-ellipse.png",
+      "slug": "mark-ellipse",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "ellipse",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .chip\"}",
+          "element": {
+            "x": 757,
+            "y": 519.5,
+            "width": 68.6875,
+            "height": 20
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 753,
+            "y": 515.5,
+            "width": 76.6875,
+            "height": 28.0
+          },
+          "corner": {
+            "x": 753,
+            "y": 515.5
+          },
+          "bottom": 549.2989898732234,
+          "bounds": {
+            "x": 737.1174987177567,
+            "y": 509.7010101267767,
+            "width": 108.45250256448662,
+            "height": 39.5979797464467
+          },
+          "top": 509.7010101267767
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 10,
+      "file": "figures/10-mark-underline.png",
+      "slug": "mark-underline",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 880
+      },
+      "marks": [
+        {
+          "kind": "underline",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"#late-fee\"}",
+          "element": {
+            "x": 754.375,
+            "y": 756,
+            "width": 46.703125,
+            "height": 17
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 750.375,
+            "y": 752,
+            "width": 54.703125,
+            "height": 25
+          },
+          "corner": {
+            "x": 750.375,
+            "y": 752
+          },
+          "bottom": 777,
+          "start": {
+            "x": 754.375,
+            "y": 777
+          },
+          "end": {
+            "x": 801.078125,
+            "y": 777
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 11,
+      "file": "figures/11-mark-highlight.png",
+      "slug": "mark-highlight",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "highlight",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"match\": \"substring\", \"name\": \"INV-1042\", \"role\": \"row\"}",
+          "element": {
+            "x": 263,
+            "y": 508,
+            "width": 714,
+            "height": 41.5
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 259,
+            "y": 504,
+            "width": 722,
+            "height": 49.5
+          },
+          "corner": {
+            "x": 259,
+            "y": 504
+          },
+          "bottom": 553.5,
+          "opacity": 0.25
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 12,
+      "file": "figures/12-mark-spotlight.png",
+      "slug": "mark-spotlight",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 808
+      },
+      "marks": [
+        {
+          "kind": "spotlight",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"selector\": \"#revenue-chart\"}",
+          "element": {
+            "x": 244,
+            "y": 276.5,
+            "width": 492,
+            "height": 252.65625
+          },
+          "badge": {
+            "x": 240,
+            "y": 272.5
+          },
+          "rectangle": {
+            "x": 240,
+            "y": 272.5,
+            "width": 500,
+            "height": 260.65625
+          },
+          "corner": {
+            "x": 240,
+            "y": 272.5
+          },
+          "bottom": 533.15625,
+          "opacity": 0.6,
+          "veil": {
+            "width": 1024,
+            "height": 808
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 13,
+      "file": "figures/13-connector-none.png",
+      "slug": "connector-none",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 880
+      },
+      "marks": [
+        {
+          "kind": "connector",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"#bill-to strong\"}",
+          "element": {
+            "x": 646,
+            "y": 219,
+            "width": 138.328125,
+            "height": 17
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 642,
+            "y": 215,
+            "width": 146.328125,
+            "height": 25
+          },
+          "corner": {
+            "x": 524.15234375,
+            "y": 227.5
+          },
+          "bottom": 227.5,
+          "source": {
+            "x": 263,
+            "y": 219,
+            "width": 140.28125,
+            "height": 17
+          },
+          "heads": "none",
+          "start": {
+            "x": 407.28125,
+            "y": 227.5
+          },
+          "end": {
+            "x": 642.0,
+            "y": 227.5
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 14,
+      "file": "figures/14-connector-end.png",
+      "slug": "connector-end",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 808
+      },
+      "marks": [
+        {
+          "kind": "connector",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"#next-up h2\"}",
+          "element": {
+            "x": 769,
+            "y": 293.5,
+            "width": 208,
+            "height": 19.5
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 765,
+            "y": 289.5,
+            "width": 216,
+            "height": 27.5
+          },
+          "corner": {
+            "x": 794.375,
+            "y": 251.0
+          },
+          "bottom": 251.0,
+          "source": {
+            "x": 627,
+            "y": 141,
+            "width": 177.5,
+            "height": 115.5
+          },
+          "heads": "end",
+          "start": {
+            "x": 808.5,
+            "y": 260.38672496025436
+          },
+          "end": {
+            "x": 852.3092105263158,
+            "y": 289.5
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 15,
+      "file": "figures/15-connector-both.png",
+      "slug": "connector-both",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/settings.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "connector",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"text\": \"Invoice overdue\"}",
+          "element": {
+            "x": 646,
+            "y": 228.5,
+            "width": 126.84375,
+            "height": 21
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 642,
+            "y": 224.5,
+            "width": 134.84375,
+            "height": 29.0
+          },
+          "corner": {
+            "x": 568.9609375,
+            "y": 239.125
+          },
+          "bottom": 239.125,
+          "source": {
+            "x": 263,
+            "y": 219,
+            "width": 331,
+            "height": 40.5
+          },
+          "heads": "both",
+          "start": {
+            "x": 598.0,
+            "y": 239.09915735024194
+          },
+          "end": {
+            "x": 642.0,
+            "y": 239.06000055620447
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 16,
+      "file": "figures/16-number-placements.png",
+      "slug": "number-placements",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/reports.html",
+      "viewport": {
+        "width": 1280,
+        "height": 520,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1280,
+        "height": 520
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='January']\"}",
+          "element": {
+            "x": 274,
+            "y": 178.1875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 270,
+            "y": 174.1875
+          },
+          "rectangle": {
+            "x": 270,
+            "y": 174.1875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 270,
+            "y": 174.1875
+          },
+          "bottom": 266.6875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 2,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='February']\"}",
+          "element": {
+            "x": 468,
+            "y": 178.1875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 464,
+            "y": 174.1875
+          },
+          "rectangle": {
+            "x": 464,
+            "y": 174.1875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 464,
+            "y": 174.1875
+          },
+          "bottom": 266.6875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 3,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='March']\"}",
+          "element": {
+            "x": 662,
+            "y": 178.1875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 816,
+            "y": 174.1875
+          },
+          "rectangle": {
+            "x": 658,
+            "y": 174.1875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 658,
+            "y": 174.1875
+          },
+          "bottom": 266.6875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 4,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='April']\"}",
+          "element": {
+            "x": 856,
+            "y": 178.1875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 852,
+            "y": 266.6875
+          },
+          "rectangle": {
+            "x": 852,
+            "y": 174.1875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 852,
+            "y": 174.1875
+          },
+          "bottom": 266.6875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 5,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='May']\"}",
+          "element": {
+            "x": 1050,
+            "y": 178.1875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 1204,
+            "y": 266.6875
+          },
+          "rectangle": {
+            "x": 1046,
+            "y": 174.1875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 1046,
+            "y": 174.1875
+          },
+          "bottom": 266.6875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 6,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='June']\"}",
+          "element": {
+            "x": 274,
+            "y": 334.6875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 288,
+            "y": 348.6875
+          },
+          "rectangle": {
+            "x": 270,
+            "y": 330.6875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 270,
+            "y": 330.6875
+          },
+          "bottom": 423.1875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 7,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='July']\"}",
+          "element": {
+            "x": 468,
+            "y": 334.6875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 444,
+            "y": 376.9375
+          },
+          "rectangle": {
+            "x": 464,
+            "y": 330.6875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 464,
+            "y": 330.6875
+          },
+          "bottom": 423.1875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 8,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='August']\"}",
+          "element": {
+            "x": 662,
+            "y": 334.6875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 836,
+            "y": 376.9375
+          },
+          "rectangle": {
+            "x": 658,
+            "y": 330.6875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 658,
+            "y": 330.6875
+          },
+          "bottom": 423.1875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 9,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='September']\"}",
+          "element": {
+            "x": 856,
+            "y": 334.6875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 931.0,
+            "y": 310.6875
+          },
+          "rectangle": {
+            "x": 852,
+            "y": 330.6875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 852,
+            "y": 330.6875
+          },
+          "bottom": 423.1875
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 10,
+          "text": null,
+          "anchor_description": "{\"selector\": \".statement[data-month='October']\"}",
+          "element": {
+            "x": 1050,
+            "y": 334.6875,
+            "width": 150,
+            "height": 84.5
+          },
+          "badge": {
+            "x": 1125.0,
+            "y": 443.1875
+          },
+          "rectangle": {
+            "x": 1046,
+            "y": 330.6875,
+            "width": 158,
+            "height": 92.5
+          },
+          "corner": {
+            "x": 1046,
+            "y": 330.6875
+          },
+          "bottom": 423.1875
+        }
+      ],
+      "warnings": [
+        "10 marks, keep one idea per image"
+      ]
+    },
+    {
+      "number": 17,
+      "file": "figures/17-colour-levels.png",
+      "slug": "colour-levels",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#047857",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
+          "element": {
+            "x": 888.984375,
+            "y": 87,
+            "width": 107.015625,
+            "height": 34
+          },
+          "badge": {
+            "x": 884.984375,
+            "y": 83
+          },
+          "rectangle": {
+            "x": 884.984375,
+            "y": 83,
+            "width": 115.015625,
+            "height": 42
+          },
+          "corner": {
+            "x": 884.984375,
+            "y": 83
+          },
+          "bottom": 125
+        },
+        {
+          "kind": "ellipse",
+          "color": "#B45309",
+          "number": null,
+          "text": null,
+          "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .chip\"}",
+          "element": {
+            "x": 757,
+            "y": 519.5,
+            "width": 68.6875,
+            "height": 20
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 753,
+            "y": 515.5,
+            "width": 76.6875,
+            "height": 28.0
+          },
+          "corner": {
+            "x": 753,
+            "y": 515.5
+          },
+          "bottom": 549.2989898732234,
+          "bounds": {
+            "x": 737.1174987177567,
+            "y": 509.7010101267767,
+            "width": 108.45250256448662,
+            "height": 39.5979797464467
+          },
+          "top": 509.7010101267767
+        },
+        {
+          "kind": "removed",
+          "color": "#C81E1E",
+          "number": 2,
+          "text": null,
+          "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
+          "element": {
+            "x": 558,
+            "y": 156.75,
+            "width": 331.5625,
+            "height": 29
+          },
+          "badge": {
+            "x": 978,
+            "y": 152.75
+          },
+          "rectangle": {
+            "x": 896,
+            "y": 152.75,
+            "width": 82,
+            "height": 37.0
+          },
+          "corner": {
+            "x": 896,
+            "y": 152.75
+          },
+          "bottom": 189.75
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 18,
+      "file": "figures/18-dark-theme.png",
+      "slug": "dark-theme",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "dark",
+      "page": {
+        "width": 1024,
+        "height": 808
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": "Needs attention",
+          "anchor_description": "{\"selector\": \".tiles .tile:nth-child(3)\"}",
+          "element": {
+            "x": 627,
+            "y": 141,
+            "width": 177.5,
+            "height": 115.5
+          },
+          "badge": {
+            "x": 623,
+            "y": 137
+          },
+          "rectangle": {
+            "x": 623,
+            "y": 137,
+            "width": 185.5,
+            "height": 123.5
+          },
+          "corner": {
+            "x": 623,
+            "y": 137
+          },
+          "bottom": 260.5
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 19,
+      "file": "figures/19-before-after-before.png",
+      "slug": "before-after-before",
+      "role": "before",
+      "url": "http://127.0.0.1:8000/old/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"name\": \"Print list\", \"role\": \"button\"}",
+          "element": {
+            "x": 924.203125,
+            "y": 69,
+            "width": 75.796875,
+            "height": 33
+          },
+          "badge": {
+            "x": 920.203125,
+            "y": 65
+          },
+          "rectangle": {
+            "x": 920.203125,
+            "y": 65,
+            "width": 83.796875,
+            "height": 41
+          },
+          "corner": {
+            "x": 920.203125,
+            "y": 65
+          },
+          "bottom": 106
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 2,
+          "text": null,
+          "anchor_description": "{\"selector\": \".toolbar\"}",
+          "element": {
+            "x": 24,
+            "y": 116,
+            "width": 976,
+            "height": 59
+          },
+          "badge": {
+            "x": 20,
+            "y": 112
+          },
+          "rectangle": {
+            "x": 20,
+            "y": 112,
+            "width": 984,
+            "height": 67
+          },
+          "corner": {
+            "x": 20,
+            "y": 112
+          },
+          "bottom": 179
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 20,
+      "file": "figures/20-before-after.png",
+      "slug": "before-after",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
+          "element": {
+            "x": 888.984375,
+            "y": 87,
+            "width": 107.015625,
+            "height": 34
+          },
+          "badge": {
+            "x": 884.984375,
+            "y": 83
+          },
+          "rectangle": {
+            "x": 884.984375,
+            "y": 83,
+            "width": 115.015625,
+            "height": 42
+          },
+          "corner": {
+            "x": 884.984375,
+            "y": 83
+          },
+          "bottom": 125
+        },
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 2,
+          "text": null,
+          "anchor_description": "{\"name\": \"Status\", \"role\": \"group\"}",
+          "element": {
+            "x": 558,
+            "y": 156.75,
+            "width": 331.5625,
+            "height": 29
+          },
+          "badge": {
+            "x": 554,
+            "y": 152.75
+          },
+          "rectangle": {
+            "x": 554,
+            "y": 152.75,
+            "width": 339.5625,
+            "height": 37.0
+          },
+          "corner": {
+            "x": 554,
+            "y": 152.75
+          },
+          "bottom": 189.75
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 21,
+      "file": "figures/21-mobile-touch.png",
+      "slug": "mobile-touch",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "scale": 2
+      },
+      "theme": "light",
+      "page": {
+        "width": 390,
+        "height": 989
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"match\": \"substring\", \"text\": \"Swipe a row left\"}",
+          "element": {
+            "x": 16,
+            "y": 248.5,
+            "width": 203.78125,
+            "height": 19.5
+          },
+          "badge": {
+            "x": 117.890625,
+            "y": 292.0
+          },
+          "rectangle": {
+            "x": 12,
+            "y": 244.5,
+            "width": 211.78125,
+            "height": 27.5
+          },
+          "corner": {
+            "x": 12,
+            "y": 244.5
+          },
+          "bottom": 272.0
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 22,
+      "file": "figures/22-mobile-menu.png",
+      "slug": "mobile-menu",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/index.html",
+      "viewport": {
+        "width": 390,
+        "height": 640,
+        "scale": 2
+      },
+      "theme": "light",
+      "page": {
+        "width": 390,
+        "height": 1295
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"name\": \"Invoices\", \"role\": \"link\"}",
+          "element": {
+            "x": 14,
+            "y": 136.5,
+            "width": 362,
+            "height": 49.5
+          },
+          "badge": {
+            "x": 16,
+            "y": 132.5
+          },
+          "rectangle": {
+            "x": 10,
+            "y": 132.5,
+            "width": 370,
+            "height": 57.5
+          },
+          "corner": {
+            "x": 10,
+            "y": 132.5
+          },
+          "bottom": 190.0
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 23,
+      "file": "figures/23-page-whole.png",
+      "slug": "page-whole",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 420,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"selector\": \"#results\"}",
+          "element": {
+            "x": 244,
+            "y": 860.5,
+            "width": 65.046875,
+            "height": 19.5
+          },
+          "badge": {
+            "x": 333.046875,
+            "y": 870.25
+          },
+          "rectangle": {
+            "x": 240,
+            "y": 856.5,
+            "width": 73.046875,
+            "height": 27.5
+          },
+          "corner": {
+            "x": 240,
+            "y": 856.5
+          },
+          "bottom": 884.0
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 24,
+      "file": "figures/24-page-window.png",
+      "slug": "page-window",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 420,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 920
+      },
+      "marks": [
+        {
+          "kind": "label",
+          "color": "#1D4ED8",
+          "number": null,
+          "text": "Window only",
+          "anchor_description": "{\"name\": \"Export CSV\", \"role\": \"button\"}",
+          "element": {
+            "x": 888.984375,
+            "y": 87,
+            "width": 107.015625,
+            "height": 34
+          },
+          "badge": null,
+          "rectangle": {
+            "x": 884.984375,
+            "y": 83,
+            "width": 115.015625,
+            "height": 42
+          },
+          "corner": {
+            "x": 884.984375,
+            "y": 83
+          },
+          "bottom": 125
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 25,
+      "file": "figures/25-steps-to-hover.png",
+      "slug": "steps-to-hover",
+      "role": "current",
+      "url": "http://127.0.0.1:8000/invoices.html",
+      "viewport": {
+        "width": 1024,
+        "height": 640,
+        "scale": 1
+      },
+      "theme": "light",
+      "page": {
+        "width": 1024,
+        "height": 640
+      },
+      "marks": [
+        {
+          "kind": "box",
+          "color": "#1D4ED8",
+          "number": 1,
+          "text": null,
+          "anchor_description": "{\"selector\": \"tr[data-number='INV-1042'] .row-buttons\"}",
+          "element": {
+            "x": 844.984375,
+            "y": 269.25,
+            "width": 124.015625,
+            "height": 22
+          },
+          "badge": {
+            "x": 840.984375,
+            "y": 265.25
+          },
+          "rectangle": {
+            "x": 840.984375,
+            "y": 265.25,
+            "width": 132.015625,
+            "height": 30.0
+          },
+          "corner": {
+            "x": 840.984375,
+            "y": 265.25
+          },
+          "bottom": 295.25
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 26,
+      "file": "figures/26-scheme-checkout-path.png",
+      "slug": "scheme-checkout-path",
+      "role": "scheme",
+      "layout": "row",
+      "continuous": true,
+      "viewport": {
+        "width": 1920,
+        "height": 518,
+        "scale": 1
+      },
+      "panels": [
+        {
+          "id": 1,
+          "title": "Add a service",
+          "url": "http://127.0.0.1:8000/addons.html",
+          "rectangle": {
+            "x": 48.0,
+            "y": 84,
+            "width": 560.0,
+            "height": 385.77777777777777
+          },
+          "scale": 0.6222222222222222,
+          "marks": [
+            {
+              "kind": "box",
+              "color": "#1D4ED8",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"name\": \"Cart (1)\", \"role\": \"link\"}",
+              "element": {
+                "x": 482.92361111111114,
+                "y": 92.08888888888889,
+                "width": 49.16527777777778,
+                "height": 21.155555555555555
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 480.4347222222222,
+                "y": 89.6,
+                "width": 54.143055555555556,
+                "height": 26.133333333333333
+              },
+              "corner": {
+                "x": 480.4347222222222,
+                "y": 89.6
+              },
+              "bottom": 115.73333333333333
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Check the cart",
+          "url": "http://127.0.0.1:8000/cart.html",
+          "rectangle": {
+            "x": 680.0,
+            "y": 84,
+            "width": 560.0,
+            "height": 385.77777777777777
+          },
+          "scale": 0.6222222222222222,
+          "marks": [
+            {
+              "kind": "highlight",
+              "color": "#1D4ED8",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"match\": \"substring\", \"name\": \"Reminder emails\", \"role\": \"row\"}",
+              "element": {
+                "x": 843.6444444444444,
+                "y": 180.56111111111113,
+                "width": 299.9111111111111,
+                "height": 25.511111111111113
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 841.1555555555556,
+                "y": 178.07222222222222,
+                "width": 304.8888888888889,
+                "height": 30.48888888888889
+              },
+              "corner": {
+                "x": 841.1555555555556,
+                "y": 178.07222222222222
+              },
+              "bottom": 208.56111111111113,
+              "opacity": 0.25
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Place the order",
+          "url": "http://127.0.0.1:8000/cart.html",
+          "rectangle": {
+            "x": 1312.0,
+            "y": 84,
+            "width": 560.0,
+            "height": 385.77777777777777
+          },
+          "scale": 0.6222222222222222,
+          "marks": [
+            {
+              "kind": "box",
+              "color": "#1D4ED8",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"selector\": \".confirmation\"}",
+              "element": {
+                "x": 1463.8222222222223,
+                "y": 169.98333333333335,
+                "width": 323.55555555555554,
+                "height": 86.4888888888889
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 1461.3333333333333,
+                "y": 167.49444444444444,
+                "width": 328.53333333333336,
+                "height": 91.46666666666667
+              },
+              "corner": {
+                "x": 1461.3333333333333,
+                "y": 167.49444444444444
+              },
+              "bottom": 258.9611111111111
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "from": 1,
+          "to": 2,
+          "style": "solid",
+          "text": null,
+          "from_mark": null,
+          "tail": {
+            "x": 614.0,
+            "y": 258.8888888888889
+          },
+          "tip": {
+            "x": 674.0,
+            "y": 258.8888888888889
+          },
+          "points": [
+            {
+              "x": 614.0,
+              "y": 258.8888888888889
+            },
+            {
+              "x": 674.0,
+              "y": 258.8888888888889
+            }
+          ],
+          "label": null
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "style": "solid",
+          "text": null,
+          "from_mark": null,
+          "tail": {
+            "x": 1246.0,
+            "y": 258.8888888888889
+          },
+          "tip": {
+            "x": 1306.0,
+            "y": 258.8888888888889
+          },
+          "points": [
+            {
+              "x": 1246.0,
+              "y": 258.8888888888889
+            },
+            {
+              "x": 1306.0,
+              "y": 258.8888888888889
+            }
+          ],
+          "label": null
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 27,
+      "file": "figures/27-scheme-invoice-parts.png",
+      "slug": "scheme-invoice-parts",
+      "role": "scheme",
+      "layout": "column",
+      "continuous": false,
+      "viewport": {
+        "width": 688,
+        "height": 655,
+        "scale": 1
+      },
+      "panels": [
+        {
+          "id": 1,
+          "title": "What was billed",
+          "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+          "rectangle": {
+            "x": 24.0,
+            "y": 60,
+            "width": 640.0,
+            "height": 331.20000000000005
+          },
+          "scale": 0.8,
+          "marks": [
+            {
+              "kind": "highlight",
+              "color": "#1D4ED8",
+              "number": null,
+              "text": null,
+              "anchor_description": "{\"selector\": \"#total\"}",
+              "element": {
+                "x": 399.20000000000005,
+                "y": 331.6,
+                "width": 224.0,
+                "height": 28.400000000000002
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 396.0,
+                "y": 328.40000000000003,
+                "width": 230.4,
+                "height": 34.800000000000004
+              },
+              "corner": {
+                "x": 396.0,
+                "y": 328.40000000000003
+              },
+              "bottom": 363.2,
+              "opacity": 0.25
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "What happened since",
+          "url": "http://127.0.0.1:8000/invoice.html?id=INV-1042",
+          "rectangle": {
+            "x": 151.5,
+            "y": 459.20000000000005,
+            "width": 385.0,
+            "height": 171.0
+          },
+          "scale": 1.0,
+          "marks": []
+        }
+      ],
+      "links": [],
+      "warnings": []
+    },
+    {
+      "number": 28,
+      "file": "figures/28-scheme-screen-map.png",
+      "slug": "scheme-screen-map",
+      "role": "scheme",
+      "layout": "grid",
+      "continuous": false,
+      "viewport": {
+        "width": 1210,
+        "height": 937,
+        "scale": 1
+      },
+      "panels": [
+        {
+          "id": "dashboard",
+          "title": "Dashboard",
+          "url": "http://127.0.0.1:8000/index.html",
+          "rectangle": {
+            "x": 48.0,
+            "y": 84.0,
+            "width": 460.0,
+            "height": 287.5
+          },
+          "scale": 0.44921875,
+          "marks": [
+            {
+              "kind": "box",
+              "color": "#1D4ED8",
+              "number": 1,
+              "text": null,
+              "anchor_description": "{\"name\": \"New invoice\", \"role\": \"link\"}",
+              "element": {
+                "x": 445.59368896484375,
+                "y": 123.08203125,
+                "width": 49.82818603515625,
+                "height": 15.2734375
+              },
+              "badge": {
+                "x": 497.21875,
+                "y": 121.28515625
+              },
+              "rectangle": {
+                "x": 443.79681396484375,
+                "y": 121.28515625,
+                "width": 53.42193603515625,
+                "height": 18.8671875
+              },
+              "corner": {
+                "x": 443.79681396484375,
+                "y": 121.28515625
+              },
+              "bottom": 140.15234375
+            }
+          ]
+        },
+        {
+          "id": "invoices",
+          "title": "Invoices",
+          "url": "http://127.0.0.1:8000/invoices.html",
+          "rectangle": {
+            "x": 701.220703125,
+            "y": 84.0,
+            "width": 460.0,
+            "height": 287.5
+          },
+          "scale": 0.44921875,
+          "marks": []
+        },
+        {
+          "id": "settings",
+          "title": "Settings",
+          "url": "http://127.0.0.1:8000/settings.html",
+          "rectangle": {
+            "x": 48.0,
+            "y": 600.720703125,
+            "width": 460.0,
+            "height": 287.5
+          },
+          "scale": 0.44921875,
+          "marks": []
+        },
+        {
+          "id": "invoice",
+          "title": "One invoice",
+          "url": "http://127.0.0.1:8000/invoice.html?id=INV-1048",
+          "rectangle": {
+            "x": 701.220703125,
+            "y": 600.720703125,
+            "width": 460.0,
+            "height": 287.5
+          },
+          "scale": 0.44921875,
+          "marks": []
+        }
+      ],
+      "links": [
+        {
+          "from": "dashboard",
+          "to": "invoices",
+          "style": "solid",
+          "text": "Go to invoices",
+          "from_mark": 1,
+          "tail": {
+            "x": 497.21875,
+            "y": 121.28515625
+          },
+          "tip": {
+            "x": 695.220703125,
+            "y": 121.28515625
+          },
+          "points": [
+            {
+              "x": 497.21875,
+              "y": 121.28515625
+            },
+            {
+              "x": 695.220703125,
+              "y": 121.28515625
+            }
+          ],
+          "label": {
+            "x": 539.98876953125,
+            "y": 91.28515625,
+            "width": 112.4619140625,
+            "height": 24
+          }
+        },
+        {
+          "from": "invoices",
+          "to": "invoice",
+          "style": "solid",
+          "text": "Pick one",
+          "from_mark": null,
+          "tail": {
+            "x": 931.220703125,
+            "y": 377.5
+          },
+          "tip": {
+            "x": 931.220703125,
+            "y": 558.720703125
+          },
+          "points": [
+            {
+              "x": 931.220703125,
+              "y": 377.5
+            },
+            {
+              "x": 931.220703125,
+              "y": 558.720703125
+            }
+          ],
+          "label": {
+            "x": 937.220703125,
+            "y": 456.1103515625,
+            "width": 73.5791015625,
+            "height": 24
+          }
+        },
+        {
+          "from": "invoice",
+          "to": "settings",
+          "style": "dashed",
+          "text": "Change who is notified",
+          "from_mark": null,
+          "tail": {
+            "x": 695.220703125,
+            "y": 726.470703125
+          },
+          "tip": {
+            "x": 514.0,
+            "y": 726.470703125
+          },
+          "points": [
+            {
+              "x": 695.220703125,
+              "y": 726.470703125
+            },
+            {
+              "x": 514.0,
+              "y": 726.470703125
+            }
+          ],
+          "label": {
+            "x": 520.0,
+            "y": 696.470703125,
+            "width": 169.220703125,
+            "height": 24
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "number": 29,
+      "file": "figures/29-scheme-hide-overlay.png",
+      "slug": "scheme-hide-overlay",
+      "role": "scheme",
+      "layout": "row",
+      "continuous": false,
+      "viewport": {
+        "width": 1200,
+        "height": 434,
+        "scale": 1
+      },
+      "panels": [
+        {
+          "id": 1,
+          "title": "Not hidden",
+          "url": "http://127.0.0.1:8000/index.html?devtools=pinned",
+          "rectangle": {
+            "x": 24.0,
+            "y": 60,
+            "width": 560.0,
+            "height": 350.0
+          },
+          "scale": 0.546875,
+          "marks": [
+            {
+              "kind": "arrow",
+              "color": "#1D4ED8",
+              "number": null,
+              "text": "Dev overlay",
+              "anchor_description": "{\"match\": \"substring\", \"text\": \"dev build\"}",
+              "element": {
+                "x": 443.58984375,
+                "y": 387.03125,
+                "width": 131.66015625,
+                "height": 14.21875
+              },
+              "badge": null,
+              "rectangle": {
+                "x": 441.40234375,
+                "y": 384.84375,
+                "width": 136.03515625,
+                "height": 18.59375
+              },
+              "corner": {
+                "x": 399.83984375,
+                "y": 354.21875
+              },
+              "bottom": 354.21875,
+              "tail": {
+                "x": 399.83984375,
+                "y": 354.21875
+              },
+              "tip": {
+                "x": 483.90127354452056,
+                "y": 384.84375
+              }
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Listed in hide",
+          "url": "http://127.0.0.1:8000/index.html",
+          "rectangle": {
+            "x": 616.0,
+            "y": 60,
+            "width": 560.0,
+            "height": 350.0
+          },
+          "scale": 0.546875,
+          "marks": []
+        }
+      ],
+      "links": [],
+      "warnings": []
+    }
+  ]
+}

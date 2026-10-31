@@ -1,9 +1,14 @@
 OVERLAY_BOUNDS_SCRIPT = """
 () => {
   const overlay = document.querySelector('svg[data-preview="overlay"]');
-  if (!overlay || !overlay.childElementCount) return null;
-  const { x, y, width, height } = overlay.getBBox();
-  return { x, y, width, height };
+  const drawn = overlay ? [...overlay.children].filter((node) => node.getAttribute("data-preview") !== "veil") : [];
+  if (!drawn.length) return null;
+  const boxes = drawn.map((node) => node.getBBox());
+  const x = Math.min(...boxes.map((box) => box.x));
+  const y = Math.min(...boxes.map((box) => box.y));
+  const right = Math.max(...boxes.map((box) => box.x + box.width));
+  const bottom = Math.max(...boxes.map((box) => box.y + box.height));
+  return { x, y, width: right - x, height: bottom - y };
 }
 """
 

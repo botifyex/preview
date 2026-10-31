@@ -12,6 +12,7 @@ from capture.locators import single_visible
 from capture.model import Box, CaptureFailure, Options, Shot, Spec, demand
 from capture.scheme.constants import CROP_PADDING, INHERITED_FIELDS
 from capture.scheme.layout import Size
+from capture.scheme.routing import overlaps
 from capture.scheme.scripts import OVERLAY_BOUNDS_SCRIPT
 from capture.scheme.validation import panel_identity
 from capture.shots import Logins, context_options, with_inherited
@@ -74,13 +75,25 @@ def cropped(element: Box, padding: float, origin: tuple[float, float], natural: 
     return Box(near_x, near_y, far_x - near_x, far_y - near_y)
 
 
+def demand_inside_crop(inside: bool, where: str) -> None:
+    demand(inside, f"{where}: marks reach past the crop, raise crop_padding or crop a larger element")
+
+
 def demand_marks_inside(page: Page, shown: Box, origin: tuple[float, float], where: str) -> None:
     bounds = page.evaluate(OVERLAY_BOUNDS_SCRIPT)
     if bounds is None:
         return
     drawn = Box(bounds["x"] - origin[0], bounds["y"] - origin[1], bounds["width"], bounds["height"])
-    inside = drawn.inside(shown.x, shown.y, shown.right, shown.bottom)
-    demand(inside, f"{where}: marks reach past the crop, raise crop_padding or crop a larger element")
+    demand_inside_crop(drawn.inside(shown.x, shown.y, shown.right, shown.bottom), where)
+
+
+def demand_connector_ends_shown(marks: list[Spec], shown: Box, origin: tuple[float, float], where: str) -> None:
+    for mark in marks:
+        if mark["kind"] != "connector":
+            continue
+        for end in (Box(**mark["element"]), Box(**mark["source"])):
+            placed = Box(end.x - origin[0], end.y - origin[1], end.width, end.height)
+            demand_inside_crop(overlaps(placed, shown, 0), where)
 
 
 def open_panel(page: Page, url: str, where: str, timeout: int) -> None:
@@ -111,6 +124,7 @@ def shown_area(page: Page, panel: Spec, picture: Picture, natural: Size, where: 
     padding = panel.get("crop_padding", CROP_PADDING)
     shown = cropped(picture.element, padding, picture.origin, natural, where)
     demand_marks_inside(page, shown, picture.origin, where)
+    demand_connector_ends_shown(picture.marks, shown, picture.origin, where)
     return shown
 
 

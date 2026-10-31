@@ -234,8 +234,10 @@ defaults to false. Also `title`, text above the panel (a long title widens the p
 `crop`, a locator that keeps only that element plus `crop_padding` (default 16) on each side, and
 `id`, a slug for links, otherwise the panel's 1-based index. A crop that does not fit the picture, or
 marks reaching past the crop, fail: a number on a cropped element's corner needs `crop_padding` of
-about 20. Failures name `figure <slug> panel <n>`, and the page at failure is saved as
-`failures/<slug>-panel-<n>.png`.
+about 20. A spotlight's dimming covers the whole picture and does not count as reaching past the
+crop; its hole, number and label do. A connector with an element entirely outside the crop also
+fails. A spotlight is limited to one per panel. Failures name `figure <slug> panel <n>`, and the
+page at failure is saved as `failures/<slug>-panel-<n>.png`.
 
 **Link**: `{ "from": <panel id>, "to": <panel id>, "text": "...", "from_mark": 2, "style": "dashed" }`.
 `from` and `to` are required; `style` is `solid` (default) or `dashed`. The arrow runs edge to edge
@@ -255,7 +257,8 @@ The manifest entry has `number`, `file`, `slug`, `role: "scheme"`, `layout`, `vi
 the composite in CSS pixels and its `scale`, the highest of its panels), `warnings`, and:
 
 - `panels`: each with `id`, `title`, `url`, `rectangle` (the picture drawn, in the composite), `scale`
-  and `marks` in composite coordinates;
+  and `marks` in composite coordinates: every point, rectangle, `top` and `bottom` is scaled and
+  shifted, a spotlight's `veil` is a size and only scaled, and `opacity` and the `text` of `lines` stay;
 - `links`: each with `from`, `to`, `style`, `text`, `from_mark`, `tail`, `tip`, `points` (the whole
   line) and `label` (the text's rectangle, or `null`).
 

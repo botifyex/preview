@@ -131,7 +131,7 @@ DRAW_SCRIPT = """
     const { x, y, width, height } = mark.rectangle;
     const hole = "M" + x + " " + y + "h" + width + "v" + height + "h" + -width + "Z";
     const d = "M0 0H" + mark.veil.width + "V" + mark.veil.height + "H0Z" + hole;
-    add("path", { d, "fill-rule": "evenodd", fill: "#000000", "fill-opacity": mark.opacity });
+    add("path", { d, "data-preview": "veil", "fill-rule": "evenodd", fill: "#000000", "fill-opacity": mark.opacity });
     add("path", { d: hole, fill: "none", stroke: HALO, "stroke-width": 2 });
   };
   const callout = (mark, color) => {

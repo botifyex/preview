@@ -6,17 +6,18 @@ from capture.scheme.constants import LABEL_HEIGHT, LABEL_OFFSET, LABEL_PADDING, 
 from capture.scheme.layout import Size
 from capture.scheme.routing import Route, Segment, heading, is_horizontal, length, overlaps, segment_box, segments
 
+VERTICAL_FIELDS = ("top", "bottom")
+
 
 def scaled_y(value: float, shown: Box, image: Box, scale: float) -> float:
     return image.y + (value - shown.y) * scale
 
 
 def scaled_point(value: Spec, shown: Box, image: Box, scale: float) -> Spec:
-    result = {
-        **value,
-        "x": image.x + (value["x"] - shown.x) * scale,
-        "y": scaled_y(value["y"], shown, image, scale),
-    }
+    result = dict(value)
+    if "x" in value:
+        result["x"] = image.x + (value["x"] - shown.x) * scale
+        result["y"] = scaled_y(value["y"], shown, image, scale)
     for field in ("width", "height"):
         if field in value:
             result[field] = value[field] * scale
@@ -25,11 +26,10 @@ def scaled_point(value: Spec, shown: Box, image: Box, scale: float) -> Spec:
 
 def scaled_value(key: str, value: Any, shown: Box, image: Box, scale: float) -> Any:
     if isinstance(value, dict):
-        point = cast("Spec", value)
-        return scaled_point(point, shown, image, scale) if "x" in point else point
+        return scaled_point(cast("Spec", value), shown, image, scale)
     if isinstance(value, list):
         return [scaled_value(key, item, shown, image, scale) for item in cast("list[Any]", value)]
-    return scaled_y(value, shown, image, scale) if key == "bottom" else value
+    return scaled_y(value, shown, image, scale) if key in VERTICAL_FIELDS else value
 
 
 def scaled_mark(mark: Spec, shown: Box, image: Box, scale: float) -> Spec:

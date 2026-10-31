@@ -32,6 +32,7 @@ ignore = ["S603", "S607", "PLR0913", "PLR0917"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "PLR2004"]
 "skills/preview/scripts/capture/page_scripts.py" = ["E501"]
+"skills/preview/scripts/capture/scheme/scripts.py" = ["E501"]
 
 [tool.basedpyright]
 include = ["skills/preview/scripts", "tests"]

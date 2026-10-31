@@ -10,9 +10,10 @@ from playwright.sync_api import Browser, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
 
 from capture.constants import FAILURES_NAME, PLAYWRIGHT_VERSION
+from capture.figures import capture_all
 from capture.model import CaptureFailure, Options, Spec, first_line
 from capture.publish import publish, refuse_conflicts
-from capture.shots import capture_all, planned_names
+from capture.shots import planned_names
 from capture.validation import read_spec, validate_spec
 
 

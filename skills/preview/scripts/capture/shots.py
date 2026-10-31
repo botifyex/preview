@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -29,6 +30,8 @@ def context_options(spec: Spec, figure: Spec, options: Options, state: Path | No
 
 
 def shots_of(figure: Spec) -> list[Shot]:
+    if "panels" in figure:
+        return [Shot(figure["slug"], "", [], [], figure, "scheme")]
     current = Shot(
         figure["slug"], figure["url"], figure.get("steps", []), figure.get("annotations", []), figure, "current"
     )
@@ -118,14 +121,16 @@ def uses_login(spec: Spec, shot: Shot) -> bool:
     return "login" in spec and shot.figure.get("login", True)
 
 
-def capture_all(browser: Browser, spec: Spec, options: Options, staging: Path) -> list[Spec]:
-    shots = all_shots(spec)
-    fresh = options.fresh_login
-    entries: list[Spec] = []
-    for number, shot in enumerate(shots, 1):
-        state = None
-        if uses_login(spec, shot):
-            state = ensure_login(browser, spec, options, fresh)
-            fresh = False
-        entries.append(capture_shot(browser, spec, shot, number, options, state, staging))
-    return entries
+@dataclass
+class Logins:
+    browser: Browser
+    spec: Spec
+    options: Options
+    fresh: bool
+
+    def state(self, shot: Shot) -> Path | None:
+        if not uses_login(self.spec, shot):
+            return None
+        path = ensure_login(self.browser, self.spec, self.options, self.fresh)
+        self.fresh = False
+        return path

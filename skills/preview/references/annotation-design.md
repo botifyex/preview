@@ -41,6 +41,16 @@ image. A callout covers whatever lies on its side, so check that it hides nothin
 and set `side` if it does. The line of a `connector` runs straight across what is between the two
 elements: keep them close, or use numbers.
 
+## When to use a scheme
+
+One idea per image still applies: a scheme is for one idea that does not fit one screen. Use it for
+a path of up to about 6 steps with `steps_numbers` and `links: "sequence"`, for how two or three
+screens lead to each other, or for the parts of a page too long to read whole, with `crop`.
+Unrelated changes stay separate figures, and one change on one page needs no scheme. Keep panels
+readable: a smaller `viewport` beats a smaller `panel_width`. Start an arrow at a mark with
+`from_mark` only when the place it leaves from matters. In the text, say "step 2" for a panel and
+"mark 1 in step 2" for a mark.
+
 ## Colours
 
 Crimson `#E6004C` for additions and red `#C81E1E` for removals, both with a white halo, so they

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scheme fixture</title>
+<style>
+  body { margin: 0; height: 300px; }
+  #card { position: absolute; left: 100px; top: 80px; width: 120px; height: 60px; background: #00aa00; }
+  #corner { position: absolute; left: 340px; top: 240px; width: 40px; height: 40px; background: #0000aa; }
+  #deep { position: absolute; left: 20px; top: 1000px; width: 100px; height: 40px; background: #aa00aa; }
+</style>
+</head>
+<body>
+<div id="card"></div>
+<div id="corner"></div>
+<div id="deep" hidden></div>
+<script>
+  document.body.style.background = location.hash ? "#" + location.hash.slice(1) : "#ffffff";
+  if (location.search === "?deep") document.getElementById("deep").hidden = false;
+</script>
+</body>
+</html>

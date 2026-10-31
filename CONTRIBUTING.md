@@ -15,6 +15,12 @@ uv lock --check
 Tests use real temporary git repositories, a local HTTP server and real Chromium, and the scripts run
 through their own `uv run` as they do for a user. Linux is the only tested platform.
 
+Versions and rules live in `pyproject.toml`. It holds tool configuration and pinned development
+dependencies only: nothing is built or installed, and the scripts keep their own PEP 723 headers.
+
+Reasons behind the choices and the backlog are in Russian: [docs/decisions.md](docs/decisions.md),
+[docs/backlog.md](docs/backlog.md).
+
 Every push to `master` and every pull request runs CI: `lint` runs ruff, basedpyright and `uv lock --check`;
 `test` runs the whole suite on Python 3.12, 3.13 and 3.14, including the rebuild of the showcase.
 

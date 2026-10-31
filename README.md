@@ -186,29 +186,7 @@ uv run skills/preview/scripts/check_report.py <dir>
 - [`check_report.py`](skills/preview/references/report-template.md) checks the report's order,
   references, numbering and files.
 
-## Tests
-
-```bash
-uv run pytest tests -n auto
-```
-
-Tests use real temporary git repositories, a local HTTP server, and real Chromium.
-
-## Checks
-
-```bash
-uv run ruff check .
-uv run ruff format --check .
-uv run basedpyright
-```
-
-Versions and rules live in `pyproject.toml`. It holds tool configuration and pinned development
-dependencies only: nothing is built or installed, and the scripts keep their own PEP 723 headers.
-
-Reasons behind the choices and the backlog are in Russian: [docs/decisions.md](docs/decisions.md),
-[docs/backlog.md](docs/backlog.md).
-
 ## License
 
-[Apache-2.0](LICENSE). Changes are listed in [CHANGELOG.md](CHANGELOG.md); see also
-[CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+[Apache-2.0](LICENSE). Changes are listed in [CHANGELOG.md](CHANGELOG.md). Tests and checks are in
+[CONTRIBUTING.md](CONTRIBUTING.md); see also [SECURITY.md](SECURITY.md).

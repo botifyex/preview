@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Extras</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+  #hover-target { position: absolute; left: 100px; top: 100px; width: 120px; height: 40px; background: #cde; }
+  #tip { display: none; position: absolute; left: 100px; top: 150px; width: 120px; height: 30px; background: #dec; }
+  #hover-target:hover + #tip { display: block; }
+  #tight { position: absolute; left: 400px; top: 400px; width: 100px; height: 24px; }
+  #add { position: absolute; left: 400px; top: 500px; }
+  #roomy { position: absolute; left: 600px; top: 100px; width: 200px; height: 100px; background: #eef; }
+</style>
+</head>
+<body>
+<div id="hover-target">Hover me</div>
+<div id="tip">Tip</div>
+<div id="tight">Tight text</div>
+<div id="roomy">Roomy</div>
+<button id="add" type="button">Add another task</button>
+<script>
+  const mark = (id) => {
+    const element = document.createElement("div");
+    element.id = id;
+    element.textContent = id;
+    document.body.appendChild(element);
+  };
+  if (navigator.maxTouchPoints > 0) mark("touch");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) mark("reduced");
+  setTimeout(() => {
+    const host = document.createElement("nextjs-portal");
+    const root = host.attachShadow({ mode: "open" });
+    root.innerHTML = '<div id="shadow-inner" style="position:fixed;left:0;bottom:0;width:100px;height:100px;background:rgb(255,0,0)"></div>';
+    document.body.appendChild(host);
+  }, 100);
+</script>
+</body>
+</html>

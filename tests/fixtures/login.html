@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Login</title></head>
+<body>
+<input id="password" aria-label="Password" type="password">
+<button id="enter" type="button">Enter</button>
+<script>
+  document.getElementById("enter").addEventListener("click", () => {
+    if (document.getElementById("password").value !== "throwaway-secret") return;
+    document.cookie = "session=fixture; path=/";
+    location.href = "/panel.html";
+  });
+</script>
+</body>
+</html>

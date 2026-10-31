@@ -1,0 +1,10 @@
+{
+  "name": "preview",
+  "version": "0.1.0",
+  "description": "Walks a running project and writes a numbered, annotated, plain-language guide to what changed in a release or beta.",
+  "keywords": [
+    "release-notes",
+    "screenshots",
+    "playwright"
+  ]
+}

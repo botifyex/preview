@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Panel</title></head>
+<body>
+<div id="content"></div>
+<script>
+  const signed = document.cookie.includes("session=fixture");
+  document.getElementById("content").innerHTML = signed ? '<h1 id="welcome">Panel</h1>' : '<h1 id="denied">Denied</h1>';
+</script>
+</body>
+</html>

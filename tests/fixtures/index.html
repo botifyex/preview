@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #f6f6f6; color: #222; }
+  header { background: #223; color: #fff; padding: 16px 24px; }
+  #save { position: absolute; left: 300px; top: 200px; width: 160px; height: 48px; }
+  #twin-one, #twin-two { position: absolute; left: 500px; top: 200px; }
+  #twin-two { top: 250px; }
+  #far { position: absolute; left: 100px; top: 2000px; width: 200px; height: 60px; background: #cde; }
+  #late { position: absolute; left: 640px; top: 320px; width: 120px; height: 40px; background: #dec; }
+  #slide { position: absolute; left: 100px; top: 400px; width: 100px; height: 50px; background: #fda; animation: move .6s ease-out forwards; }
+  @keyframes move { from { transform: translateX(0); } to { transform: translateX(300px); } }
+  #spinner { position: absolute; left: 700px; top: 100px; width: 30px; height: 30px; background: #999; animation: pulse 1s linear infinite; }
+  @keyframes pulse { from { transform: translateX(0); } to { transform: translateX(40px); } }
+  #panel { position: absolute; left: 800px; top: 400px; width: 200px; height: 100px; overflow: auto; background: #eee; }
+  #panel-spacer { height: 400px; }
+  #panel-item { height: 30px; background: #acf; }
+  #hidden { display: none; }
+  @media (prefers-color-scheme: dark) { body { background: #101010; } }
+  #block { position: absolute; left: 100px; top: 500px; width: 240px; height: 80px; background: #fff; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+<header>Fixture site</header>
+<button id="save" type="button">Save</button>
+<a id="twin-one" class="twin" href="#">Twin</a>
+<a id="twin-two" class="twin" href="#">Twin</a>
+<div id="far">Far below</div>
+<div id="slide">Slide</div>
+<div id="spinner"></div>
+<div id="panel"><div id="panel-spacer"></div><div id="panel-item">Deep item</div></div>
+<div id="hidden">Hidden</div>
+<div id="block">Place of the old block</div>
+<form id="form">
+  <input id="name" aria-label="Name" style="position:absolute;left:900px;top:200px">
+  <button id="apply" type="button" style="position:absolute;left:900px;top:240px">Apply</button>
+</form>
+<script>
+  document.getElementById("apply").addEventListener("click", () => {
+    const value = document.getElementById("name").value;
+    setTimeout(() => {
+      const created = document.createElement("div");
+      created.id = "late";
+      created.textContent = value;
+      document.body.appendChild(created);
+    }, 150);
+  });
+</script>
+</body>
+</html>

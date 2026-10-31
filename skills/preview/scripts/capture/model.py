@@ -60,6 +60,11 @@ def demand(condition: Any, message: str) -> None:
         raise CaptureFailure(message)
 
 
+def first_line(failure: Exception) -> str:
+    lines = (line.strip() for line in str(failure).splitlines())
+    return next((line for line in lines if line), "browser action failed")
+
+
 def describe_locator(target: Spec) -> str:
     return json.dumps(
         {key: target[key] for key in sorted(target) if key in LOCATOR_KEYS | {"name", "match"}}, ensure_ascii=False

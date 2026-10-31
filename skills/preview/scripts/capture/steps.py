@@ -5,7 +5,7 @@ from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page
 
 from capture.locators import single_visible
-from capture.model import CaptureFailure, Spec, demand
+from capture.model import CaptureFailure, Spec, demand, first_line
 
 
 def secret_value(step: Spec, where: str) -> str:
@@ -60,5 +60,4 @@ def run_steps(page: Page, steps: list[Spec], base_url: str, where: str, timeout:
         try:
             perform(page, step, base_url, location, timeout)
         except PlaywrightError as failure:
-            first_line = str(failure).splitlines()[0]
-            raise CaptureFailure(f"{location}: {first_line}") from failure
+            raise CaptureFailure(f"{location}: {first_line(failure)}") from failure

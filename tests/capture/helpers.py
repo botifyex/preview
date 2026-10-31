@@ -34,6 +34,20 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+DOCUMENTED_PAGES = {
+    "/login": (
+        '<!doctype html><title>Sign in</title><label>Email <input type="email"></label>'
+        '<label>Password <input type="password"></label>'
+        "<button onclick=\"location = '/dashboard'\">Sign in</button>"
+    ),
+    "/dashboard": "<!doctype html><title>Dashboard</title><h1>Dashboard</h1>",
+    "/reports": (
+        "<!doctype html><title>Reports</title><a onclick=\"document.body.insertAdjacentHTML('beforeend', "
+        "'<table class=report-table><tr><td>1</td></tr></table><button>Export</button>')\">March</a>"
+    ),
+}
+
+
 class SessionHandler(QuietHandler):
     sessions: ClassVar[dict[str, str]] = {}
 
@@ -77,6 +91,8 @@ class SessionHandler(QuietHandler):
             self.sign_out()
         elif address.path == "/account":
             self.account()
+        elif address.path in DOCUMENTED_PAGES:
+            self.answer(200, DOCUMENTED_PAGES[address.path])
         else:
             super().do_GET()
 

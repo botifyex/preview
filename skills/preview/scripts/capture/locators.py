@@ -6,10 +6,10 @@ from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from capture.model import CaptureFailure, Spec, demand, describe_locator
 
 
-def text_query(target: Spec, text: str | None) -> tuple[str | re.Pattern[str] | None, bool]:
+def text_query(target: Spec, text: str) -> tuple[str | re.Pattern[str], bool]:
     kind = target.get("match", "exact")
     if kind == "regex":
-        return (re.compile(text or ""), False)
+        return (re.compile(text), False)
     return (text, kind == "exact")
 
 
@@ -17,10 +17,12 @@ def locator_of(page: Page, target: Spec) -> Locator:
     if "selector" in target:
         return page.locator(target["selector"])
     if "role" in target:
-        name, exact = text_query(target, target.get("name"))
+        if "name" not in target:
+            return page.get_by_role(target["role"])
+        name, exact = text_query(target, target["name"])
         return page.get_by_role(target["role"], name=name, exact=exact)
     text, exact = text_query(target, target["text"])
-    return page.get_by_text(text, exact=exact)  # pyright: ignore[reportArgumentType]
+    return page.get_by_text(text, exact=exact)
 
 
 def single_visible(page: Page, target: Spec, where: str, timeout: int) -> Locator:

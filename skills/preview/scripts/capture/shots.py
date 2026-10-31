@@ -48,6 +48,14 @@ def figure_name(number: int, slug: str) -> str:
     return f"{number:02d}-{slug}.png"
 
 
+def all_shots(spec: Spec) -> list[Shot]:
+    return [shot for figure in spec["figures"] for shot in shots_of(figure)]
+
+
+def planned_names(spec: Spec) -> list[str]:
+    return [figure_name(number, shot.slug) for number, shot in enumerate(all_shots(spec), 1)]
+
+
 def inherited_placement(annotation: Spec, default: str) -> str:
     if annotation["kind"] == "arrow" and default not in ARROW_PLACEMENTS:
         return DEFAULT_PLACEMENT
@@ -103,7 +111,7 @@ def uses_login(spec: Spec, shot: Shot) -> bool:
 
 
 def capture_all(browser: Browser, spec: Spec, options: Options, staging: Path) -> list[Spec]:
-    shots = [shot for figure in spec["figures"] for shot in shots_of(figure)]
+    shots = all_shots(spec)
     fresh = options.fresh_login
     entries: list[Spec] = []
     for number, shot in enumerate(shots, 1):

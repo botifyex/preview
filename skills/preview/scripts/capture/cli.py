@@ -10,9 +10,9 @@ from playwright.sync_api import Browser, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
 
 from capture.constants import FAILURES_NAME, PLAYWRIGHT_VERSION
-from capture.model import CaptureFailure, Options, Spec
-from capture.publish import publish
-from capture.shots import capture_all
+from capture.model import CaptureFailure, Options, Spec, first_line
+from capture.publish import publish, refuse_conflicts
+from capture.shots import capture_all, planned_names
 from capture.validation import read_spec, validate_spec
 
 
@@ -28,6 +28,7 @@ def launch(playwright: Any) -> Browser:
 def run(spec_path: Path, options: Options) -> list[Spec]:
     spec = read_spec(spec_path)
     validate_spec(spec)
+    refuse_conflicts(planned_names(spec), options.output / "figures")
     options.output.mkdir(parents=True, exist_ok=True)
     shutil.rmtree(options.output / FAILURES_NAME, ignore_errors=True)
     with tempfile.TemporaryDirectory(dir=options.output, prefix=".capture-") as directory:
@@ -36,6 +37,8 @@ def run(spec_path: Path, options: Options) -> list[Spec]:
             browser = launch(playwright)
             try:
                 entries = capture_all(browser, spec, options, staging)
+            except PlaywrightError as failure:
+                raise CaptureFailure(first_line(failure)) from failure
             finally:
                 browser.close()
         publish(staging, options.output / "figures", entries, spec)
@@ -65,7 +68,7 @@ def main() -> int:
     )
     try:
         entries = run(arguments.spec, options)
-    except CaptureFailure as failure:
+    except (CaptureFailure, OSError) as failure:
         print(f"error: {failure}", file=sys.stderr)
         return 1
     for entry in entries:

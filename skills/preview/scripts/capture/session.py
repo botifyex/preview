@@ -33,19 +33,27 @@ def landing_path(state: Path) -> Path:
 
 
 def prepare_state_directory(directory: Path) -> None:
-    directory.mkdir(parents=True, exist_ok=True)
+    directory.mkdir(mode=0o700, parents=True, exist_ok=True)
     ignore = directory / ".gitignore"
     if not ignore.exists():
         ignore.write_text("*\n")
 
 
+def private_file(path: Path) -> None:
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT, 0o600)
+    try:
+        os.fchmod(descriptor, 0o600)
+    finally:
+        os.close(descriptor)
+
+
 def save_state(context: BrowserContext, page: Page, path: Path) -> None:
     prepare_state_directory(path.parent)
-    context.storage_state(path=str(path))
-    path.chmod(0o600)
     landing = landing_path(path)
+    private_file(path)
+    private_file(landing)
+    context.storage_state(path=str(path))
     landing.write_text(page.url)
-    landing.chmod(0o600)
 
 
 def log_in(browser: Browser, spec: Spec, options: Options, path: Path) -> None:
@@ -69,14 +77,14 @@ def session_alive(browser: Browser, spec: Spec, options: Options, path: Path) ->
         context = browser.new_context(
             ignore_https_errors=options.ignore_https, storage_state=str(path), **locale_option(spec)
         )
-    except PlaywrightError:
+    except (PlaywrightError, ValueError):
         return False
     try:
         page = context.new_page()
         open_url(page, landing.read_text(), options.timeout)
         single_visible(page, spec["login"]["expect"], "login expect", options.timeout)
         return True
-    except (CaptureFailure, PlaywrightError):
+    except (CaptureFailure, PlaywrightError, OSError, ValueError):
         return False
     finally:
         context.close()

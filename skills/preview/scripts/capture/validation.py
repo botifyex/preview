@@ -1,113 +1,64 @@
 import json
-import re
 from pathlib import Path
 from typing import Any, cast
 
-from capture.constants import (
-    ANNOTATION_FIELDS,
-    ARROW_PLACEMENTS,
-    DEFAULT_PLACEMENT,
-    FLAG_FIELDS,
-    LOCATOR_KEYS,
-    MATCH_KINDS,
-    PLACEMENTS,
-    PRODUCTION_NAMES,
-    SLUG_PATTERN,
-    STEP_FIELDS,
-    THEMES,
-)
+from capture.constants import DEFAULT_PLACEMENT, FLAG_FIELDS, PRODUCTION_NAMES, SLUG_PATTERN, THEMES
+from capture.fields import demand_object, demand_string, demand_url, is_choice, is_integer, is_positive
+from capture.items import validate_annotations, validate_locator, validate_placement, validate_steps
 from capture.model import CaptureFailure, Spec, demand
 
 
-def validate_match(target: Spec, where: str) -> None:
-    kind = target.get("match", "exact")
-    demand(kind in MATCH_KINDS, f"{where}: match must be exact, substring or regex")
-    if "match" not in target:
-        return
-    pattern: Any = target.get("text", target.get("name"))
-    demand(pattern is not None, f"{where}: match applies to text or a role name")
-    if kind == "regex":
-        try:
-            re.compile(pattern)
-        except re.error as failure:
-            raise CaptureFailure(f"{where}: match regex is invalid: {failure}") from failure
+def is_slug(value: Any) -> bool:
+    return isinstance(value, str) and SLUG_PATTERN.fullmatch(value) is not None
 
 
-def validate_locator(target: Any, where: str) -> None:
-    demand(isinstance(target, dict), f"{where}: target must be an object")
-    keys = LOCATOR_KEYS & set(target)
-    demand(len(keys) == 1, f"{where}: exactly one of selector, role, text is required")
-    validate_match(target, where)
+def validate_viewport(viewport: Any, where: str) -> None:
+    demand_object(viewport, f"{where}: viewport must be an object")
+    for field in ("width", "height"):
+        value = viewport.get(field, 1)
+        demand(is_integer(value) and is_positive(value), f"{where}: viewport {field} must be a positive integer")
+    demand(is_positive(viewport.get("scale", 1)), f"{where}: viewport scale must be a positive number")
 
 
-def validate_step(step: Spec, where: str) -> None:
-    kind: Any = step.get("action")
-    demand(kind in STEP_FIELDS, f"{where}: unknown action {kind!r}")
-    missing = STEP_FIELDS[kind] - set(step)
-    demand(not missing, f"{where}: {kind} requires {sorted(missing)}")
-    if "target" in step:
-        validate_locator(step["target"], where)
-    if kind == "fill":
-        demand(("value" in step) != ("value_env" in step), f"{where}: fill requires value or value_env")
-    if kind == "wait":
-        demand(("target" in step) != ("milliseconds" in step), f"{where}: wait requires target or milliseconds")
+def validate_figure_options(figure: Spec, where: str) -> None:
+    demand(is_choice(figure.get("theme", "light"), THEMES), f"{where}: theme must be light or dark")
+    validate_placement(figure.get("placement", DEFAULT_PLACEMENT), where)
+    for name in (*FLAG_FIELDS, "full_page"):
+        demand(isinstance(figure.get(name, False), bool), f"{where}: {name} must be true or false")
+    demand(figure.get("login", False) is False, f"{where}: login may only be false")
+    validate_viewport(figure.get("viewport", {}), where)
 
 
-def validate_steps(steps: list[Spec], where: str) -> None:
-    for index, step in enumerate(steps, 1):
-        validate_step(step, f"{where} step {index}")
-
-
-def validate_placement(placement: Any, where: str) -> None:
-    demand(placement in PLACEMENTS, f"{where}: placement must be one of {sorted(PLACEMENTS)}")
-
-
-def validate_annotation(annotation: Spec, where: str) -> None:
-    kind: Any = annotation.get("kind")
-    demand(kind in ANNOTATION_FIELDS, f"{where}: unknown annotation kind {kind!r}")
-    missing = ANNOTATION_FIELDS[kind] - set(annotation)
-    demand(not missing, f"{where}: {kind} requires {sorted(missing)}")
-    validate_locator(annotation["anchor"], where)
-    validate_placement(annotation.get("placement", DEFAULT_PLACEMENT), where)
-    if kind == "arrow":
-        placement = annotation.get("placement", DEFAULT_PLACEMENT)
-        demand(placement in ARROW_PLACEMENTS, f"{where}: placement {placement} does not apply to an arrow")
-    if "from" in annotation:
-        validate_locator(annotation["from"], where)
-
-
-def validate_annotations(annotations: list[Spec], where: str) -> None:
-    for index, annotation in enumerate(annotations, 1):
-        validate_annotation(annotation, f"{where} annotation {index}")
-
-
-def validate_figure(figure: Spec, index: int) -> None:
+def validate_figure(figure: Any, index: int) -> None:
+    demand_object(figure, f"figure {index}: must be an object")
     slug = figure.get("slug", "")
     where = f"figure {index} ({slug})"
-    demand(SLUG_PATTERN.fullmatch(slug), f"{where}: slug must be lowercase words joined by hyphens")
+    demand(is_slug(slug), f"{where}: slug must be lowercase words joined by hyphens")
     demand("url" in figure, f"{where}: url is required")
-    demand(figure.get("theme", "light") in THEMES, f"{where}: theme must be light or dark")
-    validate_placement(figure.get("placement", DEFAULT_PLACEMENT), where)
-    for name in FLAG_FIELDS:
-        demand(isinstance(figure.get(name, False), bool), f"{where}: {name} must be true or false")
-    demand(figure.get("login", True) in (True, False), f"{where}: login may only be false")
-    validate_steps(figure.get("steps", []), where)
-    validate_annotations(figure.get("annotations", []), where)
-    validate_steps(figure.get("before_steps", []), f"{where} before")
-    validate_annotations(figure.get("before_annotations", []), f"{where} before")
+    demand_url(figure, "url", where)
+    demand_url(figure, "before_url", where)
+    validate_figure_options(figure, where)
+    validate_steps(figure, "steps", where, where)
+    validate_annotations(figure, "annotations", where, where)
+    validate_steps(figure, "before_steps", where, f"{where} before")
+    validate_annotations(figure, "before_annotations", where, f"{where} before")
 
 
 def validate_environment(spec: Spec) -> None:
-    environment = str(spec.get("environment", "")).strip().lower()
-    demand(environment, "spec: environment is required")
-    demand(environment not in PRODUCTION_NAMES, f"spec: refusing to run against environment '{environment}'")
+    environment = spec.get("environment", "")
+    demand(isinstance(environment, str), "spec: environment must be a string")
+    name = environment.strip().lower()
+    demand(name, "spec: environment is required")
+    demand(name not in PRODUCTION_NAMES, f"spec: refusing to run against environment '{name}'")
     demand(spec.get("base_url"), "spec: base_url is required")
+    demand_url(spec, "base_url", "spec")
 
 
-def validate_login(login: Spec) -> None:
-    demand(SLUG_PATTERN.fullmatch(login.get("name", "")), "login: name must be lowercase words joined by hyphens")
+def validate_login(login: Any) -> None:
+    demand_object(login, "login: must be an object")
+    demand(is_slug(login.get("name", "")), "login: name must be lowercase words joined by hyphens")
     demand(login.get("steps"), "login: steps are required")
-    validate_steps(login["steps"], "login")
+    validate_steps(login, "steps", "login", "login")
     demand("expect" in login, "login: expect is required, it proves the login worked")
     validate_locator(login["expect"], "login expect")
 
@@ -117,19 +68,26 @@ def validate_hide(hide: Any) -> None:
     demand(valid, "spec: hide must be a list of selectors")
 
 
-def validate_spec(spec: Spec) -> None:
+def validate_figures(figures: Any) -> None:
+    demand(figures, "spec: figures are required")
+    demand(isinstance(figures, list), "spec: figures must be a list")
+    for index, figure in enumerate(figures, 1):
+        validate_figure(figure, index)
+
+
+def validate_spec(spec: Any) -> None:
+    demand_object(spec, "spec: must be an object")
     validate_environment(spec)
+    demand_string(spec, "locale", "spec")
     validate_hide(spec.get("hide", []))
     validate_placement(spec.get("placement", DEFAULT_PLACEMENT), "spec")
-    demand(spec.get("figures"), "spec: figures are required")
-    for index, figure in enumerate(spec["figures"], 1):
-        validate_figure(figure, index)
+    validate_figures(spec.get("figures"))
     if "login" in spec:
         validate_login(spec["login"])
 
 
 def read_spec(path: Path) -> Spec:
     try:
-        return json.loads(path.read_text())
-    except (OSError, json.JSONDecodeError) as failure:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, RecursionError) as failure:
         raise CaptureFailure(f"cannot read spec {path}: {failure}") from failure

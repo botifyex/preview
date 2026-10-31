@@ -1,11 +1,14 @@
+from dataclasses import asdict
+
 from playwright.sync_api import Locator, Page
 from playwright.sync_api import TimeoutError as PlaywrightTimeout
 
-from capture.constants import IDLE_LIMIT, STABLE_POLL
-from capture.geometry import build_marks, check_viewport
+from capture.constants import BADGE_RADIUS, IDLE_LIMIT, STABLE_POLL
+from capture.geometry import build_marks, page_area, visible_area
 from capture.locators import single_visible
 from capture.model import Box, CaptureFailure, Spec, demand, describe_locator
 from capture.page_scripts import DRAW_SCRIPT, HIDE_SCRIPT, MEASURE_SCRIPT, PAGE_SCRIPT, SCROLL_TOP_SCRIPT, SETTLE_SCRIPT
+from capture.viewport import check_viewport
 
 
 def wait_idle(page: Page) -> None:
@@ -70,8 +73,10 @@ def annotate(
     settle(page, where, timeout)
     boxes = stable_boxes(page, pairs, where, timeout)
     page_size = page.evaluate(PAGE_SCRIPT)
-    marks = build_marks(annotations, boxes, page_size, where)
+    area = page_area(page_size) if full_page else visible_area(page_size)
+    marks = build_marks(annotations, boxes, page_size, area, where)
+    arguments = {"marks": marks, "page": page_size, "area": asdict(area), "radius": BADGE_RADIUS}
+    labels = page.evaluate(DRAW_SCRIPT, arguments)
     if not full_page:
-        check_viewport(marks, page_size, where)
-    page.evaluate(DRAW_SCRIPT, {"marks": marks, "page": page_size})
+        check_viewport([target for target, _ in pairs], boxes, marks, labels, page_size, where)
     return marks, page_size

@@ -60,14 +60,19 @@ def test_invalid_spec_is_refused(capture: Capture, change: dict[str, Any], fragm
     assert fragment in process.stderr
 
 
-def test_documented_spec_example_is_valid(capture: Capture) -> None:
+def test_documented_spec_example_is_valid(capture: Capture, monkeypatch: pytest.MonkeyPatch) -> None:
     reference = Path(__file__).parent.parent.parent / "skills/preview/references/capture-spec.md"
     block = re.search(r"## Spec\n\n```json\n(.*?)```", reference.read_text(), re.DOTALL)
     assert block
     example = json.loads(block[1])
-    del example["login"], example["base_url"]
-    message = capture.failure(*example["figures"])
-    assert "answered with status 404" in message
+    example["base_url"] = capture.site
+    monkeypatch.setenv("PREVIEW_PASSWORD", "throwaway-secret")
+    process = capture.run(example)
+    assert process.returncode == 0, process.stderr
+    manifest = json.loads((capture.out / "figures" / "manifest.json").read_text())
+    assert [entry["file"] for entry in manifest["figures"]] == ["figures/01-export-button.png"]
+    assert manifest["figures"][0]["marks"][0]["text"] == "New button"
+    assert (capture.out / "figures" / "01-export-button.png").is_file()
 
 
 def test_self_signed_certificate_needs_the_flag(tmp_path: Path, secure_site: str) -> None:

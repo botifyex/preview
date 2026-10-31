@@ -7,7 +7,7 @@ uv run "${CLAUDE_SKILL_DIR}/scripts/run_capture.py" <spec.json> --out <dir> [--s
 | Flag | Default | Meaning |
 | --- | --- | --- |
 | `--out` | required | Writes `<dir>/figures/` |
-| `--state-dir` | `$XDG_CACHE_HOME/preview/state`, else `~/.cache/preview/state` | Saved login sessions, outside the target repository. A `*` `.gitignore` is written inside, files are mode 600 |
+| `--state-dir` | `$XDG_CACHE_HOME/preview/state`, else `~/.cache/preview/state` | Saved login sessions, outside the target repository. A `*` `.gitignore` is written inside; a new directory is mode 700, files are mode 600 from before anything is written |
 | `--ignore-https-errors` | off | For local certificates only |
 | `--fresh-login` | off | Log in again even if the saved session still works |
 | `--timeout` | 10000 | Milliseconds for each wait |
@@ -68,9 +68,12 @@ it fails (expired, or signed out by an earlier step), the login runs again.
 
 **Figure**: `slug` (lowercase words with hyphens) and `url` are required. `viewport` defaults
 to 1280x800 at scale 1. `theme` is `light` or `dark`. `full_page` defaults to true; with
-`false`, every anchor must lie inside the viewport or the run fails. `has_touch: true` and
+`false`, everything drawn must lie inside the viewport or the run fails: each anchor and `from`
+element, frame, arrow tail and tip, number and label. There, frames, a default arrow tail, labels and
+`corner` or `top-left` numbers keep to the visible rectangle, so they fit whenever the anchor does;
+an explicit `offset`, `from` or other placement falling outside fails. `has_touch: true` and
 `reduced_motion: true` set those browser features. `login: false` keeps a figure signed out in
-a run that has a `login`; if every figure does so, no login happens.
+a run that has a `login`; if every figure does so, no login happens. `false` is its only value.
 
 ## Locators
 
@@ -133,6 +136,10 @@ Corner placements are moved back onto the page at its edges.
 Failures rather than guesses:
 an arrow starting inside its target or outside the page, a `removed` place outside the page,
 a label wider than the page, anchors that keep moving.
+
+A malformed spec fails with `error: ...` before the browser starts: wrong types for any field,
+non-integer `number`, `text` or `name` not a string, numbers beyond 1000000000 or not finite,
+`milliseconds` below 0, `offset.width`, `offset.height` or a viewport size of 0 or less.
 
 ## What happens before drawing
 
@@ -206,7 +213,12 @@ Multiply by `viewport.scale` for image pixels.
 `placement` fields only where you wrote them, so the
 run can be repeated with `run_capture.py <out>/figures/spec.json --out <out>`. Repeating covers the
 pictures and not the site: steps that change data may not work twice, so see "Test data" in
-SKILL.md. A run replaces earlier figures.
+SKILL.md. A run replaces only the figures listed in the existing `manifest.json`, plus that file
+and `spec.json`. Other files stay. A new figure whose name is taken by something this tool did not
+create is refused, as is a directory named `manifest.json` or `spec.json`. This is checked before
+the browser starts and again before replacing anything, so nothing changes.
+Without a readable manifest no figure counts as this tool's. If replacing fails midway, the earlier
+output is restored.
 
 A failed run leaves earlier figures untouched and saves what the page looked like at
 `<out>/failures/<slug>.png` (`login.png` for the login), naming that path in the error. Open it:

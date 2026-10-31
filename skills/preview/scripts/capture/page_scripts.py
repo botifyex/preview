@@ -46,7 +46,7 @@ HIDE_SCRIPT = "(elements) => elements.forEach((element) => element.style.setProp
 SCROLL_TOP_SCRIPT = "() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })"
 
 DRAW_SCRIPT = """
-({ marks, page }) => {
+({ marks, page, area, radius }) => {
   const ACCENT = "#E6007E", REMOVED = "#C81E1E", HALO = "#FFFFFF", INK = "#FFFFFF";
   const NAMESPACE = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NAMESPACE, "svg");
@@ -83,7 +83,7 @@ DRAW_SCRIPT = """
   };
   const badge = (mark, color) => {
     const { x, y } = mark.badge;
-    add("circle", { cx: x, cy: y, r: 14, fill: color, stroke: HALO, "stroke-width": 3 });
+    add("circle", { cx: x, cy: y, r: radius, fill: color, stroke: HALO, "stroke-width": 3 });
     add("text", { x, y, fill: INK, "font-family": "Arial, sans-serif", "font-size": 15, "font-weight": 700, "text-anchor": "middle", "dominant-baseline": "central" }, String(mark.number));
   };
   const label = (mark, color) => {
@@ -91,21 +91,23 @@ DRAW_SCRIPT = """
     const width = text.getBBox().width + 16, height = 24;
     if (width > page.width) throw new Error("label is wider than the page: " + mark.text);
     const above = mark.corner.y - height - 8;
-    const y = above >= 0 ? above : mark.bottom + 8;
+    const y = above >= area.y ? above : mark.bottom + 8;
     const start = mark.corner.x + (mark.number === null ? 0 : 20);
-    const x = Math.max(0, Math.min(page.width - width, start));
+    const x = Math.max(area.x, Math.min(area.x + area.width - width, start));
     const back = add("rect", { x, y, width, height, rx: 4, fill: color, stroke: HALO, "stroke-width": 2 });
     svg.insertBefore(back, text);
     text.setAttribute("x", x + 8);
     text.setAttribute("y", y + height / 2);
+    return { x, y, width, height };
   };
-  for (const mark of marks) {
+  return marks.map((mark) => {
     const color = mark.kind === "removed" ? REMOVED : ACCENT;
     if (mark.kind === "box") frame(mark, color);
     if (mark.kind === "removed") frame(mark, color, "10 7");
     if (mark.kind === "arrow") arrow(mark);
-    if (mark.text !== null) label(mark, color);
+    const box = mark.text !== null ? label(mark, color) : null;
     if (mark.number !== null) badge(mark, color);
-  }
+    return box;
+  });
 }
 """

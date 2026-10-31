@@ -11,6 +11,7 @@ SPEC_NAME = "spec.json"
 FAILURES_NAME = "failures"
 IDENTITY_LENGTH = 12
 BADGE_MARGIN = 16
+BADGE_RADIUS = 14
 BADGE_REACH = 20
 BADGE_INSET = 18
 TAIL_PLACEMENTS = frozenset({"corner", "top-left"})
@@ -26,6 +27,10 @@ ARROW_REACH = (80, 60)
 MARK_ADVICE = 5
 IDLE_LIMIT = 3000
 STABLE_POLL = 100
+NUMBER_LIMIT = 1_000_000_000
+BACKUP_PREFIX = ".capture-backup-"
+INCOMING_NAME = "incoming"
+FRAMED_KINDS = frozenset({"box", "removed"})
 STEP_FIELDS: dict[str, frozenset[str]] = {
     "goto": frozenset({"url"}),
     "fill": frozenset({"target"}),

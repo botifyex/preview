@@ -7,7 +7,7 @@ from helpers import Capture, box, figure
 from internals import internal
 from support import run_script
 
-EXAMPLE = Path(__file__).parent.parent.parent / "examples" / "todo-ui-refresh" / "figures" / "spec.json"
+EXAMPLE = Path(__file__).parent.parent.parent / "examples" / "showcase" / "spec.json"
 
 SPEC_CASES: dict[str, tuple[dict[str, Any], str]] = {
     "environment-number": ({"environment": 5}, "environment"),

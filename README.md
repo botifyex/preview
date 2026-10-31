@@ -7,8 +7,7 @@ A Claude Code skill that opens a running project, walks its pages and writes a n
 visually annotated, plain-language guide to what changed in a release or beta, for ordinary
 users. The report goes: images, title, main changes referencing the images, everything else.
 
-Status: base version. It has been tested on fixtures and run on one real site
-([examples/todo-ui-refresh](examples/todo-ui-refresh/RELEASE.md)); runs on real projects are still limited.
+Status: base version. It has been tested on fixtures and run on one real site; runs on real projects are still limited.
 
 ## What it looks like
 
@@ -163,8 +162,7 @@ uv run --no-project --with playwright==1.64.1 playwright install chromium
 Marks come in eleven kinds (`box`, `arrow`, `badge`, `label`, `removed`, `callout`, `ellipse`, `underline`,
 `highlight`, `spotlight`, `connector`). A scheme combines several captures into one image as a `row`, `column` or
 `grid`: see [the capture spec](skills/preview/references/capture-spec.md).
-Worked examples: [examples/showcase](examples/showcase/RELEASE.md) is generated from this repository, and
-[examples/todo-ui-refresh](examples/todo-ui-refresh/RELEASE.md) is a report on an external site.
+Worked example: [examples/showcase](examples/showcase/RELEASE.md) is generated from this repository.
 
 The skill never tags, pushes, publishes or changes the project's code, and refuses to create
 users or capture when the environment is production or the address is unknown. Test users it

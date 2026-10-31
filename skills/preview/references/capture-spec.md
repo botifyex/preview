@@ -87,8 +87,8 @@ Used for `target` and `anchor`. Exactly one of the three kinds:
 Text and role `name` compare exactly by default. Add `"match": "substring"` (ignores case) or
 `"match": "regex"`: `{ "text": "^Add .* task$", "match": "regex" }`.
 
-Must match exactly one visible element. No match or several matches is a failure naming the
-locator. Prefer role and text: they survive restyling and describe what the user sees.
+Must match exactly one visible element; hidden matches are ignored. No visible match or several
+is a failure naming the locator. Prefer role and text: they survive restyling and describe what the user sees.
 Elements inside iframes are not supported.
 
 ## Steps

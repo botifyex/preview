@@ -26,7 +26,7 @@ def locator_of(page: Page, target: Spec) -> Locator:
 
 
 def single_visible(page: Page, target: Spec, where: str, timeout: int) -> Locator:
-    locator = locator_of(page, target)
+    locator = locator_of(page, target).filter(visible=True)
     description = describe_locator(target)
     try:
         locator.first.wait_for(state="visible", timeout=timeout)

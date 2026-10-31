@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hidden duplicates</title>
+<style>
+  body { margin: 0; font: 16px sans-serif; }
+  .spot { position: absolute; left: 300px; }
+  [hidden] { display: none; }
+</style>
+</head>
+<body>
+<button class="send" hidden>Send</button>
+<button class="send spot" style="top: 100px" onclick="document.getElementById('clicked').hidden = false">Send</button>
+<button class="send" style="display: none">Send</button>
+<input class="note" aria-label="Note" hidden>
+<input class="note spot" aria-label="Note" style="top: 160px" oninput="document.getElementById('typed').hidden = false">
+<a class="ghost" href="#" hidden>Ghost</a>
+<a class="pair spot" style="top: 220px" href="#">Pair</a>
+<a class="pair spot" style="top: 260px" href="#">Pair</a>
+<a class="pair" href="#" hidden>Pair</a>
+<p id="clicked" class="spot" style="top: 320px" hidden>Clicked</p>
+<p id="typed" class="spot" style="top: 360px" hidden>Typed</p>
+</body>
+</html>
